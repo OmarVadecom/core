@@ -184,6 +184,8 @@ return [
         Unicodeveloper\Paystack\PaystackServiceProvider::class,
         UniSharp\LaravelFilemanager\LaravelFilemanagerServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Alexusmai\LaravelFileManager\FileManagerServiceProvider::class,
+
 
     ],
 

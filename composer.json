@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.3",
         "ext-json": "*",
+        "alexusmai/laravel-file-manager": "2.5.4",
         "anandsiddharth/laravel-paytm-wallet": "^2.0",
         "anhskohbo/no-captcha": "^3.3",
         "barryvdh/laravel-dompdf": "^0.9.0",
@@ -18,6 +19,7 @@
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "haruncpi/laravel-simple-filemanager": "^1.0",
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.5",
         "mcamara/laravel-localization": "^1.6",

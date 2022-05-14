@@ -4,16 +4,16 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
         <meta charset="utf-8">
 
-        <title>{{ $setting->website_title }}</title>
+        <title><?php echo e($setting->website_title); ?></title>
 
-        <link rel="shortcut icon" href="{{  asset('assets/front/img/'.$setting->fav_icon) }}" type="image/png">
+        <link rel="shortcut icon" href="<?php echo e(asset('assets/front/img/'.$setting->fav_icon)); ?>" type="image/png">
 
-        @includeif('admin.partials.styles')
+        <?php if ($__env->exists('admin.partials.styles')) echo $__env->make('admin.partials.styles', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-        @if($currentLang->direction == 'rtl' )
+        <?php if($currentLang->direction == 'rtl' ): ?>
             <style>
                 .content-wrapper .form-group {
                     direction: rtl;
@@ -50,40 +50,30 @@
                     text-align: right
                 }
             </style>
-        @endif
+        <?php endif; ?>
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-        <link rel="stylesheet" href="{{ asset('vendor/file-manager/css/file-manager.css') }}">
+        <link rel="stylesheet" href="<?php echo e(asset('vendor/file-manager/css/file-manager.css')); ?>">
     </head>
 
     <body
-        @if(Session::has('notification')) data-notification-message='{{ json_encode(Session::get('notification')) }} @endif'
+        <?php if(Session::has('notification')): ?> data-notification-message='<?php echo e(json_encode(Session::get('notification'))); ?> <?php endif; ?>'
         class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed"
-        {{ Session::has('notification') ? 'data-notification' : '' }}
+        <?php echo e(Session::has('notification') ? 'data-notification' : ''); ?>
+
     >
 
         <div class="wrapper">
-            @include('admin.partials.top-navbar')
+            <?php echo $__env->make('admin.partials.top-navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-            @include('admin.partials.side-navbar')
+            <?php echo $__env->make('admin.partials.side-navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
             <div class="content-wrapper">
         
-        @if(Request::is('*/edit/*') || Request::is('*/add') )
-        	{{-- <div class="container">
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <div class="input-group">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button" id="lfm">File Manager</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
-            {{-- <input type="text" id="profile-photo">
-            <button onclick="filemanager.selectFile('profile-photo')">Choose</button> --}}
+        <?php if(Request::is('*/edit/*') || Request::is('*/add') ): ?>
+        	
+            
             <div class="input-group">
                 <input type="text" id="image_label" class="form-control" name="image"
                        aria-label="Image" aria-describedby="button-image">
@@ -91,23 +81,23 @@
                     <button class="btn btn-outline-secondary" type="button" id="button-image">Select</button>
                 </div>
             </div>
-        @endif
+        <?php endif; ?>
            
-            @yield('content')
+            <?php echo $__env->yieldContent('content'); ?>
             
 
-            @include('admin.partials.footer')
+            <?php echo $__env->make('admin.partials.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         </div>
-        <input type="hidden" id="main_url" value="{{ route('front.index') }}">
+        <input type="hidden" id="main_url" value="<?php echo e(route('front.index')); ?>">
 
-        @php
+        <?php
             $mainbs                     = [];
             $mainbs['slider_overlay']   = $commonsetting->slider_overlay;
             $mainbs                     = json_encode($mainbs);
-        @endphp
+        ?>
        
-        @includeif('admin.partials.scripts')
-        <script src="{{ asset('vendor/file-manager/js/file-manager.js') }}"></script>
+        <?php if ($__env->exists('admin.partials.scripts')) echo $__env->make('admin.partials.scripts', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <script src="<?php echo e(asset('vendor/file-manager/js/file-manager.js')); ?>"></script>
         
         <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -126,3 +116,4 @@ document.getElementById('image_label').value = $url;
         </script>     
     </body>
 </html>
+<?php /**PATH C:\laragon\www\core\resources\views/admin/layout.blade.php ENDPATH**/ ?>
