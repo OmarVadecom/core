@@ -1,6 +1,7 @@
 
 <div class="col-lg-12">
     <div class="section-title text-center pb-50 pt-50">
+        <h2>{{ $module['title'] }}</h2>
         <p class="title">{!! $module['text'] !!}</p>
         @if(isset($module))
             @if(isset($module['red_button']) || isset($module['yellow_button']))
