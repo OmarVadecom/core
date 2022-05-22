@@ -6,7 +6,7 @@
         <h4 class="title">{{ $module['heading'] }}</h4>
         <p>{{  $module['paragraph'] }}</p>
         <a href="{{ $module['button_url'] }}" class="link">
-            <i class="fal fa-angle-right"></i> {{ $module['button_content'] }}
+            <i class="fal fa-angle-right"></i> {{ $module['button_url'] }}
         </a>
     </div>
 </div>
