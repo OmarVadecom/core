@@ -48,9 +48,9 @@
             <div class="form-group row collapse multi-collapse" id="multiCollapseExample1">
                 <label class="col-sm-2 control-label">{{ __('العنوان') }}<span class="text-danger">*</span></label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="mod[{{ $randomKey }}][call_to_action][ar-heading]" placeholder="{{ __('العنوان') }}" value="{{  $moduleAttributes['ar-heading'] }}" >
-                    @if ($errors->has('ar-heading'))
-                        <p class="text-danger"> {{ $errors->first('ar-heading') }} </p>
+                    <input type="text" class="form-control" name="mod[{{ $randomKey }}][call_to_action][ar_heading]" placeholder="{{ __('العنوان') }}" value="{{  $moduleAttributes['ar_heading'] }}" >
+                    @if ($errors->has('ar_heading'))
+                        <p class="text-danger"> {{ $errors->first('ar_heading') }} </p>
                     @endif
                 </div>
             </div>
