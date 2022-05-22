@@ -257,12 +257,14 @@ class Helper
         return [
             'text_with_right_image' => 'Text with Image (Right)',
             'text_with_left_image'  => 'Text with Image (Left)',
-            'title_paragraph'       => 'Title',
+            'title_paragraph'       => 'Main Title',
             'section_with_icon'     => 'Small Icon with Text',
             'call_to_action'        => 'Call To Action',
             'text_editor'           => 'Text Content',
-            'packages_category'     => 'Packages Category'
-
+            'packages_category'     => 'Packages Category',
+            'thanksmessage'   => 'Thanks Message',
+            'text_content_center'   => 'Text Content Center',
+            'bannar'   => 'Bannar',
         ];
     }
 
