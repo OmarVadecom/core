@@ -20,7 +20,7 @@
                 <div class="tab-pane fade show active" id="nav-en-call-to-action"  role="tabpanel" aria-labelledby="nav-en-call-to-action-tab">
                 {{--English--}}
                     <div class="form-group row my-3">
-                        <label class="col-sm-2 control-label">{{ __('Heading') }}<span class="text-danger">*</span></label>
+                        <label class="col-sm-2 control-label">{{ __('Heading') }}</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="mod[{{ $randomKey }}][call_to_action][heading]" placeholder="{{ __('Heading') }}" value="{{ isset($moduleAttributes['heading']) ? $moduleAttributes['heading'] : '' }}" >
                             @if ($errors->has('heading'))
@@ -29,7 +29,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 control-label">{{ __('Button Content') }}<span class="text-danger">*</span></label>
+                        <label class="col-sm-2 control-label">{{ __('Button Content') }}></label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="mod[{{ $randomKey }}][call_to_action][button_content]" placeholder="{{ __('Button Content') }}" value="{{ isset($moduleAttributes['button_content']) ? $moduleAttributes['button_content'] : '' }}" >
                             @if ($errors->has('button_content'))
@@ -38,7 +38,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 control-label">{{ __('Button Url') }}<span class="text-danger">*</span></label>
+                        <label class="col-sm-2 control-label">{{ __('Button Url') }}</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="mod[{{ $randomKey }}][call_to_action][button_url]" placeholder="{{ __('Button Url') }}" value="{{isset($moduleAttributes['button_url']) ? $moduleAttributes['button_url'] : '' }}" >
                             @if ($errors->has('button_url'))
@@ -49,11 +49,12 @@
                 
                 </div>
 
+
                 <div class="tab-pane fade" id="nav-ar-call-to-action" role="tabpanel" aria-labelledby="nav-ar-call-to-action-tab">
 
                 {{--Arabic--}}
                     <div class="form-group row my-3">
-                        <label class="col-sm-2 control-label">{{ __('العنوان') }}<span class="text-danger">*</span></label>
+                        <label class="col-sm-2 control-label">{{ __('العنوان') }}</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="mod[{{ $randomKey }}][call_to_action][ar_heading]" placeholder="{{ __('العنوان') }}" value="{{ isset($moduleAttributes['ar_heading']) ? $moduleAttributes['ar_heading'] : '' }}" >
                             @if ($errors->has('ar_heading'))
@@ -62,7 +63,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 control-label">{{ __('Button Content') }}<span class="text-danger">*</span></label>
+                        <label class="col-sm-2 control-label">{{ __('Button Content') }}</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="mod[{{ $randomKey }}][call_to_action][ar_button_content]" placeholder="{{ __('Button Content') }}" value="{{ isset($moduleAttributes['ar_button_content']) ? $moduleAttributes['ar_button_content'] : ''}}" >
                             @if ($errors->has('ar_button_content'))
@@ -71,7 +72,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 control-label">{{ __('الرابط') }}<span class="text-danger">*</span></label>
+                        <label class="col-sm-2 control-label">{{ __('الرابط') }}</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="mod[{{ $randomKey }}][call_to_action][ar_button_url]" placeholder="{{ __('الرابط') }}" value="{{ isset($moduleAttributes['ar_button_url']) ? $moduleAttributes['ar_button_url'] : '' }}" >
                             @if ($errors->has('ar_button_url'))
@@ -79,7 +80,12 @@
                             @endif
                         </div>
                     </div>
-                </div>
+
+            </div>
+          
+       
+          
+            
             </div>
             @else
 
@@ -87,7 +93,7 @@
                 <div class="tab-pane fade show active" id="nav-en-call-to-action"  role="tabpanel" aria-labelledby="nav-en-call-to-action-tab">
             {{--English--}}
                     <div class="form-group row my-3">
-                        <label class="col-sm-2 control-label">{{ __('Heading') }}<span class="text-danger">*</span></label>
+                        <label class="col-sm-2 control-label">{{ __('Heading') }}</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="mod[{{ $randNumModule }}][call_to_action][heading]" placeholder="{{ __('Heading') }}" >
                             @if ($errors->has('heading'))
@@ -96,7 +102,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 control-label">{{ __('Button Content') }}<span class="text-danger">*</span></label>
+                        <label class="col-sm-2 control-label">{{ __('Button Content') }}</label>
                         <div class="col-sm-20">
                             <input type="text" class="form-control" name="mod[{{ $randNumModule }}][call_to_action][button_content]" placeholder="{{ __('Button Content') }}" >
                             @if ($errors->has('button_content'))
@@ -105,7 +111,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 control-label">{{ __('Button Url') }}<span class="text-danger">*</span></label>
+                        <label class="col-sm-2 control-label">{{ __('Button Url') }}</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="mod[{{ $randNumModule }}][call_to_action][button_url]" placeholder="{{ __('Button Url') }}" >
                             @if ($errors->has('button_url'))
@@ -118,7 +124,7 @@
                 <div class="tab-pane fade" id="nav-ar-call-to-action" role="tabpanel" aria-labelledby="nav-ar-call-to-action-tab">
             {{--Arabic--}}
                     <div class="form-group row my-3">
-                        <label class="col-sm-2 control-label">{{ __('العنوان') }}<span class="text-danger">*</span></label>
+                        <label class="col-sm-2 control-label">{{ __('العنوان') }}</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="mod[{{ $randNumModule }}][call_to_action][ar_heading]" placeholder="{{ __('العنوان') }}" >
                             @if ($errors->has('ar_heading'))
@@ -127,7 +133,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 control-label">{{ __('Button Content') }}<span class="text-danger">*</span></label>
+                        <label class="col-sm-2 control-label">{{ __('Button Content') }}</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="mod[{{ $randNumModule }}][call_to_action][ar_button_content]" placeholder="{{ __('Button Content') }}" >
                             @if ($errors->has('ar_button_content'))
@@ -136,7 +142,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 control-label">{{ __('الرابط') }}<span class="text-danger">*</span></label>
+                        <label class="col-sm-2 control-label">{{ __('الرابط') }}</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="mod[{{ $randNumModule }}][call_to_action][ar_button_url]" placeholder="{{ __('الرابط') }}" >
                             @if ($errors->has('ar_button_url'))
