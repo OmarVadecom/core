@@ -3,10 +3,10 @@
         <div class="icon">
             <i class="{{ $module['class_icon'] }}"></i>
         </div>
-        <h4 class="title">{{ $module['heading'] }}</h4>
+        <h4 class="title"><a href="{{ $module['button_url'] }}" class="link">{{ $module['heading'] }}</a></h4>
         <p>{{  $module['paragraph'] }}</p>
-        <a href="{{ $module['button_url'] }}" class="link">
+        {{-- <a href="{{ $module['button_url'] }}" class="link">
             <i class="fal fa-angle-right"></i> {{ $module['button_url'] }}
-        </a>
+        </a> --}}
     </div>
 </div>
