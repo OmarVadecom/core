@@ -262,9 +262,10 @@ class Helper
             'call_to_action'        => 'Call To Action',
             'text_editor'           => 'Text Content',
             'packages_category'     => 'Packages Category',
-            'thanksmessage'   => 'Thanks Message',
+            'thanksmessage'         => 'Thanks Message',
             'text_content_center'   => 'Text Content Center',
-            'bannar'   => 'Bannar',
+            'bannar'                => 'Bannar',
+            'faq_category' => 'Faq Category',
         ];
     }
 
