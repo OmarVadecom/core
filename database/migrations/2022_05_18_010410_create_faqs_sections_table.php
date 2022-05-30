@@ -15,6 +15,12 @@ class CreateFeqsSectionsTable extends Migration
     {
         Schema::create('feqs_sections', function (Blueprint $table) {
             $table->id();
+            $table->$table->index('category_id');
+            $table->foreign('category_id')->references('id')->on('feq_categories')->onDelete('cascade');
+            $table->text('question_en');
+            $table->text('question_ar');
+            $table->text('answer_en');
+            $table->text('answer_ar');
             $table->timestamps();
         });
     }

@@ -68,98 +68,58 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="card-body">
+                          <div class="card-body">
                             <form class="form-horizontal" action="<?php echo e(route('admin.dynamic_page.store')); ?>" method="POST"
                                   enctype="multipart/form-data">
                                 <?php echo csrf_field(); ?>
                                 <div class="form-group row">
                                     <label class="col-sm-2 control-label"><?php echo e(__('Language')); ?><span class="text-danger">*</span></label>
-
                                     <div class="col-sm-10">
-                                        <p>
-                                            <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">English</a>
-                                            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">عربى</button>
-                                            
-                                        </p>
-                                        
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="collapse multi-collapse in show" id="multiCollapseExample1" >
-                                                    <div class="card card-body">
-                                                        <label for="title">Title</label>
-                                                        <input type="text" class="form-control slugable" name="en_title" data-slug="1"  placeholder="<?php echo e(__('Title')); ?>" >
-                                                    </div>
-                                                </div>
+                                        <nav>
+                                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                                <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">English</button>
+                                                <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">عربى</button>
                                             </div>
-                                            <div class="col">
-                                                <div class="collapse multi-collapse" id="multiCollapseExample2">
-                                                    <div class="card card-body">
-                                                        <label for="title">العنوان</label>
-                                                        <input type="text" class="form-control slugable" name="ar_title" data-slug="0"  placeholder="العنوان" >
-                                                    </div>
-                                                </div>
-                                                <?php if($errors->has('title')): ?>
-                                                    <p class="text-danger"> <?php echo e($errors->first('title')); ?> </p>
+                                        </nav>
+                                       <br>
+                                        <div class="tab-content" id="nav-tabContent" >
+                                            <div class=" col-sm-10 tab-pane fade show active " id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                                <label for="title">Title</label>
+                                                <input type="text" class="form-control slugable" name="en_title" data-slug="1"  placeholder="<?php echo e(__('Title')); ?>">
+                                                <?php if($errors->has('en_title')): ?>
+                                                    <p class="text-danger"> <?php echo e($errors->first('en_title')); ?> </p>
+                                                <?php endif; ?>
+                                                <label for="meta_keywords">Meta Keywords</label>
+                                                <input type="text" class="form-control" data-role="tagsinput" name="en_meta_keywords" placeholder="<?php echo e(__('Meta Keywords')); ?>" >
+                                                <?php if($errors->has('en_meta_keywords')): ?>
+                                                    <p class="text-danger"> <?php echo e($errors->first('en_meta_keywords')); ?> </p>
+                                                <?php endif; ?>
+                                                <label for="meta_keywords"> Meta Description</label>
+                                                <textarea class="form-control" name="en_meta_description" placeholder="<?php echo e(__('Meta Description')); ?>"  rows="4"></textarea>
+                                                <?php if($errors->has('en_meta_description')): ?>
+                                                    <p class="text-danger"> <?php echo e($errors->first('en_meta_description')); ?> </p>
                                                 <?php endif; ?>
                                             </div>
+
+                                        <div class="col-sm-10 tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-home-tab">
+                                            <label for="title">العنوان</label>
+                                            <input type="text" class="form-control slugable" name="ar_title" data-slug="0"  placeholder="العنوان" >
+                                            <?php if($errors->has('ar_title')): ?>
+                                                <p class="text-danger"> <?php echo e($errors->first('ar_title')); ?> </p>
+                                            <?php endif; ?>
+                                            <label for="meta_keywords">الكلمات الدلاليه لمحركات البحث</label>
+                                            <input type="text" class="form-control" data-role="tagsinput" name="ar_meta_keywords" placeholder="الكلمات الدلاليه لمحركات البحث">
+                                            <?php if($errors->has('ar_meta_keywords')): ?>
+                                                <p class="text-danger"> <?php echo e($errors->first('ar_meta_keywords')); ?> </p>
+                                            <?php endif; ?>
+                                            <label for="meta_description">الوصف لمحركات البحث</label>
+                                            <textarea class="form-control" name="ar_meta_description" placeholder="الوصف لمحركات البحث"  rows="4"></textarea>
+                                            <?php if($errors->has('ar_meta_description')): ?>
+                                                <p class="text-danger"> <?php echo e($errors->first('ar_meta_description')); ?> </p>
+                                            <?php endif; ?>
                                         </div>
 
-                                        
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="collapse multi-collapse in show" id="multiCollapseExample1" >
-                                                    <div class="card card-body">
-                                                        <label for="meta_keywords">Meta Keywords</label>
-                                                        <input type="text" class="form-control" data-role="tagsinput" name="en_meta_keywords" placeholder="<?php echo e(__('Meta Keywords')); ?>">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="collapse multi-collapse" id="multiCollapseExample2">
-                                                    <div class="card card-body">
-                                                        <label for="meta_keywords">الكلمات الدلاليه لمحركات البحث</label>
-                                                        <input type="text" class="form-control" data-role="tagsinput" name="ar_meta_keywords" placeholder="الكلمات الدلاليه لمحركات البحث">
-                                                    </div>
-                                                </div>
-                                                <?php if($errors->has('meta_keywords')): ?>
-                                                    <p class="text-danger"> <?php echo e($errors->first('meta_keywords')); ?> </p>
-                                                <?php endif; ?>
-                                            </div>
                                         </div>
-
-                                        
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="collapse multi-collapse in show" id="multiCollapseExample1" >
-                                                    <div class="card card-body">
-                                                        <label for="meta_keywords"> Meta Description</label>
-                                                        <textarea class="form-control" name="en_meta_description" placeholder="<?php echo e(__('Meta Description')); ?>"  rows="4"></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="collapse multi-collapse" id="multiCollapseExample2">
-                                                    <div class="card card-body">
-                                                        <label for="meta_description">الوصف لمحركات البحث</label>
-                                                        <textarea class="form-control" name="ar_meta_description" placeholder="الوصف لمحركات البحث"  rows="4"></textarea>
-                                                    </div>
-                                                </div>
-                                                <?php if($errors->has('meta_description')): ?>
-                                                    <p class="text-danger"> <?php echo e($errors->first('meta_description')); ?> </p>
-                                                <?php endif; ?>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                        <div class="col-sm-10">
-
-
-
-
-
-                                        <?php if($errors->has('language_id')): ?>
-                                            <p class="text-danger"> <?php echo e($errors->first('language_id')); ?> </p>
-                                        <?php endif; ?>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -178,16 +138,6 @@
                                     </div>
                                 </div>
 
-
-
-
-
-
-
-
-
-
-
                                 <div class="form-group row">
                                     <label class="col-sm-2 control-label"><?php echo e(__('Slug')); ?><span class="text-danger">*</span></label>
 
@@ -203,30 +153,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                                 <div class="form-group row">
                                     <label for="value" class="col-sm-2 control-label"><?php echo e(__('Order')); ?><span
                                                 class="text-danger">*</span></label>
@@ -311,8 +237,9 @@
         </div>
     </section>
 <?php $__env->stopSection(); ?>
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <?php $__env->startSection('script'); ?>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     <script src="<?php echo e(asset('assets/front/js/jquery-ui.js')); ?>"></script>
     <script>
 

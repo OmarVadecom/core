@@ -669,7 +669,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin', 'checkstatus']
         Route::post('/dynamic-page/store', 'Admin\DynamicpageController@store')->name('admin.dynamic_page.store');
         Route::post('/dynamic-page/delete/{id}/', 'Admin\DynamicpageController@delete')->name('admin.dynamic_page.delete');
         Route::get('/dynamic-page/edit/{id}/', 'Admin\DynamicpageController@edit')->name('admin.dynamic_page.edit');
-        Route::post('/dynamic-page/update/{id}/', 'Admin\DynamicpageController@update')->name('admin.dynamic_page.update');
+        Route::post('/dynamic-page/update/{id}', 'Admin\DynamicpageController@update')->name('admin.dynamic_page.update');
 
         Route::get('/dynamic-page/{id}/copy/', 'Admin\DynamicpageController@copy')->name('admin.dynamic_page.copy');
     });
@@ -718,10 +718,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin', 'checkstatus']
 });
 
 
-Route::group(['middleware' => 'checkpermission:feq'], function () {
+Route::group(['middleware' => 'checkpermission:faq'], function () {
 
-    Route::resource('feq-category', 'Admin\FeqCategoryController');
-    Route::resource('feq', 'Admin\FeqController');
+    Route::resource('faq-category', 'Admin\FaqCategoryController');
+    Route::resource('faq', 'Admin\FaqSectionController');
 });
 
 Route::group(['prefix' =>  LaravelLocalization::setLocale(), 'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']], function () {

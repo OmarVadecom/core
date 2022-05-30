@@ -1246,38 +1246,38 @@ $admin = Auth::guard('admin')->user();
                 @endif
 
 
-{{--                add feq  --}}
+{{--                add faq  --}}
 
                 @if (empty($admin->role) || (!empty($permissions) && in_array('Blog', $permissions)))
                     <li class="nav-item">
                         <a class="nav-link">
                             <i class="nav-icon fa fa-question-circle"></i>
                             <p>
-                                Feq
+                                Faq
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="" class="nav-link">
+                                <a href="{{route('faq-category.index')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>List FAQ Categories </p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="" class="nav-link">
+                                <a href="{{route('faq-category.create')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Create FAQ Categories</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="" class="nav-link">
+                                <a href="{{route('faq.index')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>List FAQ</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="" class="nav-link">
+                                <a href="{{route('faq.create')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Create FAQ</p>
                                 </a>
@@ -1287,7 +1287,7 @@ $admin = Auth::guard('admin')->user();
                 @endif
 
 
-{{--                end add feq--}}
+{{--                end add faq--}}
 
                 @if (empty($admin->role) || (!empty($permissions) && in_array('Role Management', $permissions)))
                     <li class="nav-item

@@ -70,9 +70,9 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form class="form-horizontal" action="<?php echo e(route('admin.dynamic_page.update',  $dynamicpage->id)); ?>" method="POST" enctype="multipart/form-data">
+                        <form class="form-horizontal" action="<?php echo e(route('admin.dynamic_page.store')); ?>" method="POST"
+                              enctype="multipart/form-data">
                             <?php echo csrf_field(); ?>
-
                             <div class="form-group row">
                                 <label class="col-sm-2 control-label"><?php echo e(__('Language')); ?><span class="text-danger">*</span></label>
                                 <div class="col-sm-10">
@@ -123,15 +123,14 @@
                                     </div>
                                 </div>
                             </div>
-
-
                             <div class="form-group row">
                                 <label class="col-sm-2 control-label"><?php echo e(__('Category')); ?><span class="text-danger">*</span></label>
+
                                 <div class="col-sm-10">
                                     <select class="form-control lang" name="category_id">
-                                        <option value="" selected> Select Category </option>
+                                        <option value="" selected> Select Category</option>
                                         <?php $__currentLoopData = $dynamicPageCategories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $dynamicPageCategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <option value="<?php echo e($dynamicPageCategory->id); ?>" <?php echo e($dynamicpage->category_id == $dynamicPageCategory->id ? 'selected' : ''); ?>><?php echo e($dynamicPageCategory->title); ?></option>
+                                            <option value="<?php echo e($dynamicPageCategory->id); ?>"><?php echo e($dynamicPageCategory->title); ?></option>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </select>
                                     <?php if($errors->has('category_id')): ?>
@@ -144,24 +143,24 @@
                                 <label class="col-sm-2 control-label"><?php echo e(__('Slug')); ?><span class="text-danger">*</span></label>
 
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control sluginp" name="slug" placeholder="<?php echo e(__('Slug')); ?>" value="<?php echo e($dynamicpage->slug); ?>" readonly>
+                                    <input type="text" class="form-control sluginp" name="slug" placeholder="<?php echo e(__('Slug')); ?>" value="<?php echo e($dynamicpage->slug); ?>-copy" readonly>
                                     <?php if($errors->has('slug')): ?>
                                         <p class="text-danger"> <?php echo e($errors->first('slug')); ?> </p>
                                     <?php endif; ?>
                                 </div>
                                 <div class="col-sm-1">
                                     <div class="fix-slug">
-                                        <input type="checkbox" name="fix_slug" class="fix_slug" checked />
+                                        <input type="checkbox" name="fix_slug" class="fix_slug" />
                                     </div>
                                 </div>
                             </div>
-
-
                             <div class="form-group row">
-                                <label for="value" class="col-sm-2 control-label"><?php echo e(__('Order')); ?><span class="text-danger">*</span></label>
+                                <label for="value" class="col-sm-2 control-label"><?php echo e(__('Order')); ?><span
+                                            class="text-danger">*</span></label>
 
                                 <div class="col-sm-10">
-                                    <input type="number" class="form-control" name="serial_number" placeholder="<?php echo e(__('Order')); ?>" value="<?php echo e($dynamicpage->serial_number); ?>">
+                                    <input type="number" class="form-control" name="serial_number"
+                                           placeholder="<?php echo e(__('Order')); ?>" value="0">
                                     <?php if($errors->has('serial_number')): ?>
                                         <p class="text-danger"> <?php echo e($errors->first('serial_number')); ?> </p>
                                     <?php endif; ?>
@@ -174,9 +173,9 @@
                                 </label>
                                 <div class="col-sm-10">
                                     <select class="form-control" name="footer" id="footer">
-                                        <option value="together" <?php echo e($dynamicpage->footer == 'together' ? 'selected' : ''); ?>>Together</option>
-                                        <option value="long_footer" <?php echo e($dynamicpage->footer == 'long_footer' ? 'selected' : ''); ?>>Long Footer</option>
-                                        <option value="short_footer" <?php echo e($dynamicpage->footer == 'short_footer' ? 'selected' : ''); ?>>Short Footer</option>
+                                        <option value="together">Together</option>
+                                        <option value="long_footer">Long Footer</option>
+                                        <option value="short_footer">Short Footer</option>
                                     </select>
                                     <?php if($errors->has('footer')): ?>
                                         <p class="text-danger"> <?php echo e($errors->first('footer')); ?> </p>
@@ -184,13 +183,14 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="status" class="col-sm-2 control-label"><?php echo e(__('Status')); ?><span class="text-danger">*</span></label>
+                                <label for="status" class="col-sm-2 control-label"><?php echo e(__('Status')); ?><span
+                                            class="text-danger">*</span></label>
 
                                 <div class="col-sm-10">
                                     <select class="form-control" name="status">
-                                       <option value="0" <?php echo e($dynamicpage->status == '0' ? 'selected' : ''); ?>><?php echo e(__('Unpublish')); ?></option>
-                                       <option value="1" <?php echo e($dynamicpage->status == '1' ? 'selected' : ''); ?>><?php echo e(__('Publish')); ?></option>
-                                      </select>
+                                        <option value="0"><?php echo e(__('Unpublish')); ?></option>
+                                        <option value="1"><?php echo e(__('Publish')); ?></option>
+                                    </select>
                                     <?php if($errors->has('status')): ?>
                                         <p class="text-danger"> <?php echo e($errors->first('status')); ?> </p>
                                     <?php endif; ?>
@@ -213,25 +213,18 @@
                                 </div>
                             </div>
 
-                            <div class="modules-container">
-                                <?php if($dynamicpage->modules != null): ?>
-                                    <?php $__currentLoopData = $dynamicpage->modules; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $randomKey => $module): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <?php $__currentLoopData = $module; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $keyModule => $moduleAttributes): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <?php echo $__env->make('admin.modules.style_of_modules.' . $keyModule, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                <?php endif; ?>
-                            </div>
+                            <div id="modules-container" class="modules-container"></div>
+
                             <div class="form-group row">
-                                <div class="offset-sm-2 col-sm-2">
+                                <div class="offset-sm-2 col-sm-1" style="width: 100%;">
                                     <button type="submit" class="btn btn-primary" style="width: 100%;">
-                                        <?php echo e(__('Update')); ?>
+                                        <?php echo e(__('Save')); ?>
 
                                     </button>
                                 </div>
-                                <div class="col-sm-3 ml-0 pl-0">
-                                    <button type="submit" class="btn btn-primary" name="update_continue" value="update_continue" style="width: 70%;padding: 6px 0px;">
-                                        <?php echo e(__('Update And Continue')); ?>
+                                <div class="col-sm-2 ml-0 pl-0">
+                                    <button type="submit" class="btn btn-primary" name="save_continue" value="save_continue" style="width: 100%;">
+                                        <?php echo e(__('Save And Continue')); ?>
 
                                     </button>
                                 </div>
@@ -245,10 +238,8 @@
 </section>
 <?php $__env->stopSection(); ?>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 <?php $__env->startSection('script'); ?>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-
     <script src="<?php echo e(asset('assets/front/js/jquery-ui.js')); ?>"></script>
     <script>
         $('#add_module').on('click', function (e) {
@@ -281,4 +272,4 @@
     </script>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('admin.layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH F:\wamp64\www\new_vadecom\resources\views/admin/dynamicpage/edit.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('admin.layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH F:\wamp64\www\new_vadecom\resources\views/admin/dynamicpage/copy.blade.php ENDPATH**/ ?>

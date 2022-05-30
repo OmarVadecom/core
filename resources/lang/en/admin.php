@@ -8,5 +8,8 @@ return [
      *
      */
     'title' => 'title',
+    'Question' => 'Question' ,
+    'Action' => 'Action',
+    'Category' => 'Category'
 
 ];

@@ -8,5 +8,7 @@ return [
      *
      */
     'title' => 'العنوان',
-
+    'Question' => 'السؤال' ,
+    'Action' => 'التحكم' ,
+    'Category' => 'القسم'
 ];

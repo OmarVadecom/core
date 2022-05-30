@@ -68,98 +68,58 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="card-body">
+                          <div class="card-body">
                             <form class="form-horizontal" action="{{ route('admin.dynamic_page.store') }}" method="POST"
                                   enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group row">
                                     <label class="col-sm-2 control-label">{{ __('Language') }}<span class="text-danger">*</span></label>
-
                                     <div class="col-sm-10">
-                                        <p>
-                                            <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">English</a>
-                                            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">عربى</button>
-                                            {{--                                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">Toggle both elements</button>--}}
-                                        </p>
-                                        {{--            row of title           --}}
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="collapse multi-collapse in show" id="multiCollapseExample1" >
-                                                    <div class="card card-body">
-                                                        <label for="title">Title</label>
-                                                        <input type="text" class="form-control slugable" name="en_title" data-slug="1"  placeholder="{{ __('Title') }}" >
-                                                    </div>
-                                                </div>
+                                        <nav>
+                                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                                <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">English</button>
+                                                <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">عربى</button>
                                             </div>
-                                            <div class="col">
-                                                <div class="collapse multi-collapse" id="multiCollapseExample2">
-                                                    <div class="card card-body">
-                                                        <label for="title">العنوان</label>
-                                                        <input type="text" class="form-control slugable" name="ar_title" data-slug="0"  placeholder="العنوان" >
-                                                    </div>
-                                                </div>
-                                                @if ($errors->has('title'))
-                                                    <p class="text-danger"> {{ $errors->first('title') }} </p>
+                                        </nav>
+                                       <br>
+                                        <div class="tab-content" id="nav-tabContent" >
+                                            <div class=" col-sm-10 tab-pane fade show active " id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                                <label for="title">Title</label>
+                                                <input type="text" class="form-control slugable" name="en_title" data-slug="1"  placeholder="{{ __('Title') }}">
+                                                @if ($errors->has('en_title'))
+                                                    <p class="text-danger"> {{ $errors->first('en_title') }} </p>
+                                                @endif
+                                                <label for="meta_keywords">Meta Keywords</label>
+                                                <input type="text" class="form-control" data-role="tagsinput" name="en_meta_keywords" placeholder="{{ __('Meta Keywords') }}" >
+                                                @if ($errors->has('en_meta_keywords'))
+                                                    <p class="text-danger"> {{ $errors->first('en_meta_keywords') }} </p>
+                                                @endif
+                                                <label for="meta_keywords"> Meta Description</label>
+                                                <textarea class="form-control" name="en_meta_description" placeholder="{{ __('Meta Description') }}"  rows="4"></textarea>
+                                                @if ($errors->has('en_meta_description'))
+                                                    <p class="text-danger"> {{ $errors->first('en_meta_description') }} </p>
                                                 @endif
                                             </div>
+
+                                        <div class="col-sm-10 tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-home-tab">
+                                            <label for="title">العنوان</label>
+                                            <input type="text" class="form-control slugable" name="ar_title" data-slug="0"  placeholder="العنوان" >
+                                            @if ($errors->has('ar_title'))
+                                                <p class="text-danger"> {{ $errors->first('ar_title') }} </p>
+                                            @endif
+                                            <label for="meta_keywords">الكلمات الدلاليه لمحركات البحث</label>
+                                            <input type="text" class="form-control" data-role="tagsinput" name="ar_meta_keywords" placeholder="الكلمات الدلاليه لمحركات البحث">
+                                            @if ($errors->has('ar_meta_keywords'))
+                                                <p class="text-danger"> {{ $errors->first('ar_meta_keywords') }} </p>
+                                            @endif
+                                            <label for="meta_description">الوصف لمحركات البحث</label>
+                                            <textarea class="form-control" name="ar_meta_description" placeholder="الوصف لمحركات البحث"  rows="4"></textarea>
+                                            @if ($errors->has('ar_meta_description'))
+                                                <p class="text-danger"> {{ $errors->first('ar_meta_description') }} </p>
+                                            @endif
                                         </div>
 
-                                        {{--            Meta Keywords          --}}
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="collapse multi-collapse in show" id="multiCollapseExample1" >
-                                                    <div class="card card-body">
-                                                        <label for="meta_keywords">Meta Keywords</label>
-                                                        <input type="text" class="form-control" data-role="tagsinput" name="en_meta_keywords" placeholder="{{ __('Meta Keywords') }}">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="collapse multi-collapse" id="multiCollapseExample2">
-                                                    <div class="card card-body">
-                                                        <label for="meta_keywords">الكلمات الدلاليه لمحركات البحث</label>
-                                                        <input type="text" class="form-control" data-role="tagsinput" name="ar_meta_keywords" placeholder="الكلمات الدلاليه لمحركات البحث">
-                                                    </div>
-                                                </div>
-                                                @if ($errors->has('meta_keywords'))
-                                                    <p class="text-danger"> {{ $errors->first('meta_keywords') }} </p>
-                                                @endif
-                                            </div>
                                         </div>
-
-                                        {{--           Meta Description          --}}
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="collapse multi-collapse in show" id="multiCollapseExample1" >
-                                                    <div class="card card-body">
-                                                        <label for="meta_keywords"> Meta Description</label>
-                                                        <textarea class="form-control" name="en_meta_description" placeholder="{{ __('Meta Description') }}"  rows="4"></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="collapse multi-collapse" id="multiCollapseExample2">
-                                                    <div class="card card-body">
-                                                        <label for="meta_description">الوصف لمحركات البحث</label>
-                                                        <textarea class="form-control" name="ar_meta_description" placeholder="الوصف لمحركات البحث"  rows="4"></textarea>
-                                                    </div>
-                                                </div>
-                                                @if ($errors->has('meta_description'))
-                                                    <p class="text-danger"> {{ $errors->first('meta_description') }} </p>
-                                                @endif
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                        <div class="col-sm-10">
-{{--                                        <select class="form-control lang" name="language_id">--}}
-{{--                                            @foreach($langs as $lang)--}}
-{{--                                                <option value="{{$lang->id}}" {{ $lang->is_default == '1' ? 'selected' : '' }} >{{$lang->name}}</option>--}}
-{{--                                            @endforeach--}}
-{{--                                        </select>--}}
-                                        @if ($errors->has('language_id'))
-                                            <p class="text-danger"> {{ $errors->first('language_id') }} </p>
-                                        @endif
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -177,17 +137,7 @@
                                         @endif
                                     </div>
                                 </div>
-{{--                                <div class="form-group row">--}}
-{{--                                    <label class="col-sm-2 control-label">{{ __('Title') }}<span--}}
-{{--                                                class="text-danger">*</span></label>--}}
 
-{{--                                    <div class="col-sm-10">--}}
-{{--                                        <input type="text" class="form-control titleinp" name="title" placeholder="{{ __('Title') }}" value="{{ old('title') }}">--}}
-{{--                                        @if ($errors->has('title'))--}}
-{{--                                            <p class="text-danger"> {{ $errors->first('title') }} </p>--}}
-{{--                                        @endif--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
                                 <div class="form-group row">
                                     <label class="col-sm-2 control-label">{{ __('Slug') }}<span class="text-danger">*</span></label>
 
@@ -203,30 +153,6 @@
                                         </div>
                                     </div>
                                 </div>
-{{--                                <div class="form-group row">--}}
-{{--                                    <label for="meta_keywords"--}}
-{{--                                           class="col-sm-2 control-label">{{ __('Meta Keywords') }}</label>--}}
-{{--                                    <div class="col-sm-10">--}}
-{{--                                        <input type="text" class="form-control" data-role="tagsinput"--}}
-{{--                                               name="meta_keywords" placeholder="{{ __('Meta Keywords') }}"--}}
-{{--                                               value="{{ old('meta_keywords') }}">--}}
-{{--                                        @if ($errors->has('meta_keywords'))--}}
-{{--                                            <p class="text-danger"> {{ $errors->first('meta_keywords') }} </p>--}}
-{{--                                        @endif--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="form-group row">--}}
-{{--                                    <label for="meta_description"--}}
-{{--                                           class="col-sm-2 control-label">{{ __('Meta Description') }}</label>--}}
-{{--                                    <div class="col-sm-10">--}}
-{{--                                        <textarea class="form-control" name="meta_description"--}}
-{{--                                                  placeholder="{{ __('Meta Description') }}"--}}
-{{--                                                  rows="4">{{ old('meta_description') }}</textarea>--}}
-{{--                                        @if ($errors->has('meta_description'))--}}
-{{--                                            <p class="text-danger"> {{ $errors->first('meta_description') }} </p>--}}
-{{--                                        @endif--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
                                 <div class="form-group row">
                                     <label for="value" class="col-sm-2 control-label">{{ __('Order') }}<span
                                                 class="text-danger">*</span></label>
@@ -309,8 +235,9 @@
         </div>
     </section>
 @endsection
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 @section('script')
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     <script src="{{ asset('assets/front/js/jquery-ui.js') }}"></script>
     <script>
 

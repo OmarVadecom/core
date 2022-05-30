@@ -5,6 +5,7 @@ namespace App\Helpers;
 
 use App\Models\Currency;
 use App\Models\dynamicPageCategories;
+use App\Models\FaqCategory;
 use App\Models\Language;
 use App\Models\Shipping;
 use App\Models\Permalink;
@@ -254,6 +255,8 @@ class Helper
     
     public static function modules(): array
     {
+//        $faqCategories = FaqCategory::get();
+//        foreach ($faqCategories as  $faqCategory ){
         return [
             'text_with_right_image' => 'Text with Image (Right)',
             'text_with_left_image'  => 'Text with Image (Left)',
@@ -261,8 +264,8 @@ class Helper
             'section_with_icon'     => 'Small Icon with Text',
             'call_to_action'        => 'Call To Action',
             'text_editor'           => 'Text Content',
-            'packages_category'     => 'Packages Category'
-
+            'packages_category'     => 'Packages Category',
+            'faq_category' => 'Faq Category',
         ];
     }
 

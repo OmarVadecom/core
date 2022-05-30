@@ -1258,31 +1258,31 @@ $admin = Auth::guard('admin')->user();
                         <a class="nav-link">
                             <i class="nav-icon fa fa-question-circle"></i>
                             <p>
-                                Feq
+                                Faq
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="" class="nav-link">
+                                <a href="<?php echo e(route('faq-category.index')); ?>" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>List FAQ Categories </p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="" class="nav-link">
+                                <a href="<?php echo e(route('faq-category.create')); ?>" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Create FAQ Categories</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="" class="nav-link">
+                                <a href="<?php echo e(route('faq.index')); ?>" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>List FAQ</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="" class="nav-link">
+                                <a href="<?php echo e(route('faq.create')); ?>" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Create FAQ</p>
                                 </a>
