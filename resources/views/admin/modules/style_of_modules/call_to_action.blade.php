@@ -29,7 +29,11 @@
                         </div>
                     </div>
                     <div class="form-group row">
+
+                       
+
                         <label class="col-sm-2 control-label">{{ __('Button Content') }}></label>
+
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="mod[{{ $randomKey }}][call_to_action][button_content]" placeholder="{{ __('Button Content') }}" value="{{ isset($moduleAttributes['button_content']) ? $moduleAttributes['button_content'] : '' }}" >
                             @if ($errors->has('button_content'))
