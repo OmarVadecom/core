@@ -262,15 +262,15 @@ class Helper
             'call_to_action'        => 'Call To Action',
             'text_editor'           => 'Text Content',
             'packages_category'     => 'Packages Category',
-            'thanksmessage'   => 'Thanks Message',
+            'thanksmessage'         => 'Thanks Message',
             'text_content_center'   => 'Text Content Center',
-            'bannar'   => 'Bannar',
+            'bannar'                => 'Bannar',
         ];
     }
 
     public static function modulesHasImage(): array
     {
-        return ['text_with_right_image', 'text_with_left_image'];
+        return ['text_with_right_image', 'text_with_left_image','bannar','text_content_center'];
     }
 
 

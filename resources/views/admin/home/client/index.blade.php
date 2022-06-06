@@ -26,7 +26,7 @@
                     <div class="card card-primary card-outline">
                         <div class="card-header">
                             <h3 class="card-title mt-1">Client Section Content</h3>
-                            <div class="card-tools">
+                            {{-- <div class="card-tools">
                                 <div class="d-inline-block mr-4">
                                     <select class="form-control lang languageSelect" data="{{url()->current() . '?language='}}">
                                         @foreach($langs as $lang)
@@ -37,51 +37,100 @@
                                         @endforeach
                                     </select>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="card-body">
+                            <nav>
+                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                    <a class="col-md-6 nav-item nav-link active" id="nav-en-client-tab" data-toggle="tab" href="#nav-en-client" role="tab" aria-controls="nav-en-client" aria-selected="true">English</a>
+                                    <a class="col-md-6 nav-item nav-link" id="nav-ar-client-tab" data-toggle="tab" href="#nav-ar-client" role="tab" aria-controls="nav-ar-client" aria-selected="false">عربي</a>
+                                </div>
+                            </nav>
                             <form
-                                action="{{ route('admin.clientContent.update',  $saectiontitle->language_id) }}"
-                                class="form-horizontal"
-                                method="POST"
-                            >
+                                action="{{ route('admin.clientContent.update',  $seactiontitle_en->language_id) }}" class="form-horizontal" method="POST" >
                                 @csrf
-                                <div class="form-group row">
-                                    <label class="col-sm-3 control-label">
-                                        Client Section Sub Title
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <input
-                                            value="{{ $saectiontitle->blog_sub_title }}"
-                                            placeholder="Client Section Sub Title"
-                                            name="blog_sub_title"
-                                            class="form-control"
-                                            type="text"
-                                        >
-                                        @if ($errors->has('blog_sub_title'))
-                                            <p class="text-danger"> {{ $errors->first('blog_sub_title') }} </p>
-                                        @endif
+                                <div class="tab-content" id="nav-tabContent">
+                                    <div class="col-md-12 tab-pane fade show active" id="nav-en-client" role="tabpanel" aria-labelledby="nav-en-client-tab" >
+                                        {{--english--}}
+                                        <div class="form-group row my-3">
+                                            <label class="col-sm-3 control-label">
+                                                Client Section Sub Title
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input
+                                                    value="{{ $seactiontitle_en->blog_sub_title }}"
+                                                    placeholder="Client Section Sub Title"
+                                                    name="blog_sub_title"
+                                                    class="form-control"
+                                                    type="text"
+                                                >
+                                                @if ($errors->has('blog_sub_title'))
+                                                    <p class="text-danger"> {{ $errors->first('blog_sub_title') }} </p>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 control-label">
+                                                Client Section Title
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input
+                                                    value="{{ $seactiontitle_en->blog_title }}"
+                                                    placeholder="Client Section Title"
+                                                    class="form-control"
+                                                    name="blog_title"
+                                                    type="text"
+                                                >
+                                                @if ($errors->has('blog_title'))
+                                                    <p class="text-danger"> {{ $errors->first('blog_title') }} </p>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 tab-pane fade" id="nav-ar-client" role="tabpanel" aria-labelledby="nav-ar-client-tab">
+                                        {{--arabic--}}
+                                        <div class="form-group row my-3">
+                                            <label class="col-sm-3 control-label">
+                                                عنوان فرعي لقسم العميل
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input
+                                                    value="{{ $seactiontitle_ar->blog_sub_title }}"
+                                                    placeholder="Client Section Sub Title"
+                                                    name="ar_blog_sub_title"
+                                                    class="form-control"
+                                                    type="text"
+                                                >
+                                                @if ($errors->has('blog_sub_title'))
+                                                    <p class="text-danger"> {{ $errors->first('blog_sub_title') }} </p>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 control-label">
+                                                عنوان قسم العميل
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input
+                                                    value="{{ $seactiontitle_ar->blog_title }}"
+                                                    placeholder="Client Section Title"
+                                                    class="form-control"
+                                                    name="ar_blog_title"
+                                                    type="text"
+                                                >
+                                                @if ($errors->has('blog_title'))
+                                                    <p class="text-danger"> {{ $errors->first('blog_title') }} </p>
+                                                @endif
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-3 control-label">
-                                        Client Section Title
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <input
-                                            value="{{ $saectiontitle->blog_title }}"
-                                            placeholder="Client Section Title"
-                                            class="form-control"
-                                            name="blog_title"
-                                            type="text"
-                                        >
-                                        @if ($errors->has('blog_title'))
-                                            <p class="text-danger"> {{ $errors->first('blog_title') }} </p>
-                                        @endif
-                                    </div>
-                                </div>
+
+
                                 <div class="form-group row">
                                     <div class="offset-sm-3 col-sm-10">
                                         <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>

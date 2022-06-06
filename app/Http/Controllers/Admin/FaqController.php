@@ -7,6 +7,7 @@ use App\Models\Language;
 use App\Models\Sectiontitle;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 
 class FaqController extends Controller
 {
@@ -26,9 +27,10 @@ class FaqController extends Controller
                         return $q->where('status', $request['status']);
                     })->orderBy('id', 'DESC')->get();
         
-        $static = Sectiontitle::where('language_id', $lang)->orderBy('id', 'DESC')->first();
+        $static = Sectiontitle::where('language_id', 1)->orderBy('id', 'DESC')->first();
+        $static_ar = Sectiontitle::where('language_id', 2)->orderBy('id', 'DESC')->first();
         
-        return view('admin.home.faq.index', compact('faqs', 'static'));
+        return view('admin.home.faq.index', compact('faqs', 'static','static_ar'));
     }
 
     // Add Faq
@@ -41,20 +43,34 @@ class FaqController extends Controller
 
         $request->validate([
             'title' => 'required|max:150',
+            'ar_title' => 'required|max:150',
             'content' => 'required',
+            'ar_content' => 'required',
             'serial_number' => 'required|numeric',
-            'language_id' => 'required',
             'status' => 'required',
         ]);
 
+        $faq = Faq::where('language_id', 1)->first();
+        $faq_ar = Faq::where('language_id', 2)->first();
+        $str= Str::random(4);
+
+
         $faq = new Faq();
-        $faq->language_id = $request->language_id;
+        $faq->language_id = 1;
         $faq->status = $request->status;
         $faq->title = $request->title;
+        $faq->faq_id = $str;
         $faq->serial_number = $request->serial_number;
         $faq->content = $request->content;
         $faq->save();
-       
+
+        $faq_ar = new Faq();
+        $faq_ar->language_id = 2;
+        $faq_ar->faq_id = $str;
+        $faq_ar->title = $request->ar_title;
+        $faq_ar->content = $request->ar_content;
+        $faq_ar->save();
+
         $notification = array(
             'messege' => 'Faq Added successfully!',
             'alert' => 'success'
@@ -79,29 +95,40 @@ class FaqController extends Controller
     public function edit($id){
 
         $faq = Faq::find($id);
-        return view('admin.home.faq.edit', compact('faq'));
+        $faq_en = Faq::where('faq_id',$faq->faq_id)->where('language_id', 1)->first();
+        $faq_ar = Faq::where('faq_id',$faq->faq_id)->where('language_id', 2)->first();
+        return view('admin.home.faq.edit', compact('faq','faq_ar','faq_en'));
 
     }
 
     // Update Faq
     public function update(Request $request, $id){
 
-        $id = $request->id;
+        $faq = Faq::find($id);
+        $faq_en = Faq::where('faq_id',$faq->faq_id)->where('language_id', 1)->first();
+        $faq_ar = Faq::where('faq_id',$faq->faq_id)->where('language_id', 2)->first();
+
+        // $id = $request->id;
          $request->validate([
             'title' => 'required|max:150',
             'content' => 'required',
+            'ar_title' => 'required|max:150',
+            'ar_content' => 'required',
             'serial_number' => 'required|numeric',
-            'language_id' => 'required',
             'status' => 'required',
         ]);
 
-        $faq = Faq::find($id);
-        $faq->language_id = $request->language_id;
-        $faq->status = $request->status;
-        $faq->title = $request->title;
-        $faq->serial_number = $request->serial_number;
-        $faq->content = $request->content;
-        $faq->save();
+        // $faq = Faq::find($id);
+
+        $faq_en->status = $request->status;
+        $faq_en->title = $request->title;
+        $faq_en->serial_number = $request->serial_number;
+        $faq_en->content = $request->content;
+        $faq_en->save();
+
+        $faq_ar->title = $request->ar_title;
+        $faq_ar->content = $request->ar_content;
+        $faq_ar->save();
 
         $notification = array(
             'messege' => 'Faq Updated successfully!',

@@ -14,12 +14,10 @@ class CreateDynamicPageCategoriesTable extends Migration
     {
         Schema::create('dynamic_page_categories', function (Blueprint $table) {
             $table->id();
-
             $table->unsignedBigInteger('language_id')->default(0);
             $table->tinyInteger('status')->default(1);
             $table->string('title')->unique();
             $table->string('slug');
-
             $table->timestamps();
         });
     }
