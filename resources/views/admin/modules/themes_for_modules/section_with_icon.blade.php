@@ -1,12 +1,19 @@
 <div class="col-lg-4 col-md-6 col-sm-8">
-    <div class="section-content text-center mb-30">
-        <div class="icon">
-            <i class="{{ $module['class_icon'] }}"></i>
+    @if (app()->getLocale() == 'ar')
+        <div class="section-content text-center mb-30">
+            <div class="icon">
+                <i class="{{ $module['ar_class_icon'] }}"></i>
+            </div>
+            <h4 class="title"><a href="{{ $module['ar_button_url'] }}" class="link">{{ $module['ar_heading'] }}</a></h4>
+            <p class="module-text">{{  $module['ar_paragraph'] }}</p>
         </div>
-        <h4 class="title"><a href="{{ $module['button_url'] }}" class="link">{{ $module['heading'] }}</a></h4>
-        <p>{{  $module['paragraph'] }}</p>
-        {{-- <a href="{{ $module['button_url'] }}" class="link">
-            <i class="fal fa-angle-right"></i> {{ $module['button_url'] }}
-        </a> --}}
-    </div>
+    @else
+        <div class="section-content text-center mb-30">
+            <div class="icon">
+                <i class="{{ $module['class_icon'] }}"></i>
+            </div>
+            <h4 class="title"><a href="{{ $module['button_url'] }}" class="link">{{ $module['heading'] }}</a></h4>
+            <p class="module-text">{{  $module['paragraph'] }}</p>
+        </div>
+    @endif
 </div>

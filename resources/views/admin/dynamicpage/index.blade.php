@@ -155,20 +155,15 @@
 
                                             </td>
                                             <td>
-                                                <a href="{{ route('admin.dynamic_page.edit', $dynamicpage->id) }}"
+                                                <a href="{{ route('admin.dynamic_page.edit', $dynamicpage->id) }}"target="_blank"
                                                    class="btn btn-info btn-sm"><i
                                                             class="fas fa-pencil-alt"></i>{{ __('Edit') }}</a>
 
-                                                @if($dynamicpage->status == 1)
+                                                
                                                     <a href="{{ asset($dynamicpage->url) }}" target="_blank"
                                                        class="btn btn-primary btn-sm"><i class="fas fa-eye"></i>{{ __('View') }}
                                                     </a>
-                                                @else
-                                                    <span class="btn btn-primary btn-sm">
-                                                        <i class="fas fa-eye"></i>
-                                                        {{ __('View') }}
-                                                    </span>
-                                                @endif
+                                               
                                                 <form id="deleteform" class="d-inline-block"
                                                       action="{{ route('admin.dynamic_page.delete', $dynamicpage->id ) }}"
                                                       method="post">

@@ -95,7 +95,7 @@
                                     <div class="col-md-12 tab-pane fade" id="nav-ar-team" role="tabpanel" aria-labelledby="nav-ar-team-tab">
                                         {{--arabic--}}
                                         <div class="form-group row my-3">
-                                            <label class="col-sm-2 control-label">{{ __('Title') }}
+                                            <label class="col-sm-2 control-label">{{ __('العنوان') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-sm-10">
@@ -113,13 +113,13 @@
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 control-label">
-                                                {{ __('Subtitle') }}
+                                                {{ __('العنوان الفرعي') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-sm-10">
                                                 <input
                                                     value="{{ $arabic_static->team_sub_title }}"
-                                                    placeholder="{{ __('ترجمه') }}"
+                                                    placeholder="{{ __('العنوان الفرعي') }}"
                                                     name="ar_team_sub_title"
                                                     class="form-control"
                                                     type="text"

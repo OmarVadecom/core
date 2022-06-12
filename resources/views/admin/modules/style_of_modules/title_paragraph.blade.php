@@ -1,8 +1,9 @@
-<div class="card">
+    <div class="card">
     @php
         $randNumModule = \Illuminate\Support\Str::random(10);
     @endphp
     <div class="card-header toggle-open-close-module">
+       
         <i class="fas fa-times icon-delete"></i>
         Main Title
         <i class="minimize-module fas fa-chevron-down"></i>

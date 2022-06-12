@@ -3,6 +3,7 @@
         $randNumModule = \Illuminate\Support\Str::random(10);
     @endphp
     <div class="card-header toggle-open-close-module">
+      
         <i class="fas fa-times icon-delete"></i>
         Text with Image (Left)
         <i class="minimize-module fas fa-chevron-down"></i>
@@ -22,20 +23,10 @@
                     <div class="form-group row my-3">
                         <label class="col-sm-2 control-label">{{ __('Image') }}</label>
                         <div class="col-sm-10">
-                            <img
-                                src="{{isset($moduleAttributes['image']) ? asset('assets/front/img/text_with_left_image/' . $moduleAttributes['image']) : asset('assets/admin/img/img-demo.jpg') }}"
-                                class="mw-400 mb-3 show-img img-demo"
-                                alt=""
-                            >
-                            <div class="custom-file">
-                                <label
-                                    class="custom-file-label"
-                                    for="image"
-                                >{{ __('Choose Image') }}</label>
                                 <input
                                     name="images[{{ $randomKey }}][text_with_left_image][imageFile]"
-                                    class="custom-file-input up-img"
-                                    type="file"
+                                    class="form-control"
+                                    type="text"
                                     id="image"
                                 />
                                 <input
@@ -44,7 +35,7 @@
                                     class="file-image-value"
                                     type="hidden"
                                 />
-                            </div>
+                        
                             @if ($errors->has('image'))
                                 <p class="text-danger"> {{ $errors->first('image') }} </p>
                             @endif
@@ -157,20 +148,10 @@
                     <div class="form-group row my-3">
                         <label class="col-sm-2 control-label">{{ __('الصورة') }}</label>
                         <div class="col-sm-10">
-                            <img
-                                src="{{isset($moduleAttributes['ar_image']) ? asset('assets/front/img/text_with_left_image/' . $moduleAttributes['ar_image']) : asset('assets/admin/img/img-demo.jpg') }}"
-                                class="mw-400 mb-3 show-img img-demo"
-                                alt=""
-                            >
-                            <div class="custom-file">
-                                <label
-                                    class="custom-file-label"
-                                    for="image"
-                                >{{ __('Choose Image') }}</label>
                                 <input
                                     name="images[{{ $randomKey }}][text_with_left_image][ar_imageFile]"
-                                    class="custom-file-input up-img"
-                                    type="file"
+                                    class="form-control"
+                                    type="text"
                                     id="image"
                                 />
                                 <input
@@ -179,7 +160,7 @@
                                     class="file-image-value"
                                     type="hidden"
                                 />
-                            </div>
+                           
                             @if ($errors->has('ar_image'))
                                 <p class="text-danger"> {{ $errors->first('ar_image') }} </p>
                             @endif
@@ -295,17 +276,14 @@
                     <div class="form-group row my-3">
                         <label class="col-sm-2 control-label">{{ __('Image') }}</label>
                         <div class="col-sm-10">
-                            <img class="mw-400 mb-3 show-img img-demo d-block" src="{{ asset('assets/admin/img/img-demo.jpg') }}" alt="">
-                            <div class="custom-file">
-                                <label class="custom-file-label" for="image">{{ __('Choose Image') }}</label>
-                                <input type="file" class="custom-file-input up-img" name="images[{{ $randNumModule }}][text_with_left_image][imageFile]" id="image">
+                                <input type="text" class="form-control" name="images[{{ $randNumModule }}][text_with_left_image][imageFile]" id="image">
                                 <input type="hidden" class="file-image-value" name="mod[{{ $randNumModule }}][text_with_left_image][image]" value="">
                             </div>
                             @if ($errors->has('image'))
                                 <p class="text-danger"> {{ $errors->first('image') }} </p>
                             @endif
                         </div>
-                    </div>
+                    
                     <div class="form-group row">
                         <label class="col-sm-2 control-label">{{ __('Heading') }}</label>
                         <div class="col-sm-10">
@@ -395,11 +373,7 @@
                     <div class="form-group row my-3">
                         <label class="col-sm-2 control-label">{{ __('الصورة') }}</label>
                         <div class="col-sm-10">
-                            <img class="mw-400 mb-3 show-img img-demo d-block"
-                                src="{{ asset('assets/admin/img/img-demo.jpg') }}" alt="">
-                            <div class="custom-file">
-                                <label class="custom-file-label" for="image">{{ __('Choose Image') }}</label>
-                                <input type="file" class="custom-file-input up-img"
+                                <input type="text" class="form-control"
                                     name="images[{{ $randNumModule }}][text_with_left_image][ar_imageFile]" id="image">
                                 <input type="hidden" class="file-image-value"
                                     name="mod[{{ $randNumModule }}][text_with_left_image][ar_image]" value="">
@@ -408,7 +382,7 @@
                                 <p class="text-danger"> {{ $errors->first('ar_image') }} </p>
                             @endif
                         </div>
-                    </div>
+                    
                     <div class="form-group row">
                         <label class="col-sm-2 control-label">{{ __('العنوان') }}</label>
                         <div class="col-sm-10">

@@ -56,10 +56,9 @@ class DynamicpageController extends Controller
     public function getModule(Request $request)
     {
                $package_categories = PackageCategory::where('status', 1)->get();
-                $faq_categories = FaqCategory::get();
+        $faq_categories = FaqCategory::get();
 
-      
-              return view('admin.modules.style_of_modules.' . $request['module'], compact('package_categories','faq_categories'));
+        return view('admin.modules.style_of_modules.' . $request['module'], compact('package_categories','faq_categories'));
     }
 
       public function store(Request $request)
@@ -104,11 +103,6 @@ class DynamicpageController extends Controller
                     }
                 }
             ],
-            'en_meta_keywords' =>'required',
-            'ar_meta_keywords' => 'required',
-            'en_meta_description' => 'required',
-            'ar_meta_description' => 'required',
-
             'slug' => 'required',
             'serial_number' => 'required',
             'status' => 'required',
@@ -239,7 +233,7 @@ class DynamicpageController extends Controller
             'meta_keywords' => $request->en_meta_keywords,
             'meta_description' => $request->en_meta_description,
             'footer' => $request->footer,
-            'modules' => $request->mod
+               'modules' => $request->mod
         ]);
 
 
@@ -255,7 +249,7 @@ class DynamicpageController extends Controller
             'meta_keywords' => $request->ar_meta_keywords,
             'meta_description' => $request->ar_meta_description,
             'footer' => $request->footer,
-            'modules' => $request->mod
+               'modules' => $request->mod
         ]);
 
 
@@ -298,3 +292,4 @@ class DynamicpageController extends Controller
         return back();
     }
 }
+    

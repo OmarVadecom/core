@@ -175,14 +175,15 @@
                                     </select>
                                 </div>
                             </div> --}}
+                           
+                        </div>
+                        <div class="card-body">
                             <nav>
                                 <div class="nav nav-tabs " id="nav-tab" role="tablist">
                                     <a class="col-md-4 nav-item nav-link active mx-2" id="nav-en-why_chooseus-tab" data-toggle="tab" href="#nav-en-why_chooseus" role="tab" aria-controls="nav-en-why_chooseus" aria-selected="true">English</a>
                                     <a class="col-md-4 nav-item nav-link" id="nav-ar-why_chooseus-tab" data-toggle="tab" href="#nav-ar-why_chooseus" role="tab" aria-controls="nav-ar-why_chooseus" aria-selected="false">عربي</a>
                                 </div>
                             </nav>
-                        </div>
-                        <div class="card-body">
                             <form
                                 action="{{ route('admin.why_chooseus_update', $english_static->language_id) }}"
                                 enctype="multipart/form-data"
@@ -306,7 +307,7 @@
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 control-label">
-                                                {{ __('ترجمة') }}
+                                                {{ __('العنوان الفرعي') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-sm-10">

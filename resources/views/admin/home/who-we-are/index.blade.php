@@ -92,7 +92,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label  class="col-sm-2 control-label">{{ __('ترجمة') }}<span class="text-danger">*</span></label>
+                                                <label  class="col-sm-2 control-label">{{ __('العنوان الفرعي') }}<span class="text-danger">*</span></label>
                 
                                                 <div class="col-sm-10">
                                                     <input type="text" class="form-control" name="ar_w_we_are_sub_title" placeholder="{{ __('Subtitle') }}" value="{{ $arabic_static->w_we_are_sub_title }}">

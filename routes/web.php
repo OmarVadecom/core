@@ -720,5 +720,4 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin', 'checkstatus']
 Route::group(['prefix' =>  LaravelLocalization::setLocale(), 'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']], function () {
     Route::get('/{slug}', 'Front\FrontendController@front_dynamic_page')->name('front.front_dynamic_page');
     Route::get('/{category}/{slug}', 'Front\FrontendController@front_cat_dynamic_page')->name('front.front_cat_dynamic_page');
-
 });

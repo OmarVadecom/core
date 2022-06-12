@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html >
 
 <head>
 
@@ -83,7 +83,7 @@
     <!--====== PRELOADER PART START ======-->
     <div id="preloader" style="background-color: {{ $commonsetting->preloader_bg_color }}">
         <div class="image">
-            <img src="{{asset('assets/front/img/'. $commonsetting->preloader_icon )}}" alt="">
+            <img src="{{asset('assets/front/img/'. $commonsetting->preloader_icon )}}" alt="not found">
         </div>
     </div>
     <!--====== PRELOADER PART START ======-->

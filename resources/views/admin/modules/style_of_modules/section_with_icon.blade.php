@@ -3,6 +3,7 @@
         $randNumModule = \Illuminate\Support\Str::random(10);
     @endphp
     <div class="card-header toggle-open-close-module">
+        
         <i class="fas fa-times icon-delete"></i>
         Small Icon with Text
         <i class="minimize-module fas fa-chevron-down"></i>
@@ -67,7 +68,7 @@
                         <label class="col-sm-2 control-label">{{ __('الصورة') }}</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="mod[{{ $randomKey }}][section_with_icon][ar_class_icon]"
-                                placeholder="{{ __('الصورة') }}" value="{{  $moduleAttributes['ar_class_icon'] }}"/>
+                                placeholder="{{ __('الصورة') }}" value="{{  isset($moduleAttributes['ar_class_icon']) ? $moduleAttributes['ar_class_icon'] : ''  }}"/>
                             @if ($errors->has('ar_class_icon'))
                                 <p class="text-danger"> {{ $errors->first('ar_class_icon') }} </p>
                             @endif

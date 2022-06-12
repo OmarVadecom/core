@@ -97,7 +97,7 @@
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 control-label">{{ __('Button Content') }}</label>
-                        <div class="col-sm-20">
+                        <div class="col-sm-10">
                             <input type="text" class="form-control" name="mod[{{ $randNumModule }}][call_to_action][button_content]" placeholder="{{ __('Button Content') }}" >
                             @if ($errors->has('button_content'))
                                 <p class="text-danger"> {{ $errors->first('button_content') }} </p>

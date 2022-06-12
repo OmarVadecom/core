@@ -52,7 +52,8 @@
                     <i class="fas fa-globe-americas"></i>
                     E
                 </a>
-            @else
+                @else
+            {{-- @elseif($currentLang->code == "ar") --}}
                 <a class="name text-white" href="{{ Helper::changeSiteLocale('ar') }}" >
                     <i class="fas fa-globe-americas"></i>
                     ع

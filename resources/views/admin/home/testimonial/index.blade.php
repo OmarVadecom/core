@@ -93,7 +93,7 @@
                                     <div class="col-md-12 tab-pane fade" id="nav-ar-testimonial" role="tabpanel" aria-labelledby="nav-ar-testimonial-tab">
                                         <div class="form-group row my-3">
                                             <label class="col-sm-2 control-label">
-                                                {{ __('Testimonial Title') }}
+                                                {{ __('عنوان الشهادة') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-sm-10">
@@ -111,7 +111,7 @@
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 control-label">
-                                                {{ __('Testimonial Sub-title') }}
+                                                {{ __('عنوان الشهادة الفرعي') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-sm-10">
