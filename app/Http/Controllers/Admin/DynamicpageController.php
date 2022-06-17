@@ -164,6 +164,7 @@ class DynamicpageController extends Controller
                 }
             }
         }
+
         //dd($request->mod);
         // $slug = Helper::make_slug($request->title);
         $slug = $request->slug;
@@ -195,6 +196,7 @@ class DynamicpageController extends Controller
         $dynamicpage->category_id = $request->category_id ?? null;
         $dynamicpage->title = $request->title;
         $dynamicpage->slug = $slug;
+        $dynamicpage->slug_with_category = $request->slug_with_category;
         $dynamicpage->status = $request->status;
         $dynamicpage->serial_number = $request->serial_number;
         $dynamicpage->meta_keywords = $request->meta_keywords;

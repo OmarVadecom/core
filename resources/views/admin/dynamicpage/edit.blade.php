@@ -100,6 +100,16 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-sm-2 control-label">Include {{ __('Category') }} within slug<span class="text-danger">*</span></label>
+                                <div class="col-sm-4">
+                                    <select class="form-control lang" name="slug_with_category">
+                                        <option value="1" {{ $dynamicpage->slug_with_category == 1 ? 'selected' : '' }}> Yes </option>
+                                        <option value="0" {{ $dynamicpage->slug_with_category == 0 ? 'selected' : '' }}> No </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label class="col-sm-2 control-label">{{ __('Title') }}<span class="text-danger">*</span></label>
 
                                 <div class="col-sm-10">
