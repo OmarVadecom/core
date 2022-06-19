@@ -130,8 +130,9 @@ class DynamicpageController extends Controller
         $dynamicPageCategories = dynamicPageCategories::where('status', 1)->get();
         $dynamicpage = Daynamicpage::find($id);
         $package_categories = PackageCategory::where('status', 1)->get();
-
-        return view('admin.dynamicpage.edit', compact('dynamicpage', 'dynamicPageCategories', 'package_categories'));
+        $category = dynamicPageCategories::where('id', $dynamicpage->category_id)->firstOrFail();
+     
+        return view('admin.dynamicpage.edit', compact('dynamicpage', 'dynamicPageCategories', 'package_categories','category'));
     }
 
     public function copy($id)

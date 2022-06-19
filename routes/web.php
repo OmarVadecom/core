@@ -12,9 +12,9 @@ use App\Models\Permalink;
 | contains the "web" middleware group. Now create something great!
 |
  */
-Route::group(['prefix' => 'laravel-filemanager'], function () {
-    \UniSharp\LaravelFilemanager\Lfm::routes();
-});
+// Route::group(['prefix' => 'laravel-filemanager'], function () {
+//     \UniSharp\LaravelFilemanager\Lfm::routes();
+// });
 
 Route::get('login', function () {
     return view('admin.login');
@@ -719,11 +719,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin', 'checkstatus']
 
 Route::group(['prefix' =>  LaravelLocalization::setLocale(), 'middleware' => ['SlugWithCategory','localeSessionRedirect', 'localizationRedirect', 'localeViewPath']], function () {
     Route::get('/{slug}', 'Front\FrontendController@front_dynamic_page')->name('front.front_dynamic_page');
-    Route::get('/{category}/{slug}', 'Front\FrontendController@front_cat_dynamic_page')->name('front.front_cat_dynamic_page');
-
 });
 
 Route::group(['prefix' =>  LaravelLocalization::setLocale(), 'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']], function () {
-    Route::get('/{category}/{slug}', 'Front\FrontendController@front_cat_dynamic_page')->name('front.front_cat_dynamic_page');
-
+     Route::get('/{category}/{slug}', 'Front\FrontendController@front_cat_dynamic_page')->name('front.front_cat_dynamic_page');
 });

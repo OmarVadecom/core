@@ -60,10 +60,17 @@
                         <h3 class="card-title mt-1">{{ __('Dynamic Page') }}</h3>
                         <div class="card-tools">
                             {{-- <a href="{{ asset($dynamicpage->url) }}" class="btn btn-primary btn-sm" target="_blank"> --}}
-                            <a href="{{ config('app.url') . '/' . $dynamicpage->slug }}" class="btn btn-primary btn-sm" target="_blank">
-                                <i class="fa fa-eye"></i>
-                                Preview
-                            </a>
+                            @if($dynamicpage->slug_with_category == 1)
+                                <a href="{{ config('app.url') . '/'.$category->slug.'/' . $dynamicpage->slug }}" class="btn btn-primary btn-sm" target="_blank">
+                                    <i class="fa fa-eye"></i>
+                                    Preview
+                                </a>
+                            @else
+                                <a href="{{ config('app.url') . '/' . $dynamicpage->slug }}" class="btn btn-primary btn-sm" target="_blank">
+                                    <i class="fa fa-eye"></i>
+                                    Preview
+                                </a>
+                            @endif
                             <a href="{{ route('admin.dynamic_page'). '?language=' . $currentLang->code }}" class="btn btn-primary btn-sm">
                                 <i class="fas fa-angle-double-left"></i> {{ __('Back') }}
                             </a>

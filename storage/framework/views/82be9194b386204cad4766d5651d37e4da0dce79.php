@@ -60,10 +60,17 @@
                         <h3 class="card-title mt-1"><?php echo e(__('Dynamic Page')); ?></h3>
                         <div class="card-tools">
                             
-                            <a href="<?php echo e(config('app.url') . '/' . $dynamicpage->slug); ?>" class="btn btn-primary btn-sm" target="_blank">
-                                <i class="fa fa-eye"></i>
-                                Preview
-                            </a>
+                            <?php if($dynamicpage->slug_with_category == 1): ?>
+                                <a href="<?php echo e(config('app.url') . '/'.$category->slug.'/' . $dynamicpage->slug); ?>" class="btn btn-primary btn-sm" target="_blank">
+                                    <i class="fa fa-eye"></i>
+                                    Preview
+                                </a>
+                            <?php else: ?>
+                                <a href="<?php echo e(config('app.url') . '/' . $dynamicpage->slug); ?>" class="btn btn-primary btn-sm" target="_blank">
+                                    <i class="fa fa-eye"></i>
+                                    Preview
+                                </a>
+                            <?php endif; ?>
                             <a href="<?php echo e(route('admin.dynamic_page'). '?language=' . $currentLang->code); ?>" class="btn btn-primary btn-sm">
                                 <i class="fas fa-angle-double-left"></i> <?php echo e(__('Back')); ?>
 
