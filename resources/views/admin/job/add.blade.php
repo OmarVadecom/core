@@ -69,7 +69,10 @@
 
                                         <div class="col-sm-10">
                                             <select class="form-control" name="jcategory_id" id="job_category_id">
-
+                                                @foreach ($jcategories as $jcategory)
+                                                    <option value="{{ $jcategory->id }}">{{ $jcategory->name }}</option>
+                                                @endforeach
+                                
                                             </select>
                                             @if ($errors->has('jcategory_id'))
                                                 <p class="text-danger"> {{ $errors->first('jcategory_id') }} </p>
@@ -168,11 +171,27 @@
                                         <label for="employment_status" class="col-sm-2 control-label">{{ __('Employment Status') }}<span class="text-danger">*</span></label>
 
                                         <div class="col-sm-10">
-                                            <select name="employment_status" class="form-control">
+                                            {{-- <select name="employment_status" class="form-control">
                                                 <option selected="" value="Full-Time">{{__('Full-Time')}}</option>
                                                 <option value="Part-Time">{{__('Part-Time')}}</option>
                                                 <option value="Project Based">{{__('Project Based')}}</option>
-                                            </select>
+                                            </select> --}}
+                                            <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name="employment_status[]" id="inlineCheckbox1" value="Full Time">
+                                            <label class="form-check-label" for="inlineCheckbox1">Full Time</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name="employment_status[]" id="inlineCheckbox2" value="Part Time">
+                                            <label class="form-check-label" for="inlineCheckbox2">Part Time</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name="employment_status[]" id="inlineCheckbox3" value="Project Based">
+                                            <label class="form-check-label" for="inlineCheckbox3">Project Based</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" name="employment_status[]" id="inlineCheckbox3" value="Remote">
+                                                <label class="form-check-label" for="inlineCheckbox3">Remote</label>
+                                            </div>
                                             @if ($errors->has('employment_status'))
                                                 <p class="text-danger"> {{ $errors->first('employment_status') }} </p>
                                             @endif

@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
+use App\Models\EmploymentStatus;
 
 class JobController extends Controller
 {
@@ -64,7 +65,7 @@ class JobController extends Controller
             'jcategory_id' => 'required',
             'vacancy' => 'required|string|max:191',
             'job_responsibility' => 'required|string',
-            'employment_status' => 'required|string',
+            'employment_status' => 'required|array|min:1',
             'education_requirement' => 'nullable|string',
             'job_context' => 'nullable|string',
             'experience_requirement' => 'nullable|string',
@@ -78,7 +79,6 @@ class JobController extends Controller
             'meta_description' => 'nullable|string|max:191',
         ]);
 
-
         $job = new job();
 
         $job->language_id = $request->language_id;
@@ -89,7 +89,6 @@ class JobController extends Controller
         $job->vacancy = $request->vacancy;
         
         $job->job_responsibility = $request->job_responsibility;
-        $job->employment_status = $request->employment_status;
         $job->education_requirement = $request->education_requirement;
         $job->job_context = $request->job_context;
         $job->experience_requirement = $request->experience_requirement;
@@ -109,6 +108,14 @@ class JobController extends Controller
        
         $job->save();
 
+        foreach ($request->employment_status as $status) {
+            $employment_status_job = new EmploymentStatus();
+            $employment_status_job->employment_status = $status;
+            $employment_status_job->job_id = $job->id;
+            $employment_status_job->save(); 
+        }
+
+       
         $notification = array(
             'messege' => 'Job Added successfully!',
             'alert' => 'success'
@@ -132,10 +139,15 @@ class JobController extends Controller
     public function edit($id){
         $job = Job::findOrFail($id);
         $job_lan = $job->language_id;
-       
+        
         $jcategories = Jcategory::where('status', 1)->where('language_id', $job_lan)->get();
-      
-        return view('admin.job.edit', compact('jcategories', 'job'));
+        $employment_status = $job->employmentStatus;
+        $status_list = [];
+        foreach ($employment_status as $employment){
+            array_push($status_list, $employment->employment_status);
+        }
+
+        return view('admin.job.edit', compact('jcategories', 'job','status_list'));
 
     }
 
@@ -151,7 +163,7 @@ class JobController extends Controller
             'jcategory_id' => 'required',
             'vacancy' => 'required|string|max:191',
             'job_responsibility' => 'required|string',
-            'employment_status' => 'required|string',
+            'employment_status' => 'required|array|min:1',
             'education_requirement' => 'nullable|string',
             'job_context' => 'nullable|string',
             'experience_requirement' => 'nullable|string',
@@ -172,7 +184,6 @@ class JobController extends Controller
         $job->company_name = $request->company_name;
         $job->vacancy = $request->vacancy;
         $job->job_responsibility = $request->job_responsibility;
-        $job->employment_status = $request->employment_status;
         $job->education_requirement = $request->education_requirement;
         $job->job_context = $request->job_context;
         $job->experience_requirement = $request->experience_requirement;
@@ -189,6 +200,16 @@ class JobController extends Controller
 
         $job->update();
 
+        $old_employment_status = $job->employmentStatus;
+        foreach ($old_employment_status as $old_stauts){
+            $old_stauts->delete();
+        }
+        foreach ($request->employment_status as $status) {
+            $employment_status_job = new EmploymentStatus();
+            $employment_status_job->employment_status = $status;
+            $employment_status_job->job_id = $job->id;
+            $employment_status_job->save(); 
+        }
 
         $notification = array(
             'messege' => 'Job Updated successfully!',

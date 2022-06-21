@@ -94,12 +94,16 @@
                     </div>
                     @endif
 
-                    @if ($job->employment_status != null)
+                    @if (count($status_list)>0)
                     <div class="j-info">
-                        <h4>{{ __('Employment Status') }}</h4>
-                        <p>
-                            {{ $job->employment_status }}
-                        </p>
+                      <h4>{{ __('Employment Status') }}</h4>
+                 
+                    @foreach ($status_list as $status)
+                    <p>
+                      - {{ $status }}
+                    </p>
+                    
+                    @endforeach
                     </div>
                     @endif
 

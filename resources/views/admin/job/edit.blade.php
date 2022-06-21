@@ -166,13 +166,29 @@
 
                                     <div class="form-group row">
                                         <label for="employment_status" class="col-sm-2 control-label">{{ __('Employment Status') }}<span class="text-danger">*</span></label>
-
+                                        
                                         <div class="col-sm-10">
-                                            <select name="employment_status" class="form-control">
+                                            {{-- <select name="employment_status" class="form-control">
                                                 <option {{$job->employment_status == 'full_time' ? 'selected' : ''}} value="Full-Time">{{__('Full-Time')}}</option>
                                                 <option {{$job->employment_status == 'part_time' ? 'selected' : ''}}  value="Part-Time">{{__('Part-Time')}}</option>
                                                 <option {{$job->employment_status == 'project_based' ? 'selected' : ''}}   value="Project Based">{{__('Project Based')}}</option>
-                                            </select>
+                                            </select> --}}
+                                            <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name="employment_status[]" id="inlineCheckbox1" value="Full Time" {{in_array('Full Time',$status_list) ? 'checked' : ''}}>
+                                            <label class="form-check-label" for="inlineCheckbox1">Full Time</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name="employment_status[]" id="inlineCheckbox2" value="Part Time" {{in_array('Part Time',$status_list) ? 'checked' : ''}}>
+                                            <label class="form-check-label" for="inlineCheckbox2">Part Time</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name="employment_status[]" id="inlineCheckbox3" value="Project Based" {{in_array('Project Based',$status_list) ? 'checked' : ''}}>
+                                            <label class="form-check-label" for="inlineCheckbox3">Project Based</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" name="employment_status[]" id="inlineCheckbox3" value="Remote" {{in_array('Remote',$status_list) ? 'checked' : ''}}>
+                                                <label class="form-check-label" for="inlineCheckbox3">Remote</label>
+                                            </div>
                                             @if ($errors->has('employment_status'))
                                                 <p class="text-danger"> {{ $errors->first('employment_status') }} </p>
                                             @endif

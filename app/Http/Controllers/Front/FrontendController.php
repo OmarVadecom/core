@@ -273,8 +273,12 @@ class FrontendController extends Controller
         $alljobs = Job::where('status', 1)->where('language_id', $currlang->id)->get();
         $job = Job::where('slug', $slug)->where('language_id', $currlang->id)->firstOrFail();
         $jcategories = Jcategory::where('status', 1)->where('language_id', $currlang->id)->orderBy('id', 'DESC')->get();
-      
-        return view('front.jobdetails', compact('job', 'jcategories', 'alljobs'));
+        $employment_status = $job->employmentStatus;
+        $status_list = [];
+        foreach ($employment_status as $employment){
+            array_push($status_list, $employment->employment_status);
+        }
+        return view('front.jobdetails', compact('job', 'jcategories', 'alljobs','status_list'));
     }
 
     // Job Apply Route
