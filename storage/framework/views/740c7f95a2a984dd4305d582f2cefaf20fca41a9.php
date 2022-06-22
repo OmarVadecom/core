@@ -130,7 +130,7 @@
 
                                             </td>
                                             <td>
-                                                <img class="w-80" src="<?php echo e(asset('assets/front/img/slider/'.$slider->image)); ?>" alt="" />
+                                                <img class="w-80" src="<?php echo e(asset('assets/front/img/slider/'.$slider->image)); ?>" alt="" width="150px" height="150px" />
                                             </td>
                                             <td>
                                                 <?php echo e($slider->title); ?>

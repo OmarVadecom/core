@@ -12,7 +12,7 @@
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
-    <link href="<?php echo e(asset('vendor/file-manager/css/file-manager.css')); ?>" rel="stylesheet">
+   <link rel="stylesheet" href="<?php echo e(asset('assets/admin/css/file-manager.css')); ?>">
 </head>
 <body>
 <div class="container-fluid">
@@ -24,7 +24,7 @@
 </div>
 
 <!-- File manager -->
-<script src="<?php echo e(asset('vendor/file-manager/js/file-manager.js')); ?>"></script>
+   <script src="<?php echo e(asset('assets/admin/js/file-manager.js')); ?>"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     // set fm height

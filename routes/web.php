@@ -728,3 +728,4 @@ Route::group(['prefix' =>  LaravelLocalization::setLocale(), 'middleware' => ['l
     Route::get('/{category}/{slug}', 'Front\FrontendController@front_cat_dynamic_page')->name('front.front_cat_dynamic_page');
 
 });
+

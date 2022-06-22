@@ -85,12 +85,12 @@
                                         <div class="tab-content" id="nav-tabContent" >
                                             <div class=" col-sm-10 tab-pane fade show active " id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                                                 <label for="title">Title</label>
-                                                <input type="text" class="form-control slugable" name="en_title" data-slug="1"  placeholder="<?php echo e(__('Title')); ?>">
+                                                <input type="text" class="form-control slugable" name="en_title" data-slug="1"  placeholder="<?php echo e(__('Title')); ?>" required>
                                                 <?php if($errors->has('en_title')): ?>
                                                     <p class="text-danger"> <?php echo e($errors->first('en_title')); ?> </p>
                                                 <?php endif; ?>
                                                 <label for="meta_keywords">Meta Keywords</label>
-                                                <input type="text" class="form-control" data-role="tagsinput" name="en_meta_keywords" placeholder="<?php echo e(__('Meta Keywords')); ?>" >
+                                                <input type="text" class="form-control" data-role="tagsinput" name="en_meta_keywords" placeholder="<?php echo e(__('Meta Keywords')); ?>"  >
                                                 <?php if($errors->has('en_meta_keywords')): ?>
                                                     <p class="text-danger"> <?php echo e($errors->first('en_meta_keywords')); ?> </p>
                                                 <?php endif; ?>
@@ -103,7 +103,7 @@
 
                                         <div class="col-sm-10 tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-home-tab">
                                             <label for="title">العنوان</label>
-                                            <input type="text" class="form-control slugable" name="ar_title" data-slug="0"  placeholder="العنوان" >
+                                            <input type="text" class="form-control slugable" name="ar_title" data-slug="0"  placeholder="العنوان" required >
                                             <?php if($errors->has('ar_title')): ?>
                                                 <p class="text-danger"> <?php echo e($errors->first('ar_title')); ?> </p>
                                             <?php endif; ?>
@@ -142,7 +142,7 @@
                                     <label class="col-sm-2 control-label"><?php echo e(__('Slug')); ?><span class="text-danger">*</span></label>
 
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control sluginp" name="slug" placeholder="<?php echo e(__('Slug')); ?>" value="<?php echo e(old('slug')); ?>"/>
+                                        <input type="text" class="form-control sluginp" name="slug" placeholder="<?php echo e(__('Slug')); ?>" value="<?php echo e(old('slug')); ?>" required>
                                         <?php if($errors->has('slug')): ?>
                                             <p class="text-danger"> <?php echo e($errors->first('slug')); ?> </p>
                                         <?php endif; ?>
@@ -159,7 +159,7 @@
 
                                     <div class="col-sm-10">
                                         <input type="number" class="form-control" name="serial_number"
-                                               placeholder="<?php echo e(__('Order')); ?>" value="0">
+                                               placeholder="<?php echo e(__('Order')); ?>" value="0" required>
                                         <?php if($errors->has('serial_number')): ?>
                                             <p class="text-danger"> <?php echo e($errors->first('serial_number')); ?> </p>
                                         <?php endif; ?>

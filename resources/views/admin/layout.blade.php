@@ -13,7 +13,8 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
-
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
         <link rel="stylesheet" href="{{ asset('assets/admin/css/file-manager.css') }}">
         @includeif('admin.partials.styles')
 
@@ -76,7 +77,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                        <div class="input-group">
-                           <button class="btn btn-outline-secondary" type="button" id="button-image"><i class="fa-solid fa-images"></i></button>
+                           <button class="btn btn-outline-secondary" type="button" id="button-image"><i class="fa-solid fa-images"></i></i></button>
 
                            <input type="text" id="image_label" class="form-control" name="image"
                                 aria-label="Image" aria-describedby="button-image">
