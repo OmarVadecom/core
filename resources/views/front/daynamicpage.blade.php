@@ -49,7 +49,7 @@
                 <a  target="_blank" style="text-decoration: underline; text-align: center; margin: auto; display: block; color: #ffffff; font-weight: 700; font-size: 14px;" href="{{route('admin.dynamic_page.edit', $front_daynamic_page->id)}}"><i class="far fa-edit"></i> Edit this Page</a>
             </div>
     @endif
-    <div class="page-title-area" style="background-image: url('{{ asset('assets/front/img/'.$setting->breadcrumb_image) }}')">
+    {{-- <div class="page-title-area" style="background-image: url('{{ asset('assets/front/img/'.$setting->breadcrumb_image) }}')">
         <div class="overlay"></div>
         <div class="container">
             <div class="row">
@@ -68,11 +68,11 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <section class="dynamicpage">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-12 m-0 p-0">
                     <div class="content">
                         @if($front_daynamic_page->modules != null)
                             @foreach($front_daynamic_page->modules as $modules)

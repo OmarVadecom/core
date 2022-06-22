@@ -63,20 +63,20 @@ class DynamicpageController extends Controller
 
       public function store(Request $request)
     {
-//        dd($request->all());
+       // dd($request->all());
 
-        if ($request->has('mod')) {
-            foreach ($request->mod as $randomKey => $modules) {
-                foreach ($modules as $nameModule => $module) {
-                    if (in_array($nameModule, Helper::modulesHasImage())) {
-                        if ($request->hasFile('images.' . $randomKey . '.' . $nameModule . '.imageFile')) {
-                            $file = $request->file('images')[$randomKey][$nameModule]['imageFile'];
-                            $file->move('assets/front/img/' . $nameModule . '/', $request->mod[$randomKey][$nameModule]['image']);
-                        }
-                    }
-                }
-            }
-        }
+        // if ($request->has('mod')) {
+        //     foreach ($request->mod as $randomKey => $modules) {
+        //         foreach ($modules as $nameModule => $module) {
+        //             if (in_array($nameModule, Helper::modulesHasImage())) {
+        //                 if ($request->hasFile('images.' . $randomKey . '.' . $nameModule . '.imageFile')) {
+        //                     $file = $request->file('images')[$randomKey][$nameModule]['imageFile'];
+        //                     $file->move('assets/front/img/' . $nameModule . '/', $request->mod[$randomKey][$nameModule]['image']);
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
 
         // $slug = Helper::make_slug($request->title);
         $slug = $request->slug;
@@ -110,6 +110,7 @@ class DynamicpageController extends Controller
 
         $dynamicpage_en = new Daynamicpage();
         $dynamicpage_en->language_id = 1;
+        
         $dynamicpage_en->category_id = $request->category_id;
         $dynamicpage_en->title = $request->en_title;
         $dynamicpage_en->slug = $slug;
@@ -177,35 +178,28 @@ class DynamicpageController extends Controller
 
     public function update(Request $request, $id )
     {
-//        dd($request->all());
-
-
+//       dd($request->all());
         $dynamicpage = Daynamicpage::find($id);
         $dynamicpage_en = $dynamicpage->where('slug' , $dynamicpage->slug )->where('language_id' , 1)->first();
         $dynamicpage_ar = $dynamicpage->where('slug' , $dynamicpage->slug )->where('language_id' , 2)->first();
 
         $ids = [$dynamicpage_en->id , $dynamicpage_ar->id];
+        // if ($request->has('mod')) {
+        //     foreach ($request->mod as $randomKey => $modules) {
+        //         foreach ($modules as $nameModule => $module) {
+        //             if (in_array($nameModule, Helper::modulesHasImage())) {
+        //                 if ($request->hasFile('images.' . $randomKey . '.' . $nameModule . '.imageFile')) {
+        //                     if ($dynamicpage->modules != null && array_key_exists($randomKey, $dynamicpage->modules) && $dynamicpage->modules[$randomKey][$nameModule]['image'] != null)
+        //                         File::delete('assets/front/img/' . $nameModule . '/' . $dynamicpage->modules[$randomKey][$nameModule]['image']);
 
 
-
-
-
-        if ($request->has('mod')) {
-            foreach ($request->mod as $randomKey => $modules) {
-                foreach ($modules as $nameModule => $module) {
-                    if (in_array($nameModule, Helper::modulesHasImage())) {
-                        if ($request->hasFile('images.' . $randomKey . '.' . $nameModule . '.imageFile')) {
-                            if ($dynamicpage->modules != null && array_key_exists($randomKey, $dynamicpage->modules) && $dynamicpage->modules[$randomKey][$nameModule]['image'] != null)
-                                File::delete('assets/front/img/' . $nameModule . '/' . $dynamicpage->modules[$randomKey][$nameModule]['image']);
-
-
-                            $file = $request->file('images')[$randomKey][$nameModule]['imageFile'];
-                            $file->move('assets/front/img/' . $nameModule . '/', $request->mod[$randomKey][$nameModule]['image']);
-                        }
-                    }
-                }
-            }
-        }
+        //                     $file = $request->file('images')[$randomKey][$nameModule]['imageFile'];
+        //                     $file->move('assets/front/img/' . $nameModule . '/', $request->mod[$randomKey][$nameModule]['image']);
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
         //dd($request->mod);
         // $slug = Helper::make_slug($request->title);
         $slug = $request->slug;
@@ -218,6 +212,7 @@ class DynamicpageController extends Controller
             'slug' => 'required',
             'serial_number' => 'required',
             'status' => 'required',
+            
         ]);
 
 
@@ -225,6 +220,7 @@ class DynamicpageController extends Controller
         // Save english page edit
         $dynamicpage_en->update([
             'language_id' => 1,
+            
             'category_id' =>$request->category_id ?? null,
             'title' =>$request->en_title ,
             'slug' => $slug ,
@@ -233,7 +229,7 @@ class DynamicpageController extends Controller
             'meta_keywords' => $request->en_meta_keywords,
             'meta_description' => $request->en_meta_description,
             'footer' => $request->footer,
-               'modules' => $request->mod
+            'modules' => $request->mod
         ]);
 
 
@@ -249,7 +245,7 @@ class DynamicpageController extends Controller
             'meta_keywords' => $request->ar_meta_keywords,
             'meta_description' => $request->ar_meta_description,
             'footer' => $request->footer,
-               'modules' => $request->mod
+            'modules' => $request->mod
         ]);
 
 

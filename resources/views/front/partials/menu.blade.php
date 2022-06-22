@@ -14,7 +14,7 @@
                 @include('front.partials.menu.menu3')
             @endif
             
-        @elseif($commonsetting->theme_version == 'theme3')
+        @elseif($commonsetting->theme_version == 'theme3') 
             @include('front.partials.menu.menu2')
 
             
