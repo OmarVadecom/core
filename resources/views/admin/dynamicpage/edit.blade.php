@@ -274,6 +274,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 
     <script src="{{ asset('assets/front/js/jquery-ui.js') }}"></script>
+    <script src="//cdn.ckeditor.com/4.19.0/full/ckeditor.js"></script>
     <script>
         $('#add_module').on('click', function (e) {
             let valModule = $(".modules").val();
