@@ -47,7 +47,7 @@
             </ul>
         </div>
         <div class="language-change">
-            @if($currentLang->code == "ar")
+            @if(app()->getLocale() == "ar")
                 <a class="name text-white" href="{{ Helper::changeSiteLocale('en') }}" >
                     <i class="fas fa-globe-americas"></i>
                     E
