@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFeqCategoriesTable extends Migration
+class CreateFaqCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateFeqCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('feq_categories', function (Blueprint $table) {
+        Schema::create('faq_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name_en');
             $table->string('name_ar');
@@ -28,6 +28,6 @@ class CreateFeqCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('feq_categories');
+        Schema::dropIfExists('faq_categories');
     }
 }

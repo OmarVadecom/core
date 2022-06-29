@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFeqsSectionsTable extends Migration
+class CreateFaqsSectionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateFeqsSectionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('feqs_sections', function (Blueprint $table) {
+        Schema::create('faqs_sections', function (Blueprint $table) {
             $table->id();
-            $table->$table->index('category_id');
-            $table->foreign('category_id')->references('id')->on('feq_categories')->onDelete('cascade');
+            $table->index('category_id');
             $table->text('question_en');
             $table->text('question_ar');
             $table->text('answer_en');
             $table->text('answer_ar');
+            $table->foreign('category_id')->references('id')->on('faq_categories')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ class CreateFeqsSectionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('feqs_sections');
+        Schema::dropIfExists('faqs_sections');
     }
 }
