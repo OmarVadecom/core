@@ -24,86 +24,138 @@
                     <div class="card card-primary card-outline">
                             <div class="card-header">
                                 <h3 class="card-title mt-1">{{ __('Edit Why Choose') }}</h3>
-                                <div class="card-tools">
+                                {{-- <div class="card-tools">
                                     <a href="{{ route('admin.why_chooseus'). '?language=' . $currentLang->code }}" class="btn btn-primary btn-sm">
                                         <i class="fas fa-angle-double-left"></i> {{ __('Back') }}
                                     </a>
-                                </div>
+                                </div> --}}
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <form class="form-horizontal" action="{{ route('admin.wcu.update',  $wc->id) }}" method="POST" >
+                                <nav>
+                                    <div class="nav nav-tabs " id="nav-tab" role="tablist">
+                                        <a class="col-md-6 nav-item nav-link active " id="nav-en-why_chooseus-tab" data-toggle="tab" href="#nav-en-why_chooseus" role="tab" aria-controls="nav-en-why_chooseus" aria-selected="true">English</a>
+                                        <a class="col-md-6 nav-item nav-link" id="nav-ar-why_chooseus-tab" data-toggle="tab" href="#nav-ar-why_chooseus" role="tab" aria-controls="nav-ar-why_chooseus" aria-selected="false">عربي</a>
+                                    </div>
+                                </nav>
+                                <form class="form-horizontal" action="{{ route('admin.wcu.update',  $ws->id) }}" method="POST" >
                                     @csrf
                                     
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 control-label">{{ __('Language') }}<span class="text-danger">*</span></label>
-        
-                                        <div class="col-sm-10">
-                                            <select class="form-control lang" name="language_id">
-                                                @foreach($langs as $lang)
-                                                    <option value="{{$lang->id}}" {{ $wc->language_id == $lang->id ? 'selected' : '' }} >{{$lang->name}}</option>
-                                                @endforeach
-                                            </select>
-                                            @if ($errors->has('language_id'))
-                                                <p class="text-danger"> {{ $errors->first('language_id') }} </p>
-                                            @endif
+                                    <div class="tab-content" id="nav-tabContent">
+                                        <div class="col-md-12 tab-pane fade show active" id="nav-en-why_chooseus" role="tabpanel" aria-labelledby="nav-en-why_chooseus-tab" >
+                                            {{--english--}}
+                                            <div class="form-group row my-3">
+                                                <label class="col-sm-2 control-label">{{ __('Icon') }}<span class="text-danger">*</span></label>
+                
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" name="icon" placeholder="{{ __('Icon') }}" value="{{isset($en_ws->icon) ?  $en_ws->icon : ''  }}">
+                                                    @if ($errors->has('icon'))
+                                                        <p class="text-danger"> {{ $errors->first('icon') }} </p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-2 control-label">{{ __('Title') }}<span class="text-danger">*</span></label>
+                
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" name="title" placeholder="{{ __('Title') }}" value="{{ isset($en_ws->title) ?  $en_ws->title : ''   }}">
+                                                    @if ($errors->has('title'))
+                                                        <p class="text-danger"> {{ $errors->first('title') }} </p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label  class="col-sm-2 control-label">{{ __('Text') }}<span class="text-danger">*</span></label>
+                
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" name="text" placeholder="{{ __('Text') }}" value="{{ isset($en_ws->text) ?  $en_ws->text : ''   }}">
+                                                    @if ($errors->has('text'))
+                                                        <p class="text-danger"> {{ $errors->first('text') }} </p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label  class="col-sm-2 control-label">{{ __('Order') }}<span class="text-danger">*</span></label>
+                
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" name="serial_number" placeholder="{{ __('Order') }}" value="{{ isset($en_ws->serial_number) ?  $en_ws->serial_number : ''   }}">
+                                                    @if ($errors->has('serial_number'))
+                                                        <p class="text-danger"> {{ $errors->first('serial_number') }} </p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="status" class="col-sm-2 control-label">{{ __('Status') }}<span class="text-danger">*</span></label>
+                
+                                                <div class="col-sm-10">
+                                                    <select class="form-control" name="status">
+                                                    <option value="0" {{ $en_ws->status == '0' ? 'selected' : '' }}>{{ __('Unpublish') }}</option>
+                                                    <option value="1" {{ $en_ws->status == '1' ? 'selected' : '' }}>{{ __('Publish') }}</option>
+                                                    </select>
+                                                    @if ($errors->has('status'))
+                                                        <p class="text-danger"> {{ $errors->first('status') }} </p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 tab-pane fade" id="nav-ar-why_chooseus" role="tabpanel" aria-labelledby="nav-ar-why_chooseus-tab">
+                                            {{--arabic--}}
+                                                <div class="form-group row my-3">
+                                                    <label class="col-sm-2 control-label">{{ __('أيقونة') }}<span class="text-danger">*</span></label>
+                    
+                                                    <div class="col-sm-10">                                                                          
+                                                        <input type="text" class="form-control" name="ar_icon" placeholder="{{ __('Icon') }}" value="{{ isset($ar_ws->icon) ? $ar_ws->icon : '' }}">
+                                                        @if ($errors->has('ar_icon'))
+                                                            <p class="text-danger"> {{ $errors->first('ar_icon') }} </p>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2 control-label">{{ __('العنوان') }}<span class="text-danger">*</span></label>
+                    
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" name="ar_title" placeholder="{{ __('Title') }}" value="{{  isset($ar_ws->title) ? $ar_ws->title : '' }}">
+                                                        @if ($errors->has('ar_title'))
+                                                            <p class="text-danger"> {{ $errors->first('ar_title') }} </p>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label  class="col-sm-2 control-label">{{ __('نص') }}<span class="text-danger">*</span></label>
+                    
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" name="ar_text" placeholder="{{ __('Text') }}" value="{{ isset($ar_ws->text) ? $ar_ws->text : '' }}">
+                                                        @if ($errors->has('ar_text'))
+                                                            <p class="text-danger"> {{ $errors->first('ar_text') }} </p>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label  class="col-sm-2 control-label">{{ __('ترتيب') }}<span class="text-danger">*</span></label>
+                    
+                                                    <div class="col-sm-10">                                                                                     
+                                                        <input type="text" class="form-control" name="ar_serial_number" placeholder="{{ __('Order') }}" value="{{ isset($ar_ws->serial_number) ? $ar_ws->serial_number : '' }}">
+                                                        @if ($errors->has('ar_serial_number'))
+                                                            <p class="text-danger"> {{ $errors->first('ar_serial_number') }} </p>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="status" class="col-sm-2 control-label">{{ __('الحاله') }}<span class="text-danger">*</span></label>
+                    
+                                                    <div class="col-sm-10">
+                                                        <select class="form-control" name="ar_status">
+                                                        <option value="0" {{  $ws->status == '0' ? 'selected' : '' }}>{{ __('Unpublish') }}</option>
+                                                        <option value="1" {{  $ws->status == '1' ? 'selected' : '' }}>{{ __('Publish') }}</option>
+                                                        </select>
+                                                        @if ($errors->has('ar_status'))
+                                                            <p class="text-danger"> {{ $errors->first('ar_status') }} </p>
+                                                        @endif
+                                                    </div>
+                                                </div>
                                         </div>
                                     </div>
-                            
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 control-label">{{ __('Icon') }}<span class="text-danger">*</span></label>
-        
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="icon" placeholder="{{ __('Icon') }}" value="{{ $wc->icon }}">
-                                            @if ($errors->has('icon'))
-                                                <p class="text-danger"> {{ $errors->first('icon') }} </p>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 control-label">{{ __('Title') }}<span class="text-danger">*</span></label>
-        
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="title" placeholder="{{ __('Title') }}" value="{{ $wc->title }}">
-                                            @if ($errors->has('title'))
-                                                <p class="text-danger"> {{ $errors->first('title') }} </p>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label  class="col-sm-2 control-label">{{ __('Text') }}<span class="text-danger">*</span></label>
-        
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="text" placeholder="{{ __('Text') }}" value="{{ $wc->text }}">
-                                            @if ($errors->has('text'))
-                                                <p class="text-danger"> {{ $errors->first('text') }} </p>
-                                            @endif
-                                        </div>
-                                    </div>
-                                
-                                    <div class="form-group row">
-                                        <label  class="col-sm-2 control-label">{{ __('Order') }}<span class="text-danger">*</span></label>
-        
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="serial_number" placeholder="{{ __('Order') }}" value="{{ $wc->serial_number }}">
-                                            @if ($errors->has('serial_number'))
-                                                <p class="text-danger"> {{ $errors->first('serial_number') }} </p>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="status" class="col-sm-2 control-label">{{ __('Status') }}<span class="text-danger">*</span></label>
-        
-                                        <div class="col-sm-10">
-                                            <select class="form-control" name="status">
-                                               <option value="0" {{ $wc->status == '0' ? 'selected' : '' }}>{{ __('Unpublish') }}</option>
-                                               <option value="1" {{ $wc->status == '1' ? 'selected' : '' }}>{{ __('Publish') }}</option>
-                                              </select>
-                                            @if ($errors->has('status'))
-                                                <p class="text-danger"> {{ $errors->first('status') }} </p>
-                                            @endif
-                                        </div>
-                                    </div>
+
                                     <div class="form-group row">
                                         <div class="offset-sm-2 col-sm-10">
                                             <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>

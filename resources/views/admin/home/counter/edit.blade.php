@@ -22,39 +22,67 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                    <form class="form-horizontal" action="{{ route('admin.counter.update', $counter->id) }}" method="POST" >
+                                <nav>
+                                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                        <a class="col-md-6 nav-item nav-link active" id="nav-en-counter-tab" data-toggle="tab" href="#nav-en-counter" role="tab" aria-controls="nav-en-counter" aria-selected="true">English</a>
+                                        <a class="col-md-6 nav-item nav-link" id="nav-ar-counter-tab" data-toggle="tab" href="#nav-ar-counter" role="tab" aria-controls="nav-ar-counter" aria-selected="false">عربي</a>
+                                    </div>
+                                </nav>
+                                <form class="form-horizontal" action="{{ route('admin.counter.update', $counter->id) }}" method="POST" >
                                         @csrf
-                                        <div class="form-group row">
-                                            <label class="col-sm-2 control-label">{{ __('Language') }}<span class="text-danger">*</span></label>
-            
-                                            <div class="col-sm-10">
-                                                <select class="form-control lang" name="language_id">
-                                                    @foreach($langs as $lang)
-                                                        <option value="{{$lang->id}}" {{ $counter->language_id == $lang->id ? 'selected' : '' }} >{{$lang->name}}</option>
-                                                    @endforeach
-                                                </select>
-                                                @if ($errors->has('language_id'))
-                                                    <p class="text-danger"> {{ $errors->first('language_id') }} </p>
-                                                @endif
+                                        <div class="tab-content" id="nav-tabContent">
+                                            <div class="col-md-12 tab-pane fade show active" id="nav-en-counter" role="tabpanel" aria-labelledby="nav-en-counter-tab" >
+                                                {{--english--}}
+                                                <div class="form-group row my-3">
+                                                    <label for="name" class="col-sm-2 control-label">{{ __('Title') }}<span class="text-danger">*</span></label>
+                    
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" name="title" placeholder="{{ __('Title') }}" value="{{ $counter_en->title }}">
+                                                        @if ($errors->has('title'))
+                                                        <p class="text-danger"> {{ $errors->first('title') }} </p>
+                                                    @endif
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2 control-label">{{ __('Content') }}<span class="text-danger">*</span></label>
+                    
+                                                    <div class="col-sm-10">
+                                                        <textarea name="text" class="form-control"  rows="3" placeholder="{{ __('Content') }}">{{ $counter_en->text }}</textarea>
+                                                        @if ($errors->has('text'))
+                                                            <p class="text-danger"> {{ $errors->first('text') }} </p>
+                                                        @endif
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
+                                            <div class="col-md-12 tab-pane fade" id="nav-ar-counter" role="tabpanel" aria-labelledby="nav-ar-counter-tab">
+                                                {{--arabic--}}
+                                                <div class="form-group row my-3">
+                                                    <label for="name" class="col-sm-2 control-label">{{ __('الاسم') }}<span class="text-danger">*</span></label>
+                    
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" name="ar_title" placeholder="{{ __('Title') }}" value="{{ $counter_ar->title }}">
+                                                        @if ($errors->has('ar_title'))
+                                                        <p class="text-danger"> {{ $errors->first('ar_title') }} </p>
+                                                    @endif
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2 control-label">{{ __('المحتوي') }}<span class="text-danger">*</span></label>
+                    
+                                                    <div class="col-sm-10">
+                                                        <textarea name="ar_text" class="form-control"  rows="3" placeholder="{{ __('Content') }}">{{ $counter_ar->text }}</textarea>
+                                                        @if ($errors->has('ar_text'))
+                                                            <p class="text-danger"> {{ $errors->first('ar_text') }} </p>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                        <div class="form-group row">
-                                            <label for="name" class="col-sm-2 control-label">{{ __('Title') }}<span class="text-danger">*</span></label>
-            
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" name="title" placeholder="{{ __('Title') }}" value="{{ $counter->title }}">
-                                                @if ($errors->has('title'))
-                                                <p class="text-danger"> {{ $errors->first('title') }} </p>
-                                            @endif
-                                            </div>
-                                        </div>
-            
                                         <div class="form-group row">
                                             <label for="value" class="col-sm-2 control-label">{{ __('Number') }}<span class="text-danger">*</span></label>
             
                                             <div class="col-sm-10">
-                                                <input type="number" class="form-control" name="number" placeholder="{{ __('Number') }}" value="{{ $counter->number }}">
+                                                <input type="number" class="form-control" name="number" placeholder="{{ __('Number') }}" value="{{ $counter_en->number }}">
                                                 @if ($errors->has('number'))
                                                 <p class="text-danger"> {{ $errors->first('number') }} </p>
                                             @endif
@@ -64,27 +92,17 @@
                                             <label for="value" class="col-sm-2 control-label">{{ __('Icon') }}<span class="text-danger">*</span><span class="d-block"><small>{{ __('(Fontawesome icon class )') }}</small></span></label>
             
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" name="icon" placeholder="{{ __('Icon') }}" value="{{ $counter->icon }}">
+                                                <input type="text" class="form-control" name="icon" placeholder="{{ __('Icon') }}" value="{{ $counter_en->icon }}">
                                                 @if ($errors->has('icon'))
                                                 <p class="text-danger"> {{ $errors->first('icon') }} </p>
                                             @endif
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-sm-2 control-label">{{ __('Content') }}<span class="text-danger">*</span></label>
-            
-                                            <div class="col-sm-10">
-                                                <textarea name="text" class="form-control"  rows="3" placeholder="{{ __('Content') }}">{{ $counter->text }}</textarea>
-                                                @if ($errors->has('text'))
-                                                    <p class="text-danger"> {{ $errors->first('text') }} </p>
-                                                @endif
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
                                             <label for="value" class="col-sm-2 control-label">{{ __('Order') }}<span class="text-danger">*</span></label>
             
                                             <div class="col-sm-10">
-                                                <input type="number" class="form-control" name="serial_number" placeholder="{{ __('Order') }}" value="{{ $counter->serial_number }}">
+                                                <input type="number" class="form-control" name="serial_number" placeholder="{{ __('Order') }}" value="{{ $counter_en->serial_number }}">
                                                 @if ($errors->has('serial_number'))
                                                 <p class="text-danger"> {{ $errors->first('serial_number') }} </p>
                                             @endif
@@ -95,20 +113,20 @@
             
                                             <div class="col-sm-10">
                                                 <select class="form-control" name="status">
-                                                   <option value="0" {{ $counter->status == '0' ? 'selected' : '' }}>{{ __('Unpublish') }}</option>
-                                                   <option value="1" {{ $counter->status == '1' ? 'selected' : '' }}>{{ __('Publish') }}</option>
+                                                   <option value="0" {{ $counter_en->status == '0' ? 'selected' : '' }}>{{ __('Unpublish') }}</option>
+                                                   <option value="1" {{ $counter_en->status == '1' ? 'selected' : '' }}>{{ __('Publish') }}</option>
                                                   </select>
                                                 @if ($errors->has('status'))
                                                     <p class="text-danger"> {{ $errors->first('status') }} </p>
                                                 @endif
                                             </div>
                                         </div>
+                                        </div>
                                         <div class="form-group row">
                                             <div class="offset-sm-2 col-sm-10">
                                                 <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
                                             </div>
                                         </div>
-                
                                     </form>
                                 
                             </div>

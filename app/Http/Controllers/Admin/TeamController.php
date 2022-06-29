@@ -7,6 +7,8 @@ use App\Models\Language;
 use App\Models\Sectiontitle;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
+
 
 class TeamController extends Controller
 {
@@ -29,9 +31,10 @@ class TeamController extends Controller
                     return $q->where('status', $request['status']);
                 })->orderBy('id', 'DESC')->get();
 
-        $static = Sectiontitle::where('language_id', $lang)->orderBy('id', 'DESC')->first();
+                $english_static = Sectiontitle::where('language_id', 1)->orderBy('id', 'DESC')->first();
+                $arabic_static = Sectiontitle::where('language_id', 2)->orderBy('id', 'DESC')->first();
 
-        return view('admin.home.team.index', compact('teams', 'static'));
+        return view('admin.home.team.index', compact('teams','english_static','arabic_static'));
     }
 
     //Add team
@@ -50,9 +53,14 @@ class TeamController extends Controller
             'description' => 'required',
             'serial_number' => 'required|numeric',
             'status' => 'required',
-            'language_id' => 'required',
+            'ar_name' => 'required|max:100',
+            'ar_dagenation' => 'required|max:100',
+            'ar_description' => 'required',
         ]);
-        
+        $team = Team::where('language_id', 1)->first();
+        $team_ar = Team::where('language_id', 2)->first();
+        $str= Str::random(4);
+
         $team = new Team();
 
         if($request->hasFile('image')){
@@ -65,8 +73,9 @@ class TeamController extends Controller
             $team->image = $image;
         }
 
-        $team->language_id = $request->language_id;
+        $team->language_id = 1;
         $team->name = $request->name;
+        $team->team_id = $str;
         $team->status = $request->status;
         $team->dagenation = $request->dagenation;
         $team->serial_number = $request->serial_number;
@@ -114,6 +123,14 @@ class TeamController extends Controller
 
         $team->save();
 
+        $team_ar = new Team();
+        $team_ar->language_id = 2;
+        $team_ar->name = $request->ar_name;
+        $team_ar->team_id = $str;
+        $team_ar->dagenation = $request->ar_dagenation;
+        $team_ar->description = $request->ar_description;
+        $team_ar->save();
+
 
         $notification = array(
             'messege' => 'Team Added successfully!',
@@ -140,42 +157,45 @@ class TeamController extends Controller
     public function edit($id){
 
         $team = Team::find($id);
-        return view('admin.home.team.edit', compact('team'));
-
+        $team_en = Team::where('team_id',$team->team_id)->where('language_id', 1)->first();
+        $team_ar = Team::where('team_id',$team->team_id)->where('language_id', 2)->first();
+        return view('admin.home.team.edit', compact('team','team_en','team_ar'));
     }
 
     // team Update
     public function update(Request $request, $id){
+
+        $team = Team::find($id);
+        $team_en = Team::where('team_id',$team->team_id)->where('language_id', 1)->first();
+        $team_ar = Team::where('team_id',$team->team_id)->where('language_id', 2)->first();
 
         $request->validate([
             'image' => 'mimes:jpeg,jpg,png',
             'name' => 'required|max:100',
             'dagenation' => 'required|max:100',
             'description' => 'required',
+            'ar_name' => 'required|max:100',
+            'ar_dagenation' => 'required|max:100',
+            'ar_description' => 'required',
             'serial_number' => 'required|numeric',
             'status' => 'required',
-            'language_id' => 'required',
         ]);
 
-        $team = Team::findOrFail($id);
+        
 
         if($request->hasFile('image')){
-            @unlink('assets/front/img/team/'. $team->image);
-            
+            @unlink('assets/front/img/team/'. $team_en->image);
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
             $image = time().rand().'.'.$extension;
             $file->move('assets/front/img/team/', $image);
-
-            $team->image = $image;
+            $team_en->image = $image;
         }
-
-        $team->language_id = $request->language_id;
-        $team->name = $request->name;
-        $team->status = $request->status;
-        $team->dagenation = $request->dagenation;
-        $team->serial_number = $request->serial_number;
-        $team->description = $request->description;
+        $team_en->name = $request->name;
+        $team_en->status = $request->status;
+        $team_en->dagenation = $request->dagenation;
+        $team_en->serial_number = $request->serial_number;
+        $team_en->description = $request->description;
 
         if($request->icon1 && $request->url1){
             $team->icon1 = $request->icon1;
@@ -216,7 +236,12 @@ class TeamController extends Controller
             $team->url5 = null;
         }
 
-        $team->update();
+        $team_en->update();
+
+        $team_ar->name = $request->ar_name;
+        $team_ar->dagenation = $request->ar_dagenation;
+        $team_ar->description = $request->ar_description;
+        $team_ar->update();
 
         $notification = array(
             'messege' => 'Team Updated successfully!',

@@ -18,40 +18,24 @@
 
 
             <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="nav-en-text-content-center"  role="tabpanel" aria-labelledby="nav-en-text-content-center-tab">
-            {{--english--}}
-                    <div class="form-group row my-3">
-                        <label class="col-sm-2 control-label">{{ __('Image') }}</label>
-                        <div class="col-sm-10">
-                            <img
-                                src="{{isset($moduleAttributes['text_img']) ? asset('assets/front/img/text_content_center/' . $moduleAttributes['text_img']) : asset('assets/admin/img/img-demo.jpg') }}"
-                                class="mw-400 mb-3 show-img img-demo"
-                                alt=""
-                            >
-                            <div class="custom-file">
-                                <label
-                                    class="custom-file-label"
-                                    for="image"
-                                >{{ __('Choose Image') }}</label>
-                                <input
-                                    name="images[{{ $randomKey }}][text_content_center][text_imageFile]"
-                                    class="custom-file-input up-img"
-                                    type="file"
-                                    id="image"
-                                />
-                                <input
-                                    name="mod[{{ $randomKey }}][text_content_center][text_img]"
-                                    value="{{ isset($moduleAttributes['text_img']) ? asset('assets/front/img/text_content_center/' . $moduleAttributes['text_img']) : asset('assets/admin/img/img-demo.jpg') }}"
-                                    class="file-image-value"
-                                    type="hidden"
-                                />
-                            </div>
-                            @if ($errors->has('text_img'))
-                                <p class="text-danger"> {{ $errors->first('text_img') }} </p>
-                            @endif
-                        </div>
+                <div class="form-group row my-3">
+                    <label class="col-sm-2 control-label">{{ __('Image') }}</label>
+                    <div class="col-sm-10">
+                            <input
+                                name="mod[{{ $randomKey }}][text_content_center][text_img]"
+                                class="form-control"
+                                type="text"
+                                id="image"
+                                value="{{ isset($moduleAttributes['text_img']) ? asset('assets/front/img/text_content_center/' . $moduleAttributes['text_img']) : asset('assets/admin/img/img-demo.jpg') }}"
+                            />
+                        @if ($errors->has('text_img'))
+                            <p class="text-danger"> {{ $errors->first('text_img') }} </p>
+                        @endif
                     </div>
-                    <div class="form-group row">
+                </div>
+                <div class="tab-pane fade show active" id="nav-en-text-content-center"  role="tabpanel" aria-labelledby="nav-en-text-content-center-tab">
+                    {{--english--}}
+                    <div class="form-group row my-3">
                         <label class="col-sm-2 control-label">{{ __('Title') }}</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="mod[{{ $randomKey }}][text_content_center][title]"
@@ -74,38 +58,7 @@
                 </div>
 
                 <div class="tab-pane fade" id="nav-ar-text-content-center" role="tabpanel" aria-labelledby="nav-ar-text-content-center-tab">
-           {{--arabic--}}
-                    <div class="form-group row my-3">
-                        <label class="col-sm-2 control-label">{{ __('الصورة') }}</label>
-                        <div class="col-sm-10">
-                            <img
-                                src="{{isset($moduleAttributes['ar_text_img']) ? asset('assets/front/img/text_content_center/' . $moduleAttributes['ar_text_img']) : asset('assets/admin/img/img-demo.jpg') }}"
-                                class="mw-400 mb-3 show-img img-demo"
-                                alt=""
-                            >
-                            <div class="custom-file">
-                                <label
-                                    class="custom-file-label"
-                                    for="image"
-                                >{{ __('Choose Image') }}</label>
-                                <input
-                                    name="images[{{ $randomKey }}][text_content_center][ar_text_imageFile]"
-                                    class="custom-file-input up-img"
-                                    type="file"
-                                    id="image"
-                                />
-                                <input
-                                    name="mod[{{ $randomKey }}][text_content_center][ar_text_img]"
-                                    value="{{ isset($moduleAttributes['ar_text_img']) ? asset('assets/front/img/text_content_center/' . $moduleAttributes['ar_text_img']) : asset('assets/admin/img/img-demo.jpg') }}"
-                                    class="file-image-value"
-                                    type="hidden"
-                                />
-                            </div>
-                            @if ($errors->has('ar_text_img'))
-                                <p class="text-danger"> {{ $errors->first('ar_text_img') }} </p>
-                            @endif
-                        </div>
-                    </div>
+                    {{--arabic--}}
                     <div class="form-group row">
                         <label class="col-sm-2 control-label">{{ __('العنوان') }}</label>
                         <div class="col-sm-10">
@@ -131,23 +84,19 @@
         @else
             
             <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="nav-en-text-content-center"  role="tabpanel" aria-labelledby="nav-en-text-content-center-tab">
-             {{--english--}}
-                    <div class="form-group row my-3">
-                        <label class="col-sm-2 control-label">{{ __('Image') }}</label>
-                        <div class="col-sm-10">
-                            <img class="mw-400 mb-3 show-img img-demo d-block" src="{{ asset('assets/admin/img/img-demo.jpg') }}" alt="">
-                            <div class="custom-file">
-                                <label class="custom-file-label" for="image">{{ __('Choose Image') }}</label>
-                                <input type="file" class="custom-file-input up-img" name="images[{{ $randNumModule }}][text_content_center][text_imageFile]" id="image">
-                                <input type="hidden" class="file-image-value" name="mod[{{ $randNumModule }}][text_content_center][text_img]" value="">
-                            </div>
-                            @if ($errors->has('image'))
-                                <p class="text-danger"> {{ $errors->first('image') }} </p>
-                            @endif
-                        </div>
+                <div class="form-group row my-3">
+                    <label class="col-sm-2 control-label">{{ __('Image') }}</label>
+                    <div class="col-sm-10">
+                        {{-- <img class="mw-400 mb-3 show-img img-demo d-block" src="{{ asset('assets/admin/img/img-demo.jpg') }}" alt=""> --}}
+                            <input type="text" class="form-control" name="mod[{{ $randNumModule }}][text_content_center][text_img]" id="image">
+                        @if ($errors->has('image'))
+                            <p class="text-danger"> {{ $errors->first('image') }} </p>
+                        @endif
                     </div>
-                    <div class="form-group row">
+                </div>
+                <div class="tab-pane fade show active" id="nav-en-text-content-center"  role="tabpanel" aria-labelledby="nav-en-text-content-center-tab">
+                    {{--english--}}
+                    <div class="form-group row my-3">
                         <label class="col-sm-2 control-label">{{ __('Title') }}</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="mod[{{ $randNumModule }}][text_content_center][title]"
@@ -170,22 +119,8 @@
                 </div>
 
                 <div class="tab-pane fade" id="nav-ar-text-content-center" role="tabpanel" aria-labelledby="nav-ar-text-content-center-tab">
-            {{--arabic--}}
-                    <div class="form-group row my-3">
-                        <label class="col-sm-2 control-label">{{ __('الصورة') }}</label>
-                        <div class="col-sm-10">
-                            <img class="mw-400 mb-3 show-img img-demo d-block" src="{{ asset('assets/admin/img/img-demo.jpg') }}" alt="">
-                            <div class="custom-file">
-                                <label class="custom-file-label" for="image">{{ __('Choose Image') }}</label>
-                                <input type="file" class="custom-file-input up-img" name="images[{{ $randNumModule }}][text_content_center][ar_text_imageFile]" id="image">
-                                <input type="hidden" class="file-image-value" name="mod[{{ $randNumModule }}][text_content_center][ar_text_img]" value="">
-                            </div>
-                            @if ($errors->has('ar_text_img'))
-                                <p class="text-danger"> {{ $errors->first('ar_text_img') }} </p>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="form-group row">
+                    {{--arabic--}}
+                    <div class="form-group row  my-3">
                         <label class="col-sm-2 control-label">{{ __('العنوان') }}</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="mod[{{ $randNumModule }}][text_content_center][ar_title]"

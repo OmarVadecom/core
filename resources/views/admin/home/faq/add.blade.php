@@ -32,71 +32,90 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
+                                <nav>
+                                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                        <a class="col-md-6 nav-item nav-link active" id="nav-en-faq-tab" data-toggle="tab" href="#nav-en-faq" role="tab" aria-controls="nav-en-faq" aria-selected="true">English</a>
+                                        <a class="col-md-6 nav-item nav-link" id="nav-ar-faq-tab" data-toggle="tab" href="#nav-ar-faq" role="tab" aria-controls="nav-ar-faq" aria-selected="false">عربي</a>
+                                    </div>
+                                </nav>
                                 <form class="form-horizontal" action="{{ route('admin.faq.store') }}" method="POST">
                                     @csrf
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 control-label">{{ __('Language') }}<span class="text-danger">*</span></label>
-        
-                                        <div class="col-sm-10">
-                                            <select class="form-control lang" name="language_id">
-                                                @foreach($langs as $lang)
-                                                    <option value="{{$lang->id}}" {{ $lang->is_default == '1' ? 'selected' : '' }} >{{$lang->name}}</option>
-                                                @endforeach
-                                            </select>
-                                            @if ($errors->has('language_id'))
-                                                <p class="text-danger"> {{ $errors->first('language_id') }} </p>
-                                            @endif
+                                    <div class="tab-content" id="nav-tabContent">
+                                        <div class="col-md-12 tab-pane fade show active" id="nav-en-faq" role="tabpanel" aria-labelledby="nav-en-faq-tab" >
+                                            {{--english--}}
+                                            <div class="form-group row my-3">
+                                                <label class="col-sm-2 control-label">{{ __('Title') }}<span class="text-danger">*</span></label>
+                
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" name="title" placeholder="{{ __('Title') }}" value="{{ old('title') }}">
+                                                    @if ($errors->has('title'))
+                                                        <p class="text-danger"> {{ $errors->first('title') }} </p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-2 control-label">{{ __('Content') }}<span class="text-danger">*</span></label>
+                
+                                                <div class="col-sm-10">
+                                                    <textarea name="content" class="form-control summernote"  rows="3" placeholder="{{ __('Content') }}">{{ old('content') }}</textarea>
+                                                    @if ($errors->has('content'))
+                                                        <p class="text-danger"> {{ $errors->first('content') }} </p>
+                                                    @endif
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 control-label">{{ __('Title') }}<span class="text-danger">*</span></label>
-        
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="title" placeholder="{{ __('Title') }}" value="{{ old('title') }}">
-                                            @if ($errors->has('title'))
-                                                <p class="text-danger"> {{ $errors->first('title') }} </p>
-                                            @endif
+                                        <div class="col-md-12 tab-pane fade" id="nav-ar-faq" role="tabpanel" aria-labelledby="nav-ar-faq-tab">
+                                            {{--arabic--}}
+                                            <div class="form-group row my-3">
+                                                <label class="col-sm-2 control-label">{{ __('العنوان') }}<span class="text-danger">*</span></label>
+                
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" name="ar_title" placeholder="{{ __('Title') }}" value="{{ old('ar_title') }}">
+                                                    @if ($errors->has('ar_title'))
+                                                        <p class="text-danger"> {{ $errors->first('ar_title') }} </p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-2 control-label">{{ __('المحتوي') }}<span class="text-danger">*</span></label>
+                
+                                                <div class="col-sm-10">
+                                                    <textarea name="ar_content" class="form-control summernote"  rows="3" placeholder="{{ __('Content') }}">{{ old('ar_content') }}</textarea>
+                                                    @if ($errors->has('ar_content'))
+                                                        <p class="text-danger"> {{ $errors->first('ar_content') }} </p>
+                                                    @endif
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 control-label">{{ __('Content') }}<span class="text-danger">*</span></label>
-        
-                                        <div class="col-sm-10">
-                                            <textarea name="content" class="form-control summernote"  rows="3" placeholder="{{ __('Content') }}">{{ old('content') }}</textarea>
-                                            @if ($errors->has('content'))
-                                                <p class="text-danger"> {{ $errors->first('content') }} </p>
-                                            @endif
+                                        <div class="form-group row">
+                                            <label  class="col-sm-2 control-label">{{ __('Order') }}<span class="text-danger">*</span></label>
+            
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" name="serial_number" placeholder="{{ __('Order') }}" value="{{ old('serial_number') }}">
+                                                @if ($errors->has('serial_number'))
+                                                    <p class="text-danger"> {{ $errors->first('serial_number') }} </p>
+                                                @endif
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label  class="col-sm-2 control-label">{{ __('Order') }}<span class="text-danger">*</span></label>
-        
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="serial_number" placeholder="{{ __('Order') }}" value="{{ old('serial_number') }}">
-                                            @if ($errors->has('serial_number'))
-                                                <p class="text-danger"> {{ $errors->first('serial_number') }} </p>
-                                            @endif
+                                        <div class="form-group row">
+                                            <label for="status" class="col-sm-2 control-label">{{ __('Status') }}<span class="text-danger">*</span></label>
+            
+                                            <div class="col-sm-10">
+                                                <select class="form-control" name="status">
+                                                <option value="0">{{ __('Unpublish') }}</option>
+                                                <option value="1">{{ __('Publish') }}</option>
+                                                </select>
+                                                @if ($errors->has('status'))
+                                                    <p class="text-danger"> {{ $errors->first('status') }} </p>
+                                                @endif
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="status" class="col-sm-2 control-label">{{ __('Status') }}<span class="text-danger">*</span></label>
-        
-                                        <div class="col-sm-10">
-                                            <select class="form-control" name="status">
-                                               <option value="0">{{ __('Unpublish') }}</option>
-                                               <option value="1">{{ __('Publish') }}</option>
-                                              </select>
-                                            @if ($errors->has('status'))
-                                                <p class="text-danger"> {{ $errors->first('status') }} </p>
-                                            @endif
+                                        <div class="form-group row">
+                                            <div class="offset-sm-2 col-sm-10">
+                                                <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="offset-sm-2 col-sm-10">
-                                            <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
-                                        </div>
-                                    </div>
-                                
+                                </div>
                                 </form>
                                 
                             </div>

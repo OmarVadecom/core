@@ -7,6 +7,7 @@ use App\Models\Sectiontitle;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Client;
+use Illuminate\Support\Str;
 
 class ClientController extends Controller
 {
@@ -19,7 +20,8 @@ class ClientController extends Controller
     public function index(Request $request)
     {
         $lang = Language::where('code', $request->language)->first()->id;
-        $saectiontitle = Sectiontitle::where('language_id', $lang)->first();
+        $seactiontitle_en = Sectiontitle::where('language_id', 1)->first();
+        $seactiontitle_ar = Sectiontitle::where('language_id', 2)->first();
         $clients = Client::where('language_id', $lang)
                     ->when($request['name'], function ($q) use ($request) {
                         return $q->where('name', 'LIKE', '%' . $request['name'] . '%');
@@ -27,21 +29,28 @@ class ClientController extends Controller
                         return $q->where('status', $request['status']);
                     })->orderBy('id', 'DESC')->get();
 
-        return view('admin.home.client.index', compact('clients', 'saectiontitle'));
+        return view('admin.home.client.index', compact('clients', 'seactiontitle_en','seactiontitle_ar'));
     }
 
     public function clientContent(Request $request, $id)
     {
         $request->validate([
             'blog_sub_title'    => 'required',
-            'blog_title'        => 'required'
+            'blog_title'        => 'required',
+            'ar_blog_sub_title'    => 'required',
+            'ar_blog_title'        => 'required'
         ]);
 
-        $client_title = Sectiontitle::where('language_id', $id)->first();
+        $client_title_en = Sectiontitle::where('language_id', 1)->first();
+        $client_title_ar = Sectiontitle::where('language_id', 2)->first();
 
-        $client_title->blog_sub_title   = $request['blog_sub_title'];
-        $client_title->blog_title       = $request['blog_title'];
-        $client_title->save();
+        $client_title_en->blog_sub_title   = $request['blog_sub_title'];
+        $client_title_en->blog_title       = $request['blog_title'];
+        $client_title_en->save();
+
+        $client_title_ar->blog_sub_title   = $request['ar_blog_sub_title'];
+        $client_title_ar->blog_title       = $request['ar_blog_title'];
+        $client_title_ar->save();
 
         $notification = array(
             'messege'   => 'Client Content Updated successfully!',
@@ -57,11 +66,16 @@ class ClientController extends Controller
 
     public function store(Request $request){
 
-      
+        $client = Sectiontitle::where('language_id', 1)->first();
+        $client_ar = Sectiontitle::where('language_id', 2)->first();
+        $str= Str::random(4);
+
         $request->validate([
             'image' => 'required|mimes:jpeg,jpg,png',
             'name' => 'required|max:250',
             'link' => 'required|max:250',
+            'ar_name' => 'required|max:250',
+            'ar_link' => 'required|max:250',
             'status' => 'required',
             'serial_number' => 'required|numeric',
         ]);
@@ -77,12 +91,20 @@ class ClientController extends Controller
             $client->image = $image;
         }
 
-        $client->language_id = $request->language_id;
+        $client->language_id = 1;
         $client->serial_number = $request->serial_number;
+        $client->client_id = $str;
         $client->name = $request->name;
         $client->link = $request->link;
         $client->status = $request->status;
         $client->save();
+
+        $client_ar = new Client();
+        $client_ar->language_id = 2;
+        $client_ar->client_id = $str;
+        $client_ar->name = $request->ar_name;
+        $client_ar->link = $request->ar_link;
+        $client_ar->save();
 
         $notification = array(
             'messege' => 'Client Added successfully!',
@@ -94,19 +116,25 @@ class ClientController extends Controller
     public function edit($id){
 
         $client = Client::find($id);
-        return view('admin.home.client.edit', compact('client'));
+        $client_en = Client::where('client_id',$client->client_id)->where('language_id', 1)->first();
+        $client_ar = Client::where('client_id',$client->client_id)->where('language_id', 2)->first();
+        return view('admin.home.client.edit', compact('client','client_en','client_ar'));
 
     }
 
     public function update(Request $request, $id){
 
-        
+        $client = Client::find($id);
+        $client_en = Client::where('client_id',$client->client_id)->where('language_id', 1)->first();
+        $client_ar = Client::where('client_id',$client->client_id)->where('language_id', 2)->first();
 
-        $client = Client::findOrFail($id);
+        
 
          $request->validate([
             'name' => 'required|max:250',
             'link' => 'required|max:250',
+            'ar_name' => 'required|max:250',
+            'ar_link' => 'required|max:250',
             'status' => 'required',
             'serial_number' => 'required|numeric',
             'image' => 'mimes:jpeg,jpg,png',
@@ -114,20 +142,24 @@ class ClientController extends Controller
     
 
         if($request->hasFile('image')){
-            @unlink('assets/front/img/client/'. $client->image);
+            @unlink('assets/front/img/client/'. $client_en->image);
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
             $image = 'portfolio_'.time().rand().'.'.$extension;
             $file->move('assets/front/img/client/', $image);
-            $client->image = $image;
+            $client_en->image = $image;
         }
 
-        $client->language_id = $request->language_id;
-        $client->serial_number = $request->serial_number;
-        $client->name = $request->name;
-        $client->link = $request->link;
-        $client->status = $request->status;
-        $client->save();
+        
+        $client_en->serial_number = $request->serial_number;
+        $client_en->name = $request->name;
+        $client_en->link = $request->link;
+        $client_en->status = $request->status;
+        $client_en->save();
+
+        $client_ar->name = $request->ar_name;
+        $client_ar->link = $request->ar_link;
+        $client_ar->save();
 
         $notification = array(
             'messege' => 'Client Updated successfully!',

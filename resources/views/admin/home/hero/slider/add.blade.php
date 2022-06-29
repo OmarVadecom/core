@@ -52,10 +52,10 @@
                                     <div class="form-group row">
                                         <label class="col-sm-2 control-label">{{ __('Image') }} <span class="text-danger">*</span></label>
                                         <div class="col-sm-10">
-                                        <img class="mw-400 mb-3 show-img img-demo" src="{{ asset('assets/admin/img/img-demo.jpg') }}" alt="" width="150px" height="150px">
+                                        <img class="mw-400 mb-3 show-img img-demo" src="{{ asset('assets/admin/img/img-demo.jpg') }}" alt="">
                                         <div class="custom-file">
                                             <label class="custom-file-label" for="image">{{ __('Choose New Image') }}</label>
-                                            <input type="file" class="custom-file-input up-img" name="image" id="image" width="150px" height="150px">
+                                            <input type="file" class="custom-file-input up-img" name="image" id="image">
                                         </div>
                                         <p class="help-block text-info">{{ __('Upload 1920X900 (Pixel) Size image or Squre size image for best quality.
                                                                 Only jpg, jpeg, png image is allowed.') }}

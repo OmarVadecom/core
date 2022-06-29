@@ -26,7 +26,7 @@
                     <div class="card card-primary card-outline">
                         <div class="card-header">
                             <h3 class="card-title mt-1">{{ __('Section Content') }}</h3>
-                            <div class="card-tools">
+                            {{-- <div class="card-tools">
                                 <div class="d-inline-block mr-4">
                                     <select class="form-control lang languageSelect" data="{{url()->current() . '?language='}}">
                                         @foreach($langs as $lang)
@@ -37,48 +37,98 @@
                                         @endforeach
                                     </select>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="card-body">
+                            <nav>
+                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                    <a class="col-md-6 nav-item nav-link active" id="nav-en-team-tab" data-toggle="tab" href="#nav-en-team" role="tab" aria-controls="nav-en-team" aria-selected="true">English</a>
+                                    <a class="col-md-6 nav-item nav-link" id="nav-ar-team-tab" data-toggle="tab" href="#nav-ar-team" role="tab" aria-controls="nav-ar-team" aria-selected="false">عربي</a>
+                                </div>
+                            </nav>
                             <form
-                                action="{{ route('admin.team_section_update',  $static->language_id) }}" method="POST"
+                                action="{{ route('admin.team_section_update',  $english_static->language_id) }}" method="POST"
                                 enctype="multipart/form-data"
                                 class="form-horizontal"
                             >
                                 @csrf
-                                <div class="form-group row">
-                                    <label class="col-sm-2 control-label">{{ __('Title') }}
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-sm-10">
-                                        <input
-                                            value="{{ $static->team_title }}"
-                                            placeholder="{{ __('Title') }}"
-                                            class="form-control"
-                                            name="team_title"
-                                            type="text"
-                                        >
-                                        @if ($errors->has('team_title'))
-                                            <p class="text-danger"> {{ $errors->first('team_title') }} </p>
-                                        @endif
+                                <div class="tab-content" id="nav-tabContent">
+                                    <div class="col-md-12 tab-pane fade show active" id="nav-en-team" role="tabpanel" aria-labelledby="nav-en-team-tab" >
+                                        {{--english--}}
+                                        <div class="form-group row my-3">
+                                            <label class="col-sm-2 control-label">{{ __('Title') }}
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <input
+                                                    value="{{ $english_static->team_title }}"
+                                                    placeholder="{{ __('Title') }}"
+                                                    class="form-control"
+                                                    name="team_title"
+                                                    type="text"
+                                                >
+                                                @if ($errors->has('team_title'))
+                                                    <p class="text-danger"> {{ $errors->first('team_title') }} </p>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 control-label">
+                                                {{ __('Subtitle') }}
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <input
+                                                    value="{{ $english_static->team_sub_title }}"
+                                                    placeholder="{{ __('Subtitle') }}"
+                                                    name="team_sub_title"
+                                                    class="form-control"
+                                                    type="text"
+                                                >
+                                                @if ($errors->has('team_sub_title'))
+                                                    <p class="text-danger"> {{ $errors->first('team_sub_title') }} </p>
+                                                @endif
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 control-label">
-                                        {{ __('Subtitle') }}
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-sm-10">
-                                        <input
-                                            value="{{ $static->team_sub_title }}"
-                                            placeholder="{{ __('Subtitle') }}"
-                                            name="team_sub_title"
-                                            class="form-control"
-                                            type="text"
-                                        >
-                                        @if ($errors->has('team_sub_title'))
-                                            <p class="text-danger"> {{ $errors->first('team_sub_title') }} </p>
-                                        @endif
+
+                                    <div class="col-md-12 tab-pane fade" id="nav-ar-team" role="tabpanel" aria-labelledby="nav-ar-team-tab">
+                                        {{--arabic--}}
+                                        <div class="form-group row my-3">
+                                            <label class="col-sm-2 control-label">{{ __('العنوان') }}
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <input
+                                                    value="{{ $arabic_static->team_title }}"
+                                                    placeholder="{{ __('العنوان') }}"
+                                                    class="form-control"
+                                                    name="ar_team_title"
+                                                    type="text"
+                                                >
+                                                @if ($errors->has('ar_team_title'))
+                                                    <p class="text-danger"> {{ $errors->first('ar_team_title') }} </p>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 control-label">
+                                                {{ __('العنوان الفرعي') }}
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <input
+                                                    value="{{ $arabic_static->team_sub_title }}"
+                                                    placeholder="{{ __('العنوان الفرعي') }}"
+                                                    name="ar_team_sub_title"
+                                                    class="form-control"
+                                                    type="text"
+                                                >
+                                                @if ($errors->has('ar_team_sub_title'))
+                                                    <p class="text-danger"> {{ $errors->first('ar_team_sub_title') }} </p>
+                                                @endif
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -205,7 +255,7 @@
                                                 {{ $id }}
                                             </td>
                                             <td>
-                                                <img class="w-80" src="{{ asset('assets/front/img/team/'.$team->image) }}" alt="" width="150px" height="150px" />
+                                                <img class="w-80" src="{{ asset('assets/front/img/team/'.$team->image) }}" alt="" />
                                             </td>
                                             <td>{{ $team->name }}</td>
                                             <td>{{ $team->dagenation}}</td>

@@ -8,6 +8,8 @@ use App\Models\Language;
 use App\Models\Sectiontitle;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
+
 
 class FunfactController extends Controller
 {
@@ -19,7 +21,8 @@ class FunfactController extends Controller
 
     public function index(Request $request){
         $lang = Language::where('code', $request->language)->first()->id;
-
+        // $counter = Counter::where('language_id', 1)->first();
+        // $counter_ar = Counter::where('language_id', 2)->first();
         $counters = Counter::where('language_id', $lang)
                     ->when($request['name'], function ($q) use ($request) {
                         return $q->where('title', 'LIKE', '%' . $request['name'] . '%');
@@ -37,8 +40,8 @@ class FunfactController extends Controller
     }
 
     public function store(Request $request){
-
-        $c = Counter::all();
+        // dd($request->all());
+        // $c = Counter::all();
 
 //        if($c->count() >= 4){
 //            $notification = array(
@@ -48,28 +51,38 @@ class FunfactController extends Controller
 //            return redirect()->back()->with('notification', $notification);
 //        }
       
+        $counter = Counter::where('language_id', 1)->first();
+        $counter_ar = Counter::where('language_id', 2)->first();
+        $str= Str::random(4);
+
         $request->validate([
             'title' => 'required|max:250',
+            'ar_title' => 'required|max:250',
             'number' => 'required|numeric',
             'icon' => 'required|max:250',
             'text' => 'required|max:250',
-            'language_id' => 'required',
+            'ar_text' => 'required|max:250',
             'status' => 'required',
             'serial_number' => 'required|numeric',
         ]);
 
         $counter = new Counter();
-
-        
-
-        $counter->language_id = $request->language_id;
+        $counter->language_id = 1;
         $counter->serial_number = $request->serial_number;
+        $counter->counter_id = $str;
         $counter->title = $request->title;
         $counter->number = $request->number;
         $counter->icon = $request->icon;
         $counter->text = $request->text;
         $counter->status = $request->status;
         $counter->save();
+
+        $counter_ar = new Counter();
+        $counter_ar->language_id = 2;
+        $counter_ar->counter_id = $str;
+        $counter_ar->title = $request->ar_title;
+        $counter_ar->text = $request->ar_text;
+        $counter_ar->save();
 
         $notification = array(
             'messege' => 'Counter Added successfully!',
@@ -81,7 +94,9 @@ class FunfactController extends Controller
     public function edit($id){
 
         $counter = Counter::find($id);
-        return view('admin.home.counter.edit', compact('counter'));
+        $counter_en = Counter::where('counter_id',$counter->counter_id)->where('language_id', 1)->first();
+        $counter_ar = Counter::where('counter_id',$counter->counter_id)->where('language_id', 2)->first();
+        return view('admin.home.counter.edit', compact('counter','counter_en','counter_ar'));
 
     }
 
@@ -89,24 +104,30 @@ class FunfactController extends Controller
 
 
         $counter = Counter::findOrFail($id);
+        $counter_en = Counter::where('counter_id',$counter->counter_id)->where('language_id', 1)->first();
+        $counter_ar = Counter::where('counter_id',$counter->counter_id)->where('language_id', 2)->first();
 
          $request->validate([
             'title' => 'required|max:250',
+            'ar_title' => 'required|max:250',
             'number' => 'required|numeric',
             'icon' => 'required|max:250',
             'text' => 'required|max:250',
-            'language_id' => 'required',
+            'ar_text' => 'required|max:250',
             'status' => 'required',
             'serial_number' => 'required|numeric',
         ]);
 
-        $counter->language_id = $request->language_id;
-        $counter->serial_number = $request->serial_number;
-        $counter->title = $request->title;
-        $counter->number = $request->number;
-        $counter->icon = $request->icon;
-        $counter->text = $request->text;
-        $counter->status = $request->status;
+        $counter_en->serial_number = $request->serial_number;
+        $counter_en->title = $request->title;
+        $counter_en->number = $request->number;
+        $counter_en->icon = $request->icon;
+        $counter_en->text = $request->text;
+        $counter_en->status = $request->status;
+        $counter_en->save();
+
+        $counter_ar->title = $request->ar_title;
+        $counter_ar->text = $request->ar_text;
         $counter->save();
 
         $notification = array(
