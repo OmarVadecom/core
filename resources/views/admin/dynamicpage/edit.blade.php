@@ -79,19 +79,59 @@
                     <div class="card-body">
                         <form class="form-horizontal" action="{{ route('admin.dynamic_page.update',  $dynamicpage->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
+
                             <div class="form-group row">
                                 <label class="col-sm-2 control-label">{{ __('Language') }}<span class="text-danger">*</span></label>
                                 <div class="col-sm-10">
-                                    <select class="form-control lang" name="language_id">
-                                        @foreach($langs as $lang)
-                                            <option value="{{$lang->id}}" {{ $dynamicpage->language_id == $lang->id ? 'selected' : '' }} >{{$lang->name}}</option>
-                                        @endforeach
-                                    </select>
-                                    @if ($errors->has('language_id'))
-                                        <p class="text-danger"> {{ $errors->first('language_id') }} </p>
-                                    @endif
+                                    <nav>
+                                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">English</button>
+                                            <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">عربى</button>
+                                        </div>
+                                    </nav>
+                                    <br>
+                                    <div class="tab-content" id="nav-tabContent" >
+                                        <div class=" col-sm-10 tab-pane fade show active " id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                            <label for="title">Title</label>
+                                            <input type="text" class="form-control slugable" name="en_title" data-slug="1"  placeholder="{{ __('Title') }}" value="{{ $dynamicpage_en->title }}" required>
+                                            @if ($errors->has('en_title'))
+                                                <p class="text-danger"> {{ $errors->first('en_title') }} </p>
+                                            @endif
+                                            <label for="meta_keywords">Meta Keywords</label>
+                                            <input type="text" class="form-control" data-role="tagsinput" name="en_meta_keywords" placeholder="{{ __('Meta Keywords') }}" value="{{ $dynamicpage_en->meta_keywords }}" >
+                                            @if ($errors->has('en_meta_keywords'))
+                                                <p class="text-danger"> {{ $errors->first('en_meta_keywords') }} </p>
+                                            @endif
+                                            <label for="meta_keywords"> Meta Description</label>
+                                            <textarea class="form-control" name="en_meta_description" placeholder="{{ __('Meta Description') }}"  rows="4">{{ $dynamicpage_en->meta_description }}</textarea>
+                                            @if ($errors->has('en_meta_description'))
+                                                <p class="text-danger"> {{ $errors->first('en_meta_description') }} </p>
+                                            @endif
+                                        </div>
+
+                                        <div class="col-sm-10 tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-home-tab">
+                                            <label for="title">العنوان</label>
+                                            <input type="text" class="form-control slugable" name="ar_title" data-slug="0"  placeholder="العنوان"  value="{{ $dynamicpage_ar->title }}" required>
+                                            @if ($errors->has('ar_title'))
+                                                <p class="text-danger"> {{ $errors->first('ar_title') }} </p>
+                                            @endif
+                                            <label for="meta_keywords">الكلمات الدلاليه لمحركات البحث</label>
+                                            <input type="text" class="form-control" data-role="tagsinput" name="ar_meta_keywords" placeholder="الكلمات الدلاليه لمحركات البحث" value="{{ $dynamicpage_ar->meta_keywords }}">
+                                            @if ($errors->has('ar_meta_keywords'))
+                                                <p class="text-danger"> {{ $errors->first('ar_meta_keywords') }} </p>
+                                            @endif
+                                            <label for="meta_description">الوصف لمحركات البحث</label>
+                                            <textarea class="form-control" name="ar_meta_description" placeholder="الوصف لمحركات البحث"  rows="4">{{ $dynamicpage_ar->meta_description }}</textarea>
+                                            @if ($errors->has('ar_meta_description'))
+                                                <p class="text-danger"> {{ $errors->first('ar_meta_description') }} </p>
+                                            @endif
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
+
+
                             <div class="form-group row">
                                 <label class="col-sm-2 control-label">{{ __('Category') }}<span class="text-danger">*</span></label>
                                 <div class="col-sm-10">
@@ -130,7 +170,7 @@
                                 <label class="col-sm-2 control-label">{{ __('Slug') }}<span class="text-danger">*</span></label>
 
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control sluginp" name="slug" placeholder="{{ __('Slug') }}" value="{{ $dynamicpage->slug }}" readonly>
+                                    <input type="text" class="form-control sluginp" name="slug" placeholder="{{ __('Slug') }}" value="{{ $dynamicpage->slug }}" readonly required>
                                     @if ($errors->has('slug'))
                                         <p class="text-danger"> {{ $errors->first('slug') }} </p>
                                     @endif
@@ -141,29 +181,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="meta_keywords" class="col-sm-2 control-label">{{ __('Meta Keywords') }}</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" data-role="tagsinput" name="meta_keywords" placeholder="{{ __('Meta Keywords') }}" value="{{ $dynamicpage->meta_keywords }}">
-                                    @if ($errors->has('meta_keywords'))
-                                        <p class="text-danger"> {{ $errors->first('meta_keywords') }} </p>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="meta_description" class="col-sm-2 control-label">{{ __('Meta Description') }}</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" name="meta_description" placeholder="{{ __('Meta Description') }}"  rows="4">{{ $dynamicpage->meta_description }}</textarea>
-                                    @if ($errors->has('meta_description'))
-                                        <p class="text-danger"> {{ $errors->first('meta_description') }} </p>
-                                    @endif
-                                </div>
-                            </div>
+
+
                             <div class="form-group row">
                                 <label for="value" class="col-sm-2 control-label">{{ __('Order') }}<span class="text-danger">*</span></label>
 
                                 <div class="col-sm-10">
-                                    <input type="number" class="form-control" name="serial_number" placeholder="{{ __('Order') }}" value="{{ $dynamicpage->serial_number }}">
+                                    <input type="number" class="form-control" name="serial_number" placeholder="{{ __('Order') }}" value="{{ $dynamicpage->serial_number }}" required>
                                     @if ($errors->has('serial_number'))
                                         <p class="text-danger"> {{ $errors->first('serial_number') }} </p>
                                     @endif
@@ -244,8 +268,11 @@
     </div>
 </section>
 @endsection
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
 @section('script')
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+
     <script src="{{ asset('assets/front/js/jquery-ui.js') }}"></script>
     <script>
         $('#add_module').on('click', function (e) {

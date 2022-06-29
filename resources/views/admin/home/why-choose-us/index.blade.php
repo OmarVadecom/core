@@ -193,7 +193,7 @@
                                         <img
                                             src="{{ asset('assets/front/img/'.$static->w_c_us_image1) }}"
                                             class="mw-400 mb-3 img-demo show-img"
-                                            alt=""
+                                            alt="" width="150px" height="150px"
                                         />
                                         <div class="custom-file">
                                             <label class="custom-file-label" for="w_c_us_image1">
@@ -219,7 +219,7 @@
                                         <img
                                             src="{{ asset('assets/front/img/'.$static->w_c_us_image2) }}"
                                             class="mw-400 mb-3 img-demo show-img"
-                                            alt=""
+                                            alt="" width="150px" height="150px"
                                         />
                                         <div class="custom-file">
                                             <label class="custom-file-label" for="w_c_us_image2">

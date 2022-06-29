@@ -12,9 +12,9 @@ use App\Models\Permalink;
 | contains the "web" middleware group. Now create something great!
 |
  */
-// Route::group(['prefix' => 'laravel-filemanager'], function () {
-//     \UniSharp\LaravelFilemanager\Lfm::routes();
-// });
+Route::group(['prefix' => 'laravel-filemanager'], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
 
 Route::get('login', function () {
     return view('admin.login');
@@ -717,6 +717,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin', 'checkstatus']
     });
 });
 
+
+Route::resource('faq-category', 'Admin\FaqCategoryController');
+Route::resource('faq', 'Admin\FaqSectionController');
 Route::group(['prefix' =>  LaravelLocalization::setLocale(), 'middleware' => ['SlugWithCategory','localeSessionRedirect', 'localizationRedirect', 'localeViewPath']], function () {
     Route::get('/{slug}', 'Front\FrontendController@front_dynamic_page')->name('front.front_dynamic_page');
 });

@@ -532,24 +532,18 @@ class FrontendController extends Controller
             $currlang = Language::where('is_default', 1)->first();
         }
         $front_daynamic_page = Daynamicpage::where('slug', $slug)->where('language_id', $currlang->id)->firstOrFail();
-        // if($front_daynamic_page->slug_with_category ){
-           
-        //   $this->front_cat_dynamic_page('web-design',$slug);
-        // }
         $fLinks              = Flink::where('language_id', $currlang->id)->orderBy('serial_number', 'asc')->get();
         return view('front.daynamicpage', compact('front_daynamic_page', 'fLinks'));
     }
 
     public function front_cat_dynamic_page($category, $slug)
     {
-
         if (session()->has('lang')) {
             $currlang = Language::where('code', session()->get('lang'))->first();
         } else {
             $currlang = Language::where('is_default', 1)->first();
         }
         $category = dynamicPageCategories::where('slug', $category)->where('language_id', $currlang->id)->firstOrFail();
-// dd($category);
         $front_daynamic_page = Daynamicpage::where('slug', $slug)->where('category_id', $category->id)->where('language_id', $currlang->id)->firstOrFail();
         
         return view('front.daynamicpage', compact('front_daynamic_page'));

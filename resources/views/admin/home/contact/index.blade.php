@@ -43,10 +43,10 @@
                                         <label class="col-sm-2 control-label">{{ __('Image') }}<span class="text-danger">*</span></label>
         
                                         <div class="col-sm-10">
-                                            <img class="mw-400 mb-3 img-demo show-img" src="{{ asset('assets/front/img/'.$static->contact_form_image) }}" alt="">
+                                            <img class="mw-400 mb-3 img-demo show-img" src="{{ asset('assets/front/img/'.$static->contact_form_image) }}" alt="" width="150px" height="150px">
                                             <div class="custom-file">
                                                 <label class="custom-file-label" for="contact_form_image">{{ __('Choose New Image') }}</label>
-                                                <input type="file" class="custom-file-input up-img" name="contact_form_image" id="contact_form_image">
+                                                <input type="file" class="custom-file-input up-img" name="contact_form_image" id="contact_form_image" width="150px" height="150px">
                                             </div>
                                             <p class="help-block text-info">{{ __('Upload 530X730 (Pixel) Size image for best quality.
                                                 Only jpg, jpeg, png image is allowed.') }}
@@ -61,7 +61,7 @@
                                         <label class="col-sm-2 control-label">{{ __('Contact BG Image') }}<span class="text-danger">*</span></label>
         
                                         <div class="col-sm-10">
-                                            <img class="mw-400 mb-3 img-demo show-img" src="{{ asset('assets/front/img/'.$static->contact_section_bg_image) }}" alt="">
+                                            <img class="mw-400 mb-3 img-demo show-img" src="{{ asset('assets/front/img/'.$static->contact_section_bg_image) }}" alt="" width="150px" height="150px">
                                             <div class="custom-file">
                                                 <label class="custom-file-label" for="contact_section_bg_image">{{ __('Choose New Image') }}</label>
                                                 <input type="file" class="custom-file-input up-img" name="contact_section_bg_image" id="contact_section_bg_image">

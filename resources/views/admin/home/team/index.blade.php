@@ -205,7 +205,7 @@
                                                 {{ $id }}
                                             </td>
                                             <td>
-                                                <img class="w-80" src="{{ asset('assets/front/img/team/'.$team->image) }}" alt="" />
+                                                <img class="w-80" src="{{ asset('assets/front/img/team/'.$team->image) }}" alt="" width="150px" height="150px" />
                                             </td>
                                             <td>{{ $team->name }}</td>
                                             <td>{{ $team->dagenation}}</td>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Helpers\Helper;
+use App\Models\FaqCategory;
 use App\Models\dynamicPageCategories;
 use App\Models\Language;
 use App\Models\Daynamicpage;
@@ -54,12 +55,13 @@ class DynamicpageController extends Controller
 
     public function getModule(Request $request)
     {
-        $package_categories = PackageCategory::where('status', 1)->get();
+               $package_categories = PackageCategory::where('status', 1)->get();
+        $faq_categories = FaqCategory::get();
 
-        return view('admin.modules.style_of_modules.' . $request['module'], compact('package_categories'));
+        return view('admin.modules.style_of_modules.' . $request['module'], compact('package_categories','faq_categories'));
     }
 
-    public function store(Request $request)
+      public function store(Request $request)
     {
         if ($request->has('mod')) {
             foreach ($request->mod as $randomKey => $modules) {
@@ -79,7 +81,17 @@ class DynamicpageController extends Controller
         $dynamicpages = Daynamicpage::select('slug')->where('language_id', $request->language_id)->get();
 
         $request->validate([
-            'title' => [
+            'en_title' => [
+                'required', 'unique:daynamicpages,title', 'max:255',
+                function ($attribute, $value, $fail) use ($slug, $dynamicpages) {
+                    foreach ($dynamicpages as $dynamicpage) {
+                        if ($dynamicpage->slug == $slug) {
+                            return $fail('title already taken!');
+                        }
+                    }
+                }
+            ],
+            'ar_title' => [
                 'required', 'unique:daynamicpages,title', 'max:255',
                 function ($attribute, $value, $fail) use ($slug, $dynamicpages) {
                     foreach ($dynamicpages as $dynamicpage) {
@@ -92,30 +104,45 @@ class DynamicpageController extends Controller
             'slug' => 'required',
             'serial_number' => 'required',
             'status' => 'required',
-            'language_id' => 'required',
         ]);
 
-        $dynamicpage = new Daynamicpage();
-        $dynamicpage->language_id = $request->language_id;
-        $dynamicpage->category_id = $request->category_id;
-        $dynamicpage->title = $request->title;
-        $dynamicpage->slug = $slug;
-        $dynamicpage->status = $request->status;
-        $dynamicpage->serial_number = $request->serial_number;
-        $dynamicpage->meta_keywords = $request->meta_keywords;
-        $dynamicpage->meta_description = $request->meta_description;
-        $dynamicpage->footer = $request->footer;
+        $dynamicpage_en = new Daynamicpage();
+        $dynamicpage_en->language_id = 1;
+        $dynamicpage_en->category_id = $request->category_id;
+        $dynamicpage_en->title = $request->en_title;
+        $dynamicpage_en->slug = $slug;
+        $dynamicpage_en->status = $request->status;
+        $dynamicpage_en->serial_number = $request->serial_number;
+        $dynamicpage_en->meta_keywords = $request->en_meta_keywords;
+        $dynamicpage_en->meta_description = $request->en_meta_description;
+        $dynamicpage_en->footer = $request->footer;
 
-        $dynamicpage->modules = $request->mod;
+        $dynamicpage_en->modules = $request->mod;
 
-        $dynamicpage->save();
+        $dynamicpage_en->save();
+
+        $dynamicpage_ar = new Daynamicpage();
+        $dynamicpage_ar->language_id = 2;
+        $dynamicpage_ar->category_id = $request->category_id;
+        $dynamicpage_ar->title = $request->ar_title;
+        $dynamicpage_ar->slug = $slug;
+        $dynamicpage_ar->status = $request->status;
+        $dynamicpage_ar->serial_number = $request->serial_number;
+        $dynamicpage_ar->meta_keywords = $request->ar_meta_keywords;
+        $dynamicpage_ar->meta_description = $request->ar_meta_description;
+        $dynamicpage_ar->footer = $request->footer;
+
+        $dynamicpage_ar->modules = $request->mod;
+
+        $dynamicpage_ar->save();
+
 
         if($request['save_continue'] === 'save_continue') {
             $notification = array(
                 'messege' => 'Daynamic Page added successfully!',
                 'alert' => 'success'
             );
-            return redirect()->route('admin.dynamic_page.edit', $dynamicpage['id'])->with('notification', $notification);
+            return redirect()->route('admin.dynamic_page.edit', $dynamicpage_en['id'])->with('notification', $notification);
         }
         $notification = array(
             'messege' => 'Daynamic Page added successfully!',
@@ -124,30 +151,39 @@ class DynamicpageController extends Controller
         $language = ($request->language_id == "2") ? 'ar' : 'en';
         return redirect(route('admin.dynamic_page') . '?language=' . $language)->with('notification', $notification);
     }
-
-    public function edit($id)
+     public function edit($id)
     {
         $dynamicPageCategories = dynamicPageCategories::where('status', 1)->get();
         $dynamicpage = Daynamicpage::find($id);
+        $dynamicpage_en = Daynamicpage::where('slug' , $dynamicpage->slug )->where('language_id' , 1)->first();
+        $dynamicpage_ar = Daynamicpage::where('slug' , $dynamicpage->slug )->where('language_id' , 2)->first();
         $package_categories = PackageCategory::where('status', 1)->get();
-        $category = dynamicPageCategories::where('id', $dynamicpage->category_id)->firstOrFail();
-     
-        return view('admin.dynamicpage.edit', compact('dynamicpage', 'dynamicPageCategories', 'package_categories','category'));
+
+        return view('admin.dynamicpage.edit', compact('dynamicpage', 'dynamicPageCategories', 'package_categories','dynamicpage_en','dynamicpage_ar'));
     }
 
     public function copy($id)
     {
         $dynamicPageCategories = dynamicPageCategories::where('status', 1)->get();
         $dynamicpage = Daynamicpage::find($id);
+        $dynamicpage_en = Daynamicpage::where('slug' , $dynamicpage->slug )->where('language_id' , 1)->first();
+        $dynamicpage_ar = Daynamicpage::where('slug' , $dynamicpage->slug )->where('language_id' , 2)->first();
         $package_categories = PackageCategory::where('status', 1)->get();
 
-        return view('admin.dynamicpage.copy', compact('dynamicpage', 'dynamicPageCategories', 'package_categories'));
+        return view('admin.dynamicpage.copy', compact('dynamicpage', 'dynamicPageCategories', 'package_categories' ,'dynamicpage_en','dynamicpage_ar'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id )
     {
+        $dynamicpage = Daynamicpage::find($id);
+        $dynamicpage_en = $dynamicpage->where('slug' , $dynamicpage->slug )->where('language_id' , 1)->first();
+        $dynamicpage_ar = $dynamicpage->where('slug' , $dynamicpage->slug )->where('language_id' , 2)->first();
 
-        $dynamicpage = Daynamicpage::findOrFail($id);
+        $ids = [$dynamicpage_en->id , $dynamicpage_ar->id];
+
+
+
+
 
         if ($request->has('mod')) {
             foreach ($request->mod as $randomKey => $modules) {
@@ -165,45 +201,52 @@ class DynamicpageController extends Controller
                 }
             }
         }
-
         //dd($request->mod);
         // $slug = Helper::make_slug($request->title);
         $slug = $request->slug;
-        $dynamicpages = Daynamicpage::select('slug')->where('language_id', $request->language_id)->get();
         $dynamicpage->modules = $request->mod;
 
+
         $request->validate([
-            'title' => [
-                'required',
-                'max:255',
-                function ($attribute, $value, $fail) use ($slug, $dynamicpages, $dynamicpage) {
-                    foreach ($dynamicpages as $blg) {
-                        if ($dynamicpage->slug != $slug) {
-                            if ($blg->slug == $slug) {
-                                return $fail('title already taken!');
-                            }
-                        }
-                    }
-                },
-                'unique:daynamicpages,title,' . $id
-            ],
+            'en_title' => 'required',
+            'ar_title' => 'required',
             'slug' => 'required',
             'serial_number' => 'required',
             'status' => 'required',
-            'language_id' => 'required',
         ]);
 
-        $dynamicpage->language_id = $request->language_id;
-        $dynamicpage->category_id = $request->category_id ?? null;
-        $dynamicpage->title = $request->title;
-        $dynamicpage->slug = $slug;
-        $dynamicpage->slug_with_category = $request->slug_with_category;
-        $dynamicpage->status = $request->status;
-        $dynamicpage->serial_number = $request->serial_number;
-        $dynamicpage->meta_keywords = $request->meta_keywords;
-        $dynamicpage->meta_description = $request->meta_description;
-        $dynamicpage->footer = $request->footer;
-        $dynamicpage->save();
+
+
+        // Save english page edit
+        $dynamicpage_en->update([
+            'language_id' => 1,
+            'category_id' =>$request->category_id ?? null,
+            'title' =>$request->en_title ,
+            'slug' => $slug ,
+            'status' => $request->status,
+            'serial_number' => $request->serial_number,
+            'meta_keywords' => $request->en_meta_keywords,
+            'meta_description' => $request->en_meta_description,
+            'footer' => $request->footer,
+               'modules' => $request->mod
+        ]);
+
+
+
+        // Save arabic page edit
+        $dynamicpage_ar->update([
+            'language_id' => 2,
+            'category_id' =>$request->category_id ?? null,
+            'title' =>$request->ar_title ,
+            'slug' => $slug ,
+            'status' => $request->status,
+            'serial_number' => $request->serial_number,
+            'meta_keywords' => $request->ar_meta_keywords,
+            'meta_description' => $request->ar_meta_description,
+            'footer' => $request->footer,
+               'modules' => $request->mod
+        ]);
+
 
         if($request['update_continue'] === 'update_continue') {
             $notification = array(
