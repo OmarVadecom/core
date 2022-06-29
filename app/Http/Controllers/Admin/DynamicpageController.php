@@ -158,8 +158,9 @@ class DynamicpageController extends Controller
         $dynamicpage_en = Daynamicpage::where('slug' , $dynamicpage->slug )->where('language_id' , 1)->first();
         $dynamicpage_ar = Daynamicpage::where('slug' , $dynamicpage->slug )->where('language_id' , 2)->first();
         $package_categories = PackageCategory::where('status', 1)->get();
-
-        return view('admin.dynamicpage.edit', compact('dynamicpage', 'dynamicPageCategories', 'package_categories','dynamicpage_en','dynamicpage_ar'));
+        $category = dynamicPageCategories::where('id', $dynamicpage->category_id)->firstOrFail();
+     
+        return view('admin.dynamicpage.edit', compact('dynamicpage', 'dynamicPageCategories', 'package_categories','dynamicpage_en','dynamicpage_ar','category'));
     }
 
     public function copy($id)

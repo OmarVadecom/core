@@ -11,6 +11,7 @@ use App\Models\Permalink;
 use App\Models\Daynamicpage;
 use App\Models\Request;
 use Illuminate\Support\Facades\Session;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class Helper
 {
@@ -283,9 +284,9 @@ class Helper
         public static function changeSiteLocale($locale = null)
         {
             if (is_null($locale)) {
-                $locale = getCurrentLocale();
+                $locale = Helper::getCurrentLocale();
             }
-
+            
             $segments = request()->segments();
             if (config('laravellocalization.hideDefaultLocaleInURL') == true) {
                 if ($locale == 'en') {
