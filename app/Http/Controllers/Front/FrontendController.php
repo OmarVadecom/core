@@ -618,7 +618,6 @@ class FrontendController extends Controller
     // Change Language
     public function changeLanguage($lang)
     {
-
         session()->put('lang', $lang);
 
         app()->setLocale($lang);

@@ -75,6 +75,13 @@
       0 => 'Fruitcake\\Cors\\CorsServiceProvider',
     ),
   ),
+  'haruncpi/laravel-simple-filemanager' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Haruncpi\\LaravelSimpleFilemanager\\ServiceProvider',
+    ),
+  ),
   'intervention/image' => 
   array (
     'providers' => 

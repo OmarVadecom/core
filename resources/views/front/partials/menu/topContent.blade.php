@@ -55,7 +55,7 @@
             @else
                 <a class="name text-white" href="{{ Helper::changeSiteLocale('ar') }}" >
                     <i class="fas fa-globe-americas"></i>
-                    ع
+                        ع
                 </a>
             @endif
         </div>
