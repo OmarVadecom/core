@@ -85,7 +85,7 @@
                                         <div class="tab-content" id="nav-tabContent" >
                                             <div class=" col-sm-10 tab-pane fade show active " id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                                                 <label for="title">Title</label>
-                                                <input type="text" class="form-control slugable" name="en_title" data-slug="1"  placeholder="{{ __('Title') }}" required>
+                                                <input type="text" class="form-control titleinp" name="en_title" data-slug="1"  placeholder="{{ __('Title') }}" required>
                                                 @if ($errors->has('en_title'))
                                                     <p class="text-danger"> {{ $errors->first('en_title') }} </p>
                                                 @endif
@@ -150,6 +150,15 @@
                                         <div class="fix-slug">
                                             <input type="checkbox" name="fix_slug" class="fix_slug" />
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 control-label">Include {{ __('Category') }} within slug<span class="text-danger">*</span></label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control lang" name="slug_with_category">
+                                            <option value="1"> Yes </option>
+                                            <option value="0" 'selected'> No </option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">

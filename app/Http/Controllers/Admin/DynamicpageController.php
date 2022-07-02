@@ -116,6 +116,7 @@ class DynamicpageController extends Controller
         $dynamicpage_en->meta_keywords = $request->en_meta_keywords;
         $dynamicpage_en->meta_description = $request->en_meta_description;
         $dynamicpage_en->footer = $request->footer;
+        $dynamicpage_en->slug_with_category = $request->slug_with_category;
 
         $dynamicpage_en->modules = $request->mod;
 
@@ -131,7 +132,7 @@ class DynamicpageController extends Controller
         $dynamicpage_ar->meta_keywords = $request->ar_meta_keywords;
         $dynamicpage_ar->meta_description = $request->ar_meta_description;
         $dynamicpage_ar->footer = $request->footer;
-
+        $dynamicpage_ar->slug_with_category = $request->slug_with_category;
         $dynamicpage_ar->modules = $request->mod;
 
         $dynamicpage_ar->save();
@@ -155,11 +156,15 @@ class DynamicpageController extends Controller
     {
         $dynamicPageCategories = dynamicPageCategories::where('status', 1)->get();
         $dynamicpage = Daynamicpage::find($id);
+        
         $dynamicpage_en = Daynamicpage::where('slug' , $dynamicpage->slug )->where('language_id' , 1)->first();
+      
         $dynamicpage_ar = Daynamicpage::where('slug' , $dynamicpage->slug )->where('language_id' , 2)->first();
+       
         $package_categories = PackageCategory::where('status', 1)->get();
-        $category = dynamicPageCategories::where('id', $dynamicpage->category_id)->firstOrFail();
-     
+       
+        $category = dynamicPageCategories::where('id', $dynamicpage->category_id)->first();
+       
         return view('admin.dynamicpage.edit', compact('dynamicpage', 'dynamicPageCategories', 'package_categories','dynamicpage_en','dynamicpage_ar','category'));
     }
 
@@ -228,8 +233,9 @@ class DynamicpageController extends Controller
             'serial_number' => $request->serial_number,
             'meta_keywords' => $request->en_meta_keywords,
             'meta_description' => $request->en_meta_description,
+            'slug_with_category' => $request->slug_with_category,
             'footer' => $request->footer,
-               'modules' => $request->mod
+            'modules' => $request->mod
         ]);
 
 
@@ -244,8 +250,9 @@ class DynamicpageController extends Controller
             'serial_number' => $request->serial_number,
             'meta_keywords' => $request->ar_meta_keywords,
             'meta_description' => $request->ar_meta_description,
+            'slug_with_category' => $request->slug_with_category,
             'footer' => $request->footer,
-               'modules' => $request->mod
+            'modules' => $request->mod
         ]);
 
 
