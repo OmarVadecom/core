@@ -4,7 +4,7 @@
     'name' => 'VadeCom',
     'env' => 'local',
     'debug' => true,
-    'url' => 'https://new.vadecom.net',
+    'url' => 'http://localhost',
     'asset_url' => NULL,
     'timezone' => 'UTC',
     'locale' => 'en',
@@ -203,7 +203,7 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => 'F:\\wamp64\\www\\new_vadecom2\\storage\\framework/cache/data',
+        'path' => 'C:\\laragon\\www\\core\\storage\\framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -294,7 +294,7 @@
       array (
         'driver' => 'sqlite',
         'url' => NULL,
-        'database' => 'vadecom',
+        'database' => 'dbzkc2ivwel7vi',
         'prefix' => '',
         'foreign_key_constraints' => true,
       ),
@@ -304,7 +304,7 @@
         'url' => NULL,
         'host' => '127.0.0.1',
         'port' => '3306',
-        'database' => 'vadecom',
+        'database' => 'dbzkc2ivwel7vi',
         'username' => 'root',
         'password' => '',
         'unix_socket' => '',
@@ -324,7 +324,7 @@
         'url' => NULL,
         'host' => '127.0.0.1',
         'port' => '3306',
-        'database' => 'vadecom',
+        'database' => 'dbzkc2ivwel7vi',
         'username' => 'root',
         'password' => '',
         'charset' => 'utf8',
@@ -339,7 +339,7 @@
         'url' => NULL,
         'host' => '127.0.0.1',
         'port' => '3306',
-        'database' => 'vadecom',
+        'database' => 'dbzkc2ivwel7vi',
         'username' => 'root',
         'password' => '',
         'charset' => 'utf8',
@@ -380,10 +380,10 @@
     'orientation' => 'portrait',
     'defines' => 
     array (
-      'font_dir' => 'F:\\wamp64\\www\\new_vadecom2\\storage\\fonts/',
-      'font_cache' => 'F:\\wamp64\\www\\new_vadecom2\\storage\\fonts/',
-      'temp_dir' => 'C:\\Users\\Haitham\\AppData\\Local\\Temp',
-      'chroot' => 'F:\\wamp64\\www\\new_vadecom2',
+      'font_dir' => 'C:\\laragon\\www\\core\\storage\\fonts/',
+      'font_cache' => 'C:\\laragon\\www\\core\\storage\\fonts/',
+      'temp_dir' => 'C:\\Users\\OMARWA~1\\AppData\\Local\\Temp',
+      'chroot' => 'C:\\laragon\\www\\core',
       'enable_font_subsetting' => false,
       'pdf_backend' => 'CPDF',
       'default_media_type' => 'screen',
@@ -456,19 +456,19 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => 'F:\\wamp64\\www\\new_vadecom2\\storage\\app',
+        'root' => 'C:\\laragon\\www\\core\\storage\\app',
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => 'F:\\wamp64\\www\\new_vadecom2\\storage\\app/public',
-        'url' => 'https://new.vadecom.net/storage',
+        'root' => 'C:\\laragon\\www\\core\\storage\\app/public',
+        'url' => 'http://localhost/storage',
         'visibility' => 'public',
       ),
       'images' => 
       array (
         'driver' => 'local',
-        'root' => 'F:\\wamp64\\www\\new_vadecom2\\public\\images',
+        'root' => 'C:\\laragon\\www\\core\\public\\images',
         'url' => '/images',
       ),
       's3' => 
@@ -772,13 +772,13 @@
       'single' => 
       array (
         'driver' => 'single',
-        'path' => 'F:\\wamp64\\www\\new_vadecom2\\storage\\logs/laravel.log',
+        'path' => 'C:\\laragon\\www\\core\\storage\\logs/laravel.log',
         'level' => 'debug',
       ),
       'daily' => 
       array (
         'driver' => 'daily',
-        'path' => 'F:\\wamp64\\www\\new_vadecom2\\storage\\logs/laravel.log',
+        'path' => 'C:\\laragon\\www\\core\\storage\\logs/laravel.log',
         'level' => 'debug',
         'days' => 14,
       ),
@@ -847,7 +847,7 @@
       'theme' => 'default',
       'paths' => 
       array (
-        0 => 'F:\\wamp64\\www\\new_vadecom2\\resources\\views/vendor/mail',
+        0 => 'C:\\laragon\\www\\core\\resources\\views/vendor/mail',
       ),
     ),
     'log_channel' => NULL,
@@ -863,7 +863,7 @@
   array (
     'encoding' => 'UTF-8',
     'finalize' => true,
-    'cachePath' => 'F:\\wamp64\\www\\new_vadecom2\\storage\\app/purifier',
+    'cachePath' => 'C:\\laragon\\www\\core\\storage\\app/purifier',
     'cacheFileMode' => 493,
     'settings' => 
     array (
@@ -1198,7 +1198,7 @@
     'lifetime' => '120',
     'expire_on_close' => false,
     'encrypt' => false,
-    'files' => 'F:\\wamp64\\www\\new_vadecom2\\storage\\framework/sessions',
+    'files' => 'C:\\laragon\\www\\core\\storage\\framework/sessions',
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
@@ -1249,9 +1249,9 @@
   array (
     'paths' => 
     array (
-      0 => 'F:\\wamp64\\www\\new_vadecom2\\resources\\views',
+      0 => 'C:\\laragon\\www\\core\\resources\\views',
     ),
-    'compiled' => 'F:\\wamp64\\www\\new_vadecom2\\storage\\framework\\views',
+    'compiled' => 'C:\\laragon\\www\\core\\storage\\framework\\views',
   ),
   'lfm-config' => 
   array (
@@ -1309,12 +1309,6 @@
     'should_validate_size' => false,
     'should_validate_mime' => true,
     'over_write_on_duplicate' => false,
-    'disallowed_mimetypes' => 
-    array (
-      0 => 'text/x-php',
-      1 => 'text/html',
-      2 => 'text/plain',
-    ),
     'item_columns' => 
     array (
       0 => 'name',
@@ -1360,8 +1354,8 @@
     'route' => NULL,
     'paths' => 
     array (
-      0 => 'F:\\wamp64\\www\\new_vadecom2\\public\\upload',
-      1 => 'F:\\wamp64\\www\\new_vadecom2\\public\\images',
+      0 => 'C:\\laragon\\www\\core\\public\\upload',
+      1 => 'C:\\laragon\\www\\core\\public\\images',
     ),
     'templates' => 
     array (

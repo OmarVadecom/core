@@ -93,7 +93,8 @@
                                     <div class="tab-content" id="nav-tabContent" >
                                         <div class=" col-sm-10 tab-pane fade show active " id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                                             <label for="title">Title</label>
-                                            <input type="text" class="form-control slugable" name="en_title" data-slug="1"  placeholder="{{ __('Title') }}" value="{{ $dynamicpage_en->title }}" required>
+                                            <input type="text" class="form-control titleinp" name="en_title" data-slug="1"  placeholder="{{ __('Title') }}" value="{{ $dynamicpage_en->title }}" required>
+                                         
                                             @if ($errors->has('en_title'))
                                                 <p class="text-danger"> {{ $errors->first('en_title') }} </p>
                                             @endif
@@ -150,13 +151,13 @@
                                 <label class="col-sm-2 control-label">Include {{ __('Category') }} within slug<span class="text-danger">*</span></label>
                                 <div class="col-sm-4">
                                     <select class="form-control lang" name="slug_with_category">
-                                        <option value="1" {{ $dynamicpage->slug_with_category == 1 ? 'selected' : '' }}> Yes </option>
-                                        <option value="0" {{ $dynamicpage->slug_with_category == 0 ? 'selected' : '' }}> No </option>
+                                        <option value="1" {{ $dynamicpage_en->slug_with_category == 1 ? 'selected' : '' }}> Yes </option>
+                                        <option value="0" {{ $dynamicpage_en->slug_with_category == 0 ? 'selected' : '' }}> No </option>
                                     </select>
                                 </div>
                             </div>
 
-                            <div class="form-group row">
+                            {{-- <div class="form-group row">
                                 <label class="col-sm-2 control-label">{{ __('Title') }}<span class="text-danger">*</span></label>
 
                                 <div class="col-sm-10">
@@ -165,7 +166,7 @@
                                         <p class="text-danger"> {{ $errors->first('title') }} </p>
                                     @endif
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="form-group row">
                                 <label class="col-sm-2 control-label">{{ __('Slug') }}<span class="text-danger">*</span></label>
 

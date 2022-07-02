@@ -12,13 +12,13 @@ use App\Models\Permalink;
 | contains the "web" middleware group. Now create something great!
 |
  */
-Route::group(['prefix' => 'laravel-filemanager'], function () {
-    \UniSharp\LaravelFilemanager\Lfm::routes();
-});
+// Route::group(['prefix' => 'laravel-filemanager'], function () {
+//     \UniSharp\LaravelFilemanager\Lfm::routes();
+// });
 
-Route::get('login', function () {
-    return view('admin.login');
-})->name('login');
+// Route::get('login', function () {
+//     return view('admin.login');
+// })->name('login');
 
 /*=======================================================
 Front Routes

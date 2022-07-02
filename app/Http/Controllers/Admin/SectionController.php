@@ -18,7 +18,7 @@ class SectionController extends Controller
 
     // Who we are section
     public function w_w_a(Request $request){
-        // $request->language = !isset($request->language)?'en':$request->language;
+        $request->language = !isset($request->language)?'en':$request->language;
         $lang = Language::where('code', $request->language)->first()->id;
      
         $english_static = Sectiontitle::where('language_id', 1)->orderBy('id', 'DESC')->first();
@@ -63,7 +63,7 @@ class SectionController extends Controller
     public function about_section(Request $request){
 
         
-        // $request->language = !isset($request->language)?'en':$request->language;
+        $request->language = !isset($request->language)?'en':$request->language;
         $lang = Language::where('code', $request->language)->first()->id;
         
         
@@ -230,7 +230,7 @@ class SectionController extends Controller
     // Why Choose us Section
     public function why_chooseus(Request $request){
 
-        // $request->language = !isset($request->language)?'en':$request->language;
+        $request->language = !isset($request->language)?'en':$request->language;
     
         $lang = Language::where('code', $request->language)->first()->id;
      
