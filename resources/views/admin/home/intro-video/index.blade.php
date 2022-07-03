@@ -49,7 +49,7 @@
                                             <label class="col-sm-2 control-label">{{ __('Image') }}<span class="text-danger">*</span></label>
             
                                             <div class="col-sm-10">
-                                                <img class="mw-400 mb-3 img-demo show-img" src="{{ asset('assets/front/img/'.$english_static->video_image) }}" alt="">
+                                                <img class="mw-400 mb-3 img-demo show-img" src="{{ asset('assets/front/img/'.$english_static->video_image) }}" alt="" width="150px" height="150px">
                                                 <div class="custom-file">
                                                     <label class="custom-file-label" for="video_image">{{ __('Choose New Image') }}</label>
                                                     <input type="file" class="custom-file-input up-img" name="video_image" id="video_image">
@@ -67,7 +67,7 @@
                                             <label class="col-sm-2 control-label">{{ __('Section BG Image') }}<span class="text-danger">*</span></label>
             
                                             <div class="col-sm-10">
-                                                <img class="mw-400 mb-3 img-demo show-img" src="{{ asset('assets/front/img/'.$english_static->video_bg_image) }}" alt="">
+                                                <img class="mw-400 mb-3 img-demo show-img" src="{{ asset('assets/front/img/'.$english_static->video_bg_image) }}" alt="" width="150px" height="150px">
                                                 <div class="custom-file">
                                                     <label class="custom-file-label" for="video_bg_image">{{ __('Choose New Image') }}</label>
                                                     <input type="file" class="custom-file-input up-img" name="video_bg_image" id="video_bg_image">
@@ -85,7 +85,7 @@
                                             <label class="col-sm-2 control-label">{{ __('Left Image') }}<span class="text-danger">*</span></label>
             
                                             <div class="col-sm-10">
-                                                <img class="mw-400 mb-3 img-demo show-img" src="{{ asset('assets/front/img/'.$english_static->video_image_left) }}" alt="">
+                                                <img class="mw-400 mb-3 img-demo show-img" src="{{ asset('assets/front/img/'.$english_static->video_image_left) }}" alt="" width="150px" height="150px">
                                                 <div class="custom-file">
                                                     <label class="custom-file-label" for="video_image_left">{{ __('Choose New Image') }}</label>
                                                     <input type="file" class="custom-file-input up-img" name="video_image_left" id="video_image_left">
@@ -103,7 +103,7 @@
                                             <label class="col-sm-2 control-label">{{ __('Right Image') }}<span class="text-danger">*</span></label>
             
                                             <div class="col-sm-10">
-                                                <img class="mw-400 mb-3 img-demo show-img" src="{{ asset('assets/front/img/'.$english_static->video_image_right) }}" alt="">
+                                                <img class="mw-400 mb-3 img-demo show-img" src="{{ asset('assets/front/img/'.$english_static->video_image_right) }}" alt="" width="150px" height="150px">
                                                 <div class="custom-file">
                                                     <label class="custom-file-label" for="video_image_right">{{ __('Choose New Image') }}</label>
                                                     <input type="file" class="custom-file-input up-img" name="video_image_right" id="video_image_right">

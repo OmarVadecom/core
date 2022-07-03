@@ -11,7 +11,7 @@
         <div class="form-group row">
             <label class="col-sm-3 control-label">{{ __('Faqs Category') }}<span class="text-danger">*</span></label>
             <div class="col-sm-9">
-                <select class="form-control" name="mod[{{ $randNumModule }}][packages_category][category_id]" >
+                <select class="form-control" name="mod[{{ $randNumModule }}][faq_category][category_id]" >
                     <option value="">Choose Category</option>
                     @foreach($faq_categories as $category)
                         <option value="{{$category->id}}" {{(isset( $moduleAttributes['category_id'])&&$moduleAttributes['category_id']==$category->id) ? 'selected' : '' }} >{{$category->name_en}}</option>

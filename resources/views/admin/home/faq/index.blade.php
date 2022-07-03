@@ -187,7 +187,7 @@
                                             <img
                                                 src="{{ asset('assets/front/img/'.$static->faq_bg_image) }}"
                                                 class="mw-400 mb-3 img-demo show-img"
-                                                alt=""
+                                                alt="" width="150px" height="150px"
                                             />
                                             <div class="custom-file">
                                                 <label class="custom-file-label" for="faq_bg_image">{{ __('Choose New Image') }}</label>
@@ -211,6 +211,7 @@
                                                 src="{{ asset('assets/front/img/'.$static->faq_image1) }}"
                                                 class="mw-400 mb-3 img-demo show-img"
                                                 alt=""
+                                                width="150px" height="150px"
                                             />
                                             <div class="custom-file">
                                                 <label class="custom-file-label" for="faq_image1">{{ __('Choose New Image') }}</label>
@@ -234,6 +235,7 @@
                                                 src="{{ asset('assets/front/img/'.$static->faq_image2) }}"
                                                 class="mw-400 mb-3 img-demo show-img"
                                                 alt=""
+                                                width="150px" height="150px"
                                             />
                                             <div class="custom-file">
                                                 <label class="custom-file-label" for="faq_image2">{{ __('Choose New Image') }}</label>

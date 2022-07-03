@@ -55,6 +55,7 @@ class DynamicpageController extends Controller
 
     public function getModule(Request $request)
     {
+
                $package_categories = PackageCategory::where('status', 1)->get();
         $faq_categories = FaqCategory::get();
 

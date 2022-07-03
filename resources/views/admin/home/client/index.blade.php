@@ -238,7 +238,7 @@
                                         <tr>
                                             <td>{{ ++$id }}</td>
                                             <td>
-                                                <img class="w-80" src="{{ asset('assets/front/img/client/'.$client->image) }}" alt="" />
+                                                <img class="w-80" src="{{ asset('assets/front/img/client/'.$client->image) }}" alt="" width="150px" height="150px">
                                             </td>
                                             <td>{{ $client->name }}</td>
                                             <td>{{ $client->serial_number }}</td>
