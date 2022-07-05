@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Helpers\Helper;
 use App\Models\Faq;
 use App\Models\Flink;
 use App\Models\Job;
@@ -44,9 +45,11 @@ use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\dynamicPageCategories;
 use App\Models\Visibility;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request as UrlRequest;
 
 class FrontendController extends Controller
@@ -80,7 +83,9 @@ class FrontendController extends Controller
         } else {
             $currlang = Language::where('is_default', 1)->first();
         }
-
+        // dd($currlang);
+        session()->put('lang', $currlang->code);
+        app()->setLocale($currlang->code);
         $setting = Setting::where('language_id', $currlang->id)->first();
         //theme_version used is third
         if ($setting->theme_version == 'theme9') {
@@ -618,11 +623,9 @@ class FrontendController extends Controller
     // Change Language
     public function changeLanguage($lang)
     {
-        session()->put('lang', $lang);
-
-        app()->setLocale($lang);
-
-        return redirect()->route('front.index');
+        $previous_url = url()->previous();
+        $next_url = Helper::changeSiteLocale($lang,$previous_url);
+        return Redirect::to($next_url);
     }
 
     // Change Currency

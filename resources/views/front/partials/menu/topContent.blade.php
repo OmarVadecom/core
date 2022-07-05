@@ -48,16 +48,20 @@
         </div>
         <div class="language-change">
             @if(app()->getLocale() == "ar")
-                <a class="name text-white" href="{{ Helper::changeSiteLocale('en') }}" >
+                <a class="name text-white" href="{{route('changeLanguage','en')}}"  >
                     <i class="fas fa-globe-americas"></i>
                     E
                 </a>
-            @else
-                <a class="name text-white" href="{{ Helper::changeSiteLocale('ar') }}" >
+               
+            @endif
+            
+            @if(app()->getLocale() == 'en')
+                <a class="name text-white" href="{{route('changeLanguage','ar')}}" >
                     <i class="fas fa-globe-americas"></i>
                         ع
                 </a>
             @endif
+            
         </div>
     </div>
 </div>
