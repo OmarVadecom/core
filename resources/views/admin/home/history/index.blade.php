@@ -186,7 +186,7 @@
                                         <tr>
                                             <td>{{ ++$id }}</td>
                                             <td>
-                                                <img class="w-80" src="{{ asset('assets/front/img/history/'.$history->image) }}" alt="" />
+                                                <img class="w-80" src="{{ asset('assets/front/img/history/'.$history->image) }}" alt="" width="150px" height="150px" />
                                             </td>
                                             <td>{{ $history->title }}</td>
                                             <td>{{ $history->serial_number }}</td>

@@ -127,7 +127,7 @@
                                                 {{ $id }}
                                             </td>
                                             <td>
-                                                <img class="w-80" src="{{ asset('assets/front/img/slider/'.$slider->image) }}" alt="" />
+                                                <img class="w-80" src="{{ asset('assets/front/img/slider/'.$slider->image) }}" alt="" width="150px" height="150px" />
                                             </td>
                                             <td>
                                                 {{ $slider->title }}

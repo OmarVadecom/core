@@ -233,7 +233,7 @@
                                         <tr>
                                             <td>{{ ++$id }}</td>
                                             <td>
-                                                <img class="w-80" src="{{ asset('assets/front/img/'.$testimonial->image) }}" alt="" />
+                                                <img class="w-80" src="{{ asset('assets/front/img/'.$testimonial->image) }}" alt="" width="150px" height="150px" />
                                             </td>
                                             <td>{{ $testimonial->name }}</td>
                                             <td>{{ $testimonial->position}}</td>

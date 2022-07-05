@@ -46,7 +46,7 @@
                                                 <label class="col-sm-2 control-label">{{ __('Image') }}<span class="text-danger">*</span></label>
                 
                                                 <div class="col-sm-10">
-                                                    <img class="w-100 mb-3 img-demo show-img" src="{{ asset('assets/front/img/client/'.$client->image) }}" alt="">
+                                                    <img class="w-100 mb-3 img-demo show-img" src="{{ asset('assets/front/img/client/'.$client->image) }}" alt="" width="150px" height="150px">
                                                     <div class="custom-file">
                                                         <label class="custom-file-label" for="image">{{ __('Choose New Image') }}</label>
                                                         <input type="file" class="custom-file-input up-img" name="image" id="image">
