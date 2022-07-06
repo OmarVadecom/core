@@ -32,80 +32,97 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
+                                <nav>
+                                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                        <a class="col-md-6 nav-item nav-link active" id="nav-en-feature-tab" data-toggle="tab" href="#nav-en-feature" role="tab" aria-controls="nav-en-feature" aria-selected="true">English</a>
+                                        <a class="col-md-6 nav-item nav-link" id="nav-ar-feature-tab" data-toggle="tab" href="#nav-ar-feature" role="tab" aria-controls="nav-ar-feature" aria-selected="false">عربي</a>
+                                    </div>
+                                </nav>
                                 <form class="form-horizontal" action="{{ route('admin.feature.update',  $feature->id) }}" method="POST">
                                     @csrf
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 control-label">{{ __('Language') }}<span class="text-danger">*</span></label>
-        
-                                        <div class="col-sm-10">
-                                            <select class="form-control lang" name="language_id">
-                                                @foreach($langs as $lang)
-                                                    <option value="{{$lang->id}}" {{ $feature->language_id == $lang->id ? 'selected' : '' }} >{{$lang->name}}</option>
-                                                @endforeach
-                                            </select>
-                                            @if ($errors->has('language_id'))
-                                                <p class="text-danger"> {{ $errors->first('language_id') }} </p>
-                                            @endif
+                                    <div class="tab-content" id="nav-tabContent">
+                                        <div class="col-md-12 tab-pane fade show active" id="nav-en-feature" role="tabpanel" aria-labelledby="nav-en-feature-tab" >
+                                            {{--english--}}
+                                            <div class="form-group row my-3">
+                                                <label class="col-sm-2 control-label">{{ __('Title') }}<span class="text-danger">*</span></label>
+                
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" name="title" placeholder="{{ __('Title') }}" value="{{ $feature_en->title }}">
+                                                    @if ($errors->has('title'))
+                                                        <p class="text-danger"> {{ $errors->first('title') }} </p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label  class="col-sm-2 control-label">{{ __('Text') }}<span class="text-danger">*</span></label>
+                
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" name="text" placeholder="{{ __('Text') }}" value="{{ $feature_en->text }}">
+                                                    @if ($errors->has('text'))
+                                                        <p class="text-danger"> {{ $errors->first('text') }} </p>
+                                                    @endif
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-
+                                        <div class="col-md-12 tab-pane fade" id="nav-ar-feature" role="tabpanel" aria-labelledby="nav-ar-feature-tab">
+                                            {{--arabic--}}
+                                            <div class="form-group row my-3">
+                                                <label class="col-sm-2 control-label">{{ __('العنوان') }}<span class="text-danger">*</span></label>
+                
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" name="ar_title" placeholder="{{ __('Title') }}" value="{{ $feature_ar->title }}">
+                                                    @if ($errors->has('ar_title'))
+                                                        <p class="text-danger"> {{ $errors->first('ar_title') }} </p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label  class="col-sm-2 control-label">{{ __('النص') }}<span class="text-danger">*</span></label>
+                
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" name="ar_text" placeholder="{{ __('Text') }}" value="{{ $feature_ar->text }}">
+                                                    @if ($errors->has('ar_text'))
+                                                        <p class="text-danger"> {{ $errors->first('ar_text') }} </p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
                                     <div class="form-group row">
                                         <label class="col-sm-2 control-label">{{ __('Icon') }}<span class="text-danger">*</span></label>
         
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="icon" placeholder="{{ __('Icon') }}" value="{{ $feature->icon }}">
+                                            <input type="text" class="form-control" name="icon" placeholder="{{ __('Icon') }}" value="{{ $feature_en->icon }}">
                                             @if ($errors->has('icon'))
                                                 <p class="text-danger"> {{ $errors->first('icon') }} </p>
                                             @endif
                                         </div>
                                     </div>
-
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 control-label">{{ __('Title') }}<span class="text-danger">*</span></label>
-        
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="title" placeholder="{{ __('Title') }}" value="{{ $feature->title }}">
-                                            @if ($errors->has('title'))
-                                                <p class="text-danger"> {{ $errors->first('title') }} </p>
-                                            @endif
-                                        </div>
-                                    </div>
-                          
-                                    <div class="form-group row">
-                                        <label  class="col-sm-2 control-label">{{ __('Text') }}<span class="text-danger">*</span></label>
-        
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="text" placeholder="{{ __('Text') }}" value="{{ $feature->text }}">
-                                            @if ($errors->has('text'))
-                                                <p class="text-danger"> {{ $errors->first('text') }} </p>
-                                            @endif
-                                        </div>
-                                    </div>
-
                                     <div class="form-group row">
                                         <label  class="col-sm-2 control-label">{{ __('Order') }}<span class="text-danger">*</span></label>
         
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="serial_number" placeholder="{{ __('Order') }}" value="{{ $feature->serial_number }}">
+                                            <input type="text" class="form-control" name="serial_number" placeholder="{{ __('Order') }}" value="{{ $feature_en->serial_number }}">
                                             @if ($errors->has('serial_number'))
                                                 <p class="text-danger"> {{ $errors->first('serial_number') }} </p>
                                             @endif
                                         </div>
                                     </div>
-                                        
                                     <div class="form-group row">
                                         <label for="status" class="col-sm-2 control-label">{{ __('Status') }}<span class="text-danger">*</span></label>
         
                                         <div class="col-sm-10">
                                             <select class="form-control" name="status">
-                                               <option value="0" {{ $feature->status == '0' ? 'selected' : '' }}>{{ __('Unpublish') }}</option>
-                                               <option value="1" {{ $feature->status == '1' ? 'selected' : '' }}>{{ __('Publish') }}</option>
+                                               <option value="0" {{ $feature_en->status == '0' ? 'selected' : '' }}>{{ __('Unpublish') }}</option>
+                                               <option value="1" {{ $feature_en->status == '1' ? 'selected' : '' }}>{{ __('Publish') }}</option>
                                               </select>
                                             @if ($errors->has('status'))
                                                 <p class="text-danger"> {{ $errors->first('status') }} </p>
                                             @endif
                                         </div>
                                     </div>
+
+                                    </div>
+
                                     <div class="form-group row">
                                         <div class="offset-sm-2 col-sm-10">
                                             <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>

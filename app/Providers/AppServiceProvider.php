@@ -16,6 +16,7 @@ use App\Models\Daynamicpage;
 use App\Models\ExtraVisibility;
 use App\Models\Sectiontitle;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -40,6 +41,7 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        Schema::defaultStringLength(191);
         View::composer('*', function ($view) {
             $socials = Social::orderBy('serial_number', 'asc')->get();
             

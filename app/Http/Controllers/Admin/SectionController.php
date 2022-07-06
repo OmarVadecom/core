@@ -18,12 +18,13 @@ class SectionController extends Controller
 
     // Who we are section
     public function w_w_a(Request $request){
-        
+        $request->language = !isset($request->language)?'en':$request->language;
         $lang = Language::where('code', $request->language)->first()->id;
      
-        $static = Sectiontitle::where('language_id', $lang)->orderBy('id', 'DESC')->first();
+        $english_static = Sectiontitle::where('language_id', 1)->orderBy('id', 'DESC')->first();
+        $arabic_static = Sectiontitle::where('language_id', 2)->orderBy('id', 'DESC')->first();
 
-        return view('admin.home.who-we-are.index', compact('static'));
+        return view('admin.home.who-we-are.index', compact('english_static','arabic_static'));
     }
 
     // Who we are section update
@@ -33,13 +34,22 @@ class SectionController extends Controller
             'w_we_are_title' => 'required|max:250',
             'w_we_are_sub_title' => 'required|max:250',
             'w_we_are_text' => 'required',
+            'ar_w_we_are_title' => 'required|max:250',
+            'ar_w_we_are_sub_title' => 'required|max:250',
+            'ar_w_we_are_text' => 'required',
         ]);
-        $st = Sectiontitle::where('language_id', $id)->first();
+        $en_st = Sectiontitle::where('language_id', 1)->first();
+        $ar_st = Sectiontitle::where('language_id', 2)->first();
 
-        $st->w_we_are_title = $request->w_we_are_title;
-        $st->w_we_are_sub_title = $request->w_we_are_sub_title;
-        $st->w_we_are_text = $request->w_we_are_text;
-        $st->save();
+        $en_st->w_we_are_title = $request->w_we_are_title;
+        $en_st->w_we_are_sub_title = $request->w_we_are_sub_title;
+        $en_st->w_we_are_text = $request->w_we_are_text;
+        $en_st->save();
+        
+        $ar_st->w_we_are_title = $request->ar_w_we_are_title;
+        $ar_st->w_we_are_sub_title = $request->ar_w_we_are_sub_title;
+        $ar_st->w_we_are_text = $request->ar_w_we_are_text;
+        $ar_st->save();
 
         $notification = array(
             'messege' => 'Who We Are Section Updated successfully!',
@@ -52,52 +62,70 @@ class SectionController extends Controller
     // About Section
     public function about_section(Request $request){
 
+        
         $request->language = !isset($request->language)?'en':$request->language;
-    
         $lang = Language::where('code', $request->language)->first()->id;
-     
-        $static = Sectiontitle::where('language_id', $lang)->orderBy('id', 'DESC')->first();
-
-        return view('admin.home.about.index', compact('static'));
+        
+        
+        $english_static = Sectiontitle::where('language_id', 1)->orderBy('id', 'DESC')->first();
+        $arabic_static = Sectiontitle::where('language_id', 2)->orderBy('id', 'DESC')->first();
+        
+        return view('admin.home.about.index', compact('english_static','arabic_static'));
     }
 
     // About section update
     public function about_section_update(Request $request, $id){
 
         $request->validate([
-            'about_title' => 'required|max:250',
-            'about_sub_title' => 'required|max:250',
-            'about_intro_video' => 'required|max:250',
-            'about_experince_yers' => 'required|numeric',
-            'about_text' => 'required',
-            'about_image' => 'mimes:jpeg,jpg,png',
+            'about_title'               => 'required|max:250',
+            'about_sub_title'           => 'required|max:250',
+            'about_intro_video'         => 'required|max:250',
+            'about_experince_yers'      => 'required|numeric',
+            'about_text'                => 'required',
+            'about_image'               => 'mimes:jpeg,jpg,png',
+            'ar_about_title'            => 'required|max:250',
+            'ar_about_sub_title'        => 'required|max:250',
+            'ar_about_intro_video'      => 'required|max:250',
+            'ar_about_experince_yers'   => 'required|numeric',
+            'ar_about_text'             => 'required',
         ]);
-
-        $st = Sectiontitle::where('language_id', $id)->first();
+        
+        $en_st = Sectiontitle::where('language_id', 1)->first();
+        
+        $ar_st = Sectiontitle::where('language_id', 2)->first();
+       
 
         if($request->hasFile('about_image')){
-            @unlink('assets/front/img/'. $st->about_image);
+            @unlink('assets/front/img/'. $en_st->about_image);
             $file = $request->file('about_image');
             $extension = $file->getClientOriginalExtension();
             $about_image = time().rand().'.'.$extension;
             $file->move('assets/front/img/', $about_image);
 
-            $st->about_image = $about_image;
+            $en_st->about_image = $about_image;
         }
 
-        $st->about_title = $request->about_title;
-        $st->about_sub_title = $request->about_sub_title;
-        $st->about_intro_video = $request->about_intro_video;
-        $st->about_experince_yers = $request->about_experince_yers;
-        $st->about_text = $request->about_text;
-        $st->about_text = $request->about_text;
-        $st->save();
 
+        $en_st->about_title          = $request->about_title;
+        $en_st->about_sub_title      = $request->about_sub_title;
+        $en_st->about_intro_video    = $request->about_intro_video;
+        $en_st->about_experince_yers = $request->about_experince_yers;
+        $en_st->about_text           = $request->about_text;
+        $en_st->save();
+
+        $ar_st->about_title = $request->ar_about_title;
+        $ar_st->about_sub_title = $request->ar_about_sub_title;
+        $ar_st->about_intro_video = $request->ar_about_intro_video;
+        $ar_st->about_experince_yers = $request->ar_about_experince_yers;
+        $ar_st->about_text = $request->ar_about_text;
+        $ar_st->save();
+        
+        
         $notification = array(
             'messege' => 'About Section Updated successfully!',
             'alert' => 'success'
         );
-        return redirect(route('admin.about_section').'?language='.$this->lang->code)->with('notification', $notification);
+         return redirect(route('admin.about_section').'?language='.$this->lang->code)->with('notification', $notification);
 
     }
 
@@ -106,27 +134,36 @@ class SectionController extends Controller
         
         $lang = Language::where('code', $request->language)->first()->id;
      
-        $static = Sectiontitle::where('language_id', $lang)->orderBy('id', 'DESC')->first();
+        $english_static = Sectiontitle::where('language_id', 1)->orderBy('id', 'DESC')->first();
+        $arabic_static = Sectiontitle::where('language_id', 2)->orderBy('id', 'DESC')->first();
 
-        return view('admin.home.intro-video.index', compact('static'));
+        return view('admin.home.intro-video.index', compact('english_static','arabic_static'));
     }
 
     // Intro Video Section Update
     public function intro_video_update(Request $request, $id){
 
         $request->validate([
-            'video_title' => 'required|max:250',
-            'video_sub_title' => 'required|max:250',
-            'video_text' => 'required|max:250',
-            'video_link' => 'required',
-            'video_content' => 'required',
-            'video_bg_image' => 'mimes:jpeg,jpg,png',
-            'video_image_left' => 'mimes:jpeg,jpg,png',
-            'video_image_right' => 'mimes:jpeg,jpg,png',
-            'video_image' => 'mimes:jpeg,jpg,png',
+            'video_title'           => 'required|max:250',
+            'video_sub_title'       => 'required|max:250',
+            'video_text'            => 'required|max:250',
+            'video_link'            => 'required',
+            'video_content'         => 'required',
+            'video_bg_image'        => 'mimes:jpeg,jpg,png',
+            'video_image_left'      => 'mimes:jpeg,jpg,png',
+            'video_image_right'     => 'mimes:jpeg,jpg,png',
+            'video_image'           => 'mimes:jpeg,jpg,png',
+            'ar_video_title'        => 'required|max:250',
+            'ar_video_sub_title'    => 'required|max:250',
+            'ar_video_text'         => 'required|max:250',
+            'ar_video_link'         => 'required',
+            'ar_video_content'      => 'required',
         ]);
 
-        $st = Sectiontitle::where('language_id', $id)->first();
+        $st = Sectiontitle::where('language_id', 1)->first();
+        
+        $ar_st = Sectiontitle::where('language_id', 2)->first();
+       
 
         if($request->hasFile('video_bg_image')){
             @unlink('assets/front/img/'. $st->video_bg_image);
@@ -175,6 +212,13 @@ class SectionController extends Controller
         $st->video_content = $request->video_content;
         $st->save();
 
+        $ar_st->video_title = $request->ar_video_title;
+        $ar_st->video_sub_title = $request->ar_video_sub_title;
+        $ar_st->video_text = $request->ar_video_text;
+        $ar_st->video_link = $request->ar_video_link;
+        $ar_st->video_content = $request->ar_video_content;
+        $ar_st->save();
+
         $notification = array(
             'messege' => 'Intor Video Section Updated successfully!',
             'alert' => 'success'
@@ -186,9 +230,12 @@ class SectionController extends Controller
     // Why Choose us Section
     public function why_chooseus(Request $request){
 
+        $request->language = !isset($request->language)?'en':$request->language;
+    
         $lang = Language::where('code', $request->language)->first()->id;
      
-        $static = Sectiontitle::where('language_id', $lang)->orderBy('id', 'DESC')->first();
+        $english_static = Sectiontitle::where('language_id', 1)->orderBy('id', 'DESC')->first();
+        $arabic_static = Sectiontitle::where('language_id', 2)->orderBy('id', 'DESC')->first();
 
         $why_selects = WhySelect::where('language_id', $lang)
                         ->when($request['title'], function ($q) use ($request) {
@@ -197,7 +244,7 @@ class SectionController extends Controller
                             return $q->where('status', $request['status']);
                         })->orderBy('id', 'DESC')->get();
 
-        return view('admin.home.why-choose-us.index', compact('static', 'why_selects'));
+        return view('admin.home.why-choose-us.index', compact('english_static','arabic_static', 'why_selects'));
     }
 
     // Why Choose us Update
@@ -207,33 +254,40 @@ class SectionController extends Controller
             'w_c_us_sub_title' => 'required|max:250',
             'w_c_us_image1' => 'mimes:jpeg,jpg,png',
             'w_c_us_image2' => 'mimes:jpeg,jpg,png',
+            'ar_w_c_us_title' => 'required|max:250',
+            'ar_w_c_us_sub_title' => 'required|max:250',
         ]);
 
-        $st = Sectiontitle::where('language_id', $id)->first();
+        $en_st = Sectiontitle::where('language_id', 1)->first();
+        $ar_st = Sectiontitle::where('language_id', 2)->first();
 
         if($request->hasFile('w_c_us_image1')){
-            @unlink('assets/front/img/'. $st->w_c_us_image1);
+            @unlink('assets/front/img/'. $en_st->w_c_us_image1);
             $file = $request->file('w_c_us_image1');
             $extension = $file->getClientOriginalExtension();
             $w_c_us_image1 = time().rand().'.'.$extension;
             $file->move('assets/front/img/', $w_c_us_image1);
 
-            $st->w_c_us_image1 = $w_c_us_image1;
+            $en_st->w_c_us_image1 = $w_c_us_image1;
         }
 
         if($request->hasFile('w_c_us_image2')){
-            @unlink('assets/front/img/'. $st->w_c_us_image2);
+            @unlink('assets/front/img/'. $en_st->w_c_us_image2);
             $file = $request->file('w_c_us_image2');
             $extension = $file->getClientOriginalExtension();
             $w_c_us_image2 = time().rand().'.'.$extension;
             $file->move('assets/front/img/', $w_c_us_image2);
 
-            $st->w_c_us_image2 = $w_c_us_image2;
+            $en_st->w_c_us_image2 = $w_c_us_image2;
         }
 
-        $st->w_c_us_title = $request->w_c_us_title;
-        $st->w_c_us_sub_title = $request->w_c_us_sub_title;
-        $st->save();
+        $en_st->w_c_us_title = $request->w_c_us_title;
+        $en_st->w_c_us_sub_title = $request->w_c_us_sub_title;
+        $en_st->save();
+
+        $ar_st->w_c_us_title = $request->ar_w_c_us_title;
+        $ar_st->w_c_us_sub_title = $request->ar_w_c_us_sub_title;
+        $ar_st->save();
 
         $notification = array(
             'messege' => 'Why Choose Us Section Updated successfully!',
@@ -247,9 +301,10 @@ class SectionController extends Controller
 
         $lang = Language::where('code', $request->language)->first()->id;
      
-        $static = Sectiontitle::where('language_id', $lang)->orderBy('id', 'DESC')->first();
+        $english_static = Sectiontitle::where('language_id', 1)->orderBy('id', 'DESC')->first();
+        $arabic_static = Sectiontitle::where('language_id', 2)->orderBy('id', 'DESC')->first();
 
-        return view('admin.home.service.index', compact('static'));
+        return view('admin.home.service.index', compact('english_static','arabic_static'));
     }
 
     // Service Update
@@ -258,14 +313,21 @@ class SectionController extends Controller
         $request->validate([
             'service_title' => 'required|max:250',
             'service_sub_title' => 'required|max:250',
+            'ar_service_title' => 'required|max:250',
+            'ar_service_sub_title' => 'required|max:250',
         ]);
 
-        $st = Sectiontitle::where('language_id', $id)->first();
+        $st = Sectiontitle::where('language_id', 1)->first();
+        $ar_st = Sectiontitle::where('language_id', 2)->first();
 
 
         $st->service_title = $request->service_title;
         $st->service_sub_title = $request->service_sub_title;
         $st->save();
+
+        $ar_st->service_title = $request->ar_service_title;
+        $ar_st->service_sub_title = $request->ar_service_sub_title;
+        $ar_st->save();
 
         $notification = array(
             'messege' => 'Service Section Updated successfully!',
@@ -279,9 +341,10 @@ class SectionController extends Controller
 
         $lang = Language::where('code', $request->language)->first()->id;
      
-        $static = Sectiontitle::where('language_id', $lang)->orderBy('id', 'DESC')->first();
+        $english_static = Sectiontitle::where('language_id', 1)->orderBy('id', 'DESC')->first();
+        $arabic_static = Sectiontitle::where('language_id', 2)->orderBy('id', 'DESC')->first();
 
-        return view('admin.home.project.index', compact('static'));
+        return view('admin.home.project.index', compact('english_static','arabic_static'));
     }
 
     // Project Update
@@ -290,14 +353,21 @@ class SectionController extends Controller
         $request->validate([
             'portfolio_title' => 'required|max:250',
             'portfolio_sub_title' => 'required|max:250',
+            'ar_portfolio_title' => 'required|max:250',
+            'ar_portfolio_sub_title' => 'required|max:250',
         ]);
 
-        $st = Sectiontitle::where('language_id', $id)->first();
+        $st = Sectiontitle::where('language_id', 1)->first();
+        $ar_st = Sectiontitle::where('language_id', 2)->first();
 
 
         $st->portfolio_title = $request->portfolio_title;
         $st->portfolio_sub_title = $request->portfolio_sub_title;
         $st->save();
+
+        $ar_st->portfolio_title = $request->ar_portfolio_title;
+        $ar_st->portfolio_sub_title = $request->ar_portfolio_sub_title;
+        $ar_st->save();
 
         $notification = array(
             'messege' => 'Project Section Updated successfully!',
@@ -312,14 +382,21 @@ class SectionController extends Controller
         $request->validate([
             'team_title' => 'required|max:250',
             'team_sub_title' => 'required|max:250',
+            'ar_team_title' => 'required|max:250',
+            'ar_team_sub_title' => 'required|max:250',
         ]);
 
-        $st = Sectiontitle::where('language_id', $id)->first();
+        $st = Sectiontitle::where('language_id', 1)->first();
+        $ar_st = Sectiontitle::where('language_id', 2)->first();
 
 
         $st->team_title = $request->team_title;
         $st->team_sub_title = $request->team_sub_title;
         $st->save();
+
+        $ar_st->team_title = $request->ar_team_title;
+        $ar_st->team_sub_title = $request->ar_team_sub_title;
+        $ar_st->save();
 
         $notification = array(
             'messege' => 'Team Section Updated successfully!',
@@ -335,9 +412,10 @@ class SectionController extends Controller
         $request->language = isset($request->language)?$request->language:'en';
         $lang = Language::where('code', $request->language)->first()->id;
      
-        $static = Sectiontitle::where('language_id', $lang)->orderBy('id', 'DESC')->first();
+        $english_static = Sectiontitle::where('language_id', 1)->orderBy('id', 'DESC')->first();
+        $arabic_static = Sectiontitle::where('language_id', 2)->orderBy('id', 'DESC')->first();
 
-        return view('admin.home.contact.index', compact('static'));
+        return view('admin.home.contact.index', compact('english_static','arabic_static'));
     }
 
 
@@ -348,12 +426,16 @@ class SectionController extends Controller
             'contact_title' => 'required|max:250',
             'contact_sub_title' => 'required|max:250',
             'contact_form_title' => 'required|max:250',
+            'ar_contact_title' => 'required|max:250',
+            'ar_contact_sub_title' => 'required|max:250',
+            'ar_contact_form_title' => 'required|max:250',
             'contact_map' => 'required',
             'contact_form_image' => 'mimes:jpeg,jpg,png',
             'contact_section_bg_image' => 'mimes:jpeg,jpg,png',
         ]);
 
-        $st = Sectiontitle::where('language_id', $id)->first();
+        $st = Sectiontitle::where('language_id', 1)->first();
+        $ar_st = Sectiontitle::where('language_id', 2)->first();
 
         if($request->hasFile('contact_form_image')){
             @unlink('assets/front/img/'. $st->contact_form_image);
@@ -375,11 +457,16 @@ class SectionController extends Controller
             $st->contact_section_bg_image = $contact_section_bg_image;
         }
 
+        $st->contact_map = $request->contact_map;
         $st->contact_title = $request->contact_title;
         $st->contact_sub_title = $request->contact_sub_title;
         $st->contact_form_title = $request->contact_form_title;
-        $st->contact_map = $request->contact_map;
         $st->save();
+
+        $ar_st->contact_title = $request->ar_contact_title;
+        $ar_st->contact_sub_title = $request->ar_contact_sub_title;
+        $ar_st->contact_form_title = $request->ar_contact_form_title;
+        $ar_st->save();
 
         $notification = array(
             'messege' => 'Contact Section Updated successfully!',
@@ -395,12 +482,15 @@ class SectionController extends Controller
         $request->validate([
             'faq_title' => 'required|max:250',
             'faq_sub_title' => 'required|max:250',
+            'ar_faq_title' => 'required|max:250',
+            'ar_faq_sub_title' => 'required|max:250',
             'faq_bg_image' => 'mimes:jpeg,jpg,png',
             'faq_image1' => 'mimes:jpeg,jpg,png',
             'faq_image2' => 'mimes:jpeg,jpg,png',
         ]);
 
-        $st = Sectiontitle::where('language_id', $id)->first();
+        $st = Sectiontitle::where('language_id',1)->first();
+        $st_ar = Sectiontitle::where('language_id', 2)->first();
 
         if($request->hasFile('faq_bg_image')){
             @unlink('assets/front/img/'. $st->faq_bg_image);
@@ -435,6 +525,9 @@ class SectionController extends Controller
         $st->faq_title = $request->faq_title;
         $st->faq_sub_title = $request->faq_sub_title;
         $st->save();
+        $st_ar->faq_title = $request->ar_faq_title;
+        $st_ar->faq_sub_title = $request->ar_faq_sub_title;
+        $st_ar->save();
 
         $notification = array(
             'messege' => 'FAQ Section Updated successfully!',
@@ -449,9 +542,10 @@ class SectionController extends Controller
 
         $lang = Language::where('code', $request->language)->first()->id;
         
-        $static = Sectiontitle::where('language_id', $lang)->orderBy('id', 'DESC')->first();
+        $english_static = Sectiontitle::where('language_id', 1)->orderBy('id', 'DESC')->first();
+        $arabic_static = Sectiontitle::where('language_id', 2)->orderBy('id', 'DESC')->first();
 
-        return view('admin.home.blog.index', compact('static'));
+        return view('admin.home.blog.index', compact('english_static','arabic_static'));
     }
 
     // Blog Section Update
@@ -460,14 +554,21 @@ class SectionController extends Controller
         $request->validate([
             'blog_title' => 'required|max:250',
             'blog_sub_title' => 'required|max:250',
+            'ar_blog_title' => 'required|max:250',
+            'ar_blog_sub_title' => 'required|max:250',
         ]);
 
-        $st = Sectiontitle::where('language_id', $id)->first();
+        $st = Sectiontitle::where('language_id', 1)->first();
+        $ar_st = Sectiontitle::where('language_id', 2)->first();
 
 
         $st->blog_title = $request->blog_title;
         $st->blog_sub_title = $request->blog_sub_title;
         $st->save();
+
+        $ar_st->blog_title = $request->ar_blog_title;
+        $ar_st->blog_sub_title = $request->ar_blog_sub_title;
+        $ar_st->save();
 
         $notification = array(
             'messege' => 'Blog Section Updated successfully!',
@@ -482,9 +583,10 @@ class SectionController extends Controller
 
         $lang = Language::where('code', $request->language)->first()->id;
         
-        $static = Sectiontitle::where('language_id', $lang)->orderBy('id', 'DESC')->first();
+        $english_static = Sectiontitle::where('language_id', 1)->orderBy('id', 'DESC')->first();
+        $arabic_static = Sectiontitle::where('language_id', 2)->orderBy('id', 'DESC')->first();
 
-        return view('admin.home.meet.index', compact('static'));
+        return view('admin.home.meet.index', compact('english_static','arabic_static'));
     }
 
     // Meet us section update
@@ -494,10 +596,14 @@ class SectionController extends Controller
             'meeet_us_text' => 'required|max:250',
             'meeet_us_button_text' => 'required|max:250',
             'meeet_us_button_link' => 'required|max:250',
+            'ar_meeet_us_text' => 'required|max:250',
+            'ar_meeet_us_button_text' => 'required|max:250',
+            'ar_meeet_us_button_link' => 'required|max:250',
             'meeet_us_bg_image' => 'mimes:jpeg,jpg,png',
         ]);
 
-        $st = Sectiontitle::where('language_id', $id)->first();
+        $st = Sectiontitle::where('language_id', 1)->first();
+        $ar_st = Sectiontitle::where('language_id', 2)->first();
 
         if($request->hasFile('meeet_us_bg_image')){
             @unlink('assets/front/img/'. $st->meeet_us_bg_image);
@@ -513,6 +619,11 @@ class SectionController extends Controller
         $st->meeet_us_button_text = $request->meeet_us_button_text;
         $st->meeet_us_button_link = $request->meeet_us_button_link;
         $st->save();
+
+        $ar_st->meeet_us_text = $request->ar_meeet_us_text;
+        $ar_st->meeet_us_button_text = $request->ar_meeet_us_button_text;
+        $ar_st->meeet_us_button_link = $request->ar_meeet_us_button_link;
+        $ar_st->save();
 
         $notification = array(
             'messege' => 'Meet With Us Section Updated successfully!',

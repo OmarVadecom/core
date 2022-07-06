@@ -17,19 +17,19 @@
         @if(\Illuminate\Support\Str::contains(\Illuminate\Support\Facades\Route::getCurrentRoute()->getActionName(), 'edit'))
 
             <div class="tab-content" id="nav-tabContent">
+                <div class="form-group row my-3">
+                    <label class="col-sm-2 control-label">{{ __('Image') }}</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="mod[{{ $randomKey }}][section_with_icon][class_icon]"
+                            placeholder="{{ __('Image') }}" value="{{  $moduleAttributes['class_icon'] }}"/>
+                        @if ($errors->has('class_icon'))
+                            <p class="text-danger"> {{ $errors->first('class_icon') }} </p>
+                        @endif
+                    </div>
+                </div>
                 <div class="tab-pane fade show active" id="nav-en-small-icon"  role="tabpanel" aria-labelledby="nav-en-small-icon-tab">
                     {{--english--}}
                     <div class="form-group row my-3">
-                        <label class="col-sm-2 control-label">{{ __('Image') }}</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="mod[{{ $randomKey }}][section_with_icon][class_icon]"
-                                placeholder="{{ __('Image') }}" value="{{  $moduleAttributes['class_icon'] }}"/>
-                            @if ($errors->has('class_icon'))
-                                <p class="text-danger"> {{ $errors->first('class_icon') }} </p>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="form-group row">
                         <label class="col-sm-2 control-label">{{ __('Title') }}</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="mod[{{ $randomKey }}][section_with_icon][heading]"
@@ -64,16 +64,6 @@
                 <div class="tab-pane fade" id="nav-ar-small-icon" role="tabpanel" aria-labelledby="nav-ar-small-icon-tab">
                     {{--arabic--}}
                     <div class="form-group row my-3">
-                        <label class="col-sm-2 control-label">{{ __('الصورة') }}</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="mod[{{ $randomKey }}][section_with_icon][ar_class_icon]"
-                                placeholder="{{ __('الصورة') }}" value="{{  $moduleAttributes['ar_class_icon'] }}"/>
-                            @if ($errors->has('ar_class_icon'))
-                                <p class="text-danger"> {{ $errors->first('ar_class_icon') }} </p>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="form-group row">
                         <label class="col-sm-2 control-label">{{ __('العنوان') }}</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="mod[{{ $randomKey }}][section_with_icon][ar_heading]"
@@ -108,20 +98,20 @@
         @else
 
         <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="nav-en-small-icon"  role="tabpanel" aria-labelledby="nav-en-small-icon-tab">
-            {{--english--}}
-                <div class="form-group row my-3">
-                    <label class="col-sm-2 control-label">{{ __('Image') }}</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control"
-                            name="mod[{{ $randNumModule }}][section_with_icon][class_icon]"
-                            placeholder="{{ __('Image') }}"/>
-                        @if ($errors->has('class_icon'))
-                            <p class="text-danger"> {{ $errors->first('class_icon') }} </p>
-                        @endif
-                    </div>
+            <div class="form-group row my-3">
+                <label class="col-sm-2 control-label">{{ __('Image') }}</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control"
+                        name="mod[{{ $randNumModule }}][section_with_icon][class_icon]"
+                        placeholder="{{ __('Image') }}"/>
+                    @if ($errors->has('class_icon'))
+                        <p class="text-danger"> {{ $errors->first('class_icon') }} </p>
+                    @endif
                 </div>
-                <div class="form-group row">
+            </div>
+            <div class="tab-pane fade show active" id="nav-en-small-icon"  role="tabpanel" aria-labelledby="nav-en-small-icon-tab">
+                {{--english--}}
+                <div class="form-group row  my-3">
                     <label class="col-sm-2 control-label">{{ __('Title') }}</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" name="mod[{{ $randNumModule }}][section_with_icon][heading]"
@@ -155,19 +145,8 @@
             </div>
 
             <div class="tab-pane fade" id="nav-ar-small-icon" role="tabpanel" aria-labelledby="nav-ar-small-icon-tab">
-              {{--arabic--}}
-                <div class="form-group row my-3">
-                    <label class="col-sm-2 control-label">{{ __('الصورة') }}</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control"
-                            name="mod[{{ $randNumModule }}][section_with_icon][ar_class_icon]"
-                            placeholder="{{ __('Image') }}"/>
-                        @if ($errors->has('ar_class_icon'))
-                            <p class="text-danger"> {{ $errors->first('ar_class_icon') }} </p>
-                        @endif
-                    </div>
-                </div>
-                <div class="form-group row">
+                {{--arabic--}}
+                <div class="form-group row  my-3">
                     <label class="col-sm-2 control-label">{{ __('العنوان') }}</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" name="mod[{{ $randNumModule }}][section_with_icon][ar_heading]"

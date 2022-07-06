@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 
 class HeroController extends Controller
 {
+    
     public $lang;
     public function __construct()
     {
@@ -30,14 +31,14 @@ class HeroController extends Controller
 
      
         $request->validate([
-            'hero_title' => 'required|max:250',
-            'hero_sub_title' => 'required|max:250',
-            'hero_text' => 'required|max:250',
-            'ar_hero_title' => 'required|max:250',
+            'hero_title'        => 'required|max:250',
+            'hero_sub_title'    => 'required|max:250',
+            'hero_text'         => 'required|max:250',
+            'ar_hero_title'     => 'required|max:250',
             'ar_hero_sub_title' => 'required|max:250',
-            'ar_hero_text' => 'required|max:250',
-            'hero_bg_image' => 'mimes:jpeg,jpg,png',
-            'hero_image' => 'mimes:jpeg,jpg,png',
+            'ar_hero_text'      => 'required|max:250',
+            'hero_bg_image'     => 'mimes:jpeg,jpg,png',
+            'hero_image'        => 'mimes:jpeg,jpg,png',
         ]);
 
       
@@ -70,13 +71,13 @@ class HeroController extends Controller
         }
 
         
-        $en_st->hero_title = $request->hero_title;
-        $en_st->hero_sub_title = $request->hero_sub_title;
-        $en_st->hero_text = $request->hero_text;
-        $en_st->hero_f_icon1 = $request->hero_f_icon1;
-        $en_st->hero_f_text1 = $request->hero_f_text1;
-        $en_st->hero_f_icon2 = $request->hero_f_icon2;
-        $en_st->hero_f_text2 = $request->hero_f_text2;
+        $en_st->hero_title      = $request->hero_title;
+        $en_st->hero_sub_title  = $request->hero_sub_title;
+        $en_st->hero_text       = $request->hero_text;
+        $en_st->hero_f_icon1    = $request->hero_f_icon1;
+        $en_st->hero_f_text1    = $request->hero_f_text1;
+        $en_st->hero_f_icon2    = $request->hero_f_icon2;
+        $en_st->hero_f_text2    = $request->hero_f_text2;
         $en_st->save();
 
         $notification = array(

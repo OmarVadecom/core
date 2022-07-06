@@ -96,7 +96,7 @@
                                                         @endforeach
                                                     </select>
                                                 </div>
-                                                <a href="{{ route('dynamic-page-categories.create'). '?language=' . $currentLang->code }}"
+                                                <a href="{{ route('admin.package.add'). '?language=' . $currentLang->code }}"
                                                    class="btn btn-primary btn-sm">
                                                     <i class="fas fa-plus"></i> {{ __('Add') }}
                                                 </a>

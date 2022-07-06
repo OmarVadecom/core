@@ -1,8 +1,10 @@
+
 <div class="card">
     @php
         $randNumModule = \Illuminate\Support\Str::random(10);
     @endphp
     <div class="card-header toggle-open-close-module">
+      
         <i class="fas fa-times icon-delete"></i>
         Text Content
         <i class="minimize-module fas fa-chevron-down"></i>
@@ -18,7 +20,7 @@
 
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-en-text-content"  role="tabpanel" aria-labelledby="nav-en-text-content-tab">
-            {{--english--}}
+                    {{--english--}}
                     <div class="form-group row my-3">
                         <label class="col-sm-2 control-label">{{ __('Title') }}</label>
                         <div class="col-sm-10">
@@ -39,8 +41,8 @@
                         <div class="col-sm-10">
                             <textarea
                                 name="mod[{{ $randomKey }}][text_editor][text]"
-                                
-                                class="form-control summernote"
+                                id="editor1"
+                                class="form-control "
                                 placeholder="{{ __('Text') }}"
                                 rows="3"
                             >{{ isset($moduleAttributes['text']) ? $moduleAttributes['text'] : '' }}</textarea>
@@ -120,7 +122,7 @@
                 </div>
 
                 <div class="tab-pane fade" id="nav-ar-text-content" role="tabpanel" aria-labelledby="nav-ar-text-content-tab">
-            {{--arabic--}}
+                    {{--arabic--}}
                     <div class="form-group row my-3">
                         <label class="col-sm-2 control-label">{{ __('العنوان') }}</label>
                         <div class="col-sm-10">
@@ -130,6 +132,7 @@
                                 placeholder="{{ __('العنوان') }}"
                                 class="form-control"
                                 type="text"
+
                             />
                             @if ($errors->has('ar_title'))
                                 <p class="text-danger"> {{ $errors->first('ar_title') }} </p>
@@ -141,8 +144,8 @@
                         <div class="col-sm-10">
                             <textarea
                                 name="mod[{{ $randomKey }}][text_editor][ar_text]"
-                                
-                                class="form-control summernote"
+                                id="editor2"
+                                class="form-control"
                                 placeholder="{{ __('النص') }}"
                                 rows="3"
                             >{{ isset($moduleAttributes['ar_text']) ? $moduleAttributes['ar_text'] : '' }}</textarea>
@@ -162,7 +165,7 @@
                                     <div class="col-md-6">
                                         <div class="red-button-text">
                                             <input
-                                                name="mod[{{ $randomKey }}][text_editor][red_button][text]"
+                                                name="mod[{{ $randomKey }}][text_editor][red_button][ar_text]"
                                                 value="{{  isset($moduleAttributes['red_button']['ar_text']) ? $moduleAttributes['red_button']['ar_text'] : '' }}"
                                                 placeholder="Red Button Text"
                                                 class="form-control"
@@ -207,8 +210,8 @@
                                     <div class="col-md-6">
                                         <div class="yellow-button-url">
                                             <input
-                                                name="mod[{{ $randomKey }}][text_editor][yellow_button][url]"
-                                                value="{{  isset($moduleAttributes['yellow_button']['url']) ? $moduleAttributes['yellow_button']['url'] : '' }}"
+                                                name="mod[{{ $randomKey }}][text_editor][yellow_button][ar_url]"
+                                                value="{{  isset($moduleAttributes['yellow_button']['ar_url']) ? $moduleAttributes['yellow_button']['ar_url'] : '' }}"
                                                 placeholder="Yellow Button Url"
                                                 class="form-control"
                                                 type="text"
@@ -246,9 +249,10 @@
                         <div class="col-sm-10">
                             <textarea
                                 name="mod[{{ $randNumModule }}][text_editor][text]"
-                                class="form-control summernote"
+                                class="form-control"
                                 placeholder="{{ __('Text') }}"
                                 rows="3"
+                                id="editor1"
                             ></textarea>
                             @if ($errors->has('text'))
                                 <p class="text-danger"> {{ $errors->first('text') }} </p>
@@ -342,9 +346,10 @@
                         <div class="col-sm-10">
                             <textarea
                                 name="mod[{{ $randNumModule }}][text_editor][ar_text]"
-                                class="form-control summernote"
+                                class="form-control"
                                 placeholder="{{ __('النص') }}"
                                 rows="3"
+                                id="editor2"
                             ></textarea>
                             @if ($errors->has('ar_text'))
                                 <p class="text-danger"> {{ $errors->first('ar_text') }} </p>
@@ -421,3 +426,7 @@
     </div>
 </div>
 <div class="clearfix"></div>
+<script>
+    CKEDITOR.replace( 'editor1' );
+    CKEDITOR.replace( 'editor2' );
+</script>

@@ -182,8 +182,6 @@ return [
         Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
         Anand\LaravelPaytmWallet\PaytmWalletServiceProvider::class,
         Unicodeveloper\Paystack\PaystackServiceProvider::class,
-        UniSharp\LaravelFilemanager\LaravelFilemanagerServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class,
         Alexusmai\LaravelFileManager\FileManagerServiceProvider::class,
 
 

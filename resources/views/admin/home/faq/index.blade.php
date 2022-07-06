@@ -156,7 +156,7 @@
                     <div class="card card-primary card-outline">
                         <div class="card-header">
                             <h3 class="card-title mt-1">{{ __('Section Content') }}</h3>
-                            <div class="card-tools">
+                            {{-- <div class="card-tools">
                                 <div class="d-inline-block mr-4">
                                     <select class="form-control lang languageSelect"
                                             data="{{url()->current() . '?language='}}">
@@ -168,123 +168,171 @@
                                         @endforeach
                                     </select>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="card-body">
+                            <nav>
+                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                    <a class="col-md-6 nav-item nav-link active" id="nav-en-faq-tab" data-toggle="tab" href="#nav-en-faq" role="tab" aria-controls="nav-en-faq" aria-selected="true">English</a>
+                                    <a class="col-md-6 nav-item nav-link" id="nav-ar-faq-tab" data-toggle="tab" href="#nav-ar-faq" role="tab" aria-controls="nav-ar-faq" aria-selected="false">عربي</a>
+                                </div>
+                            </nav>
                             <form
-                                action="{{ route('admin.faq_section_update',  $static->language_id) }}"
-                                enctype="multipart/form-data"
-                                class="form-horizontal"
-                                method="POST"
-                            >
+                                action="{{ route('admin.faq_section_update',  $static->language_id) }}" enctype="multipart/form-data" class="form-horizontal" method="POST" >
                                 @csrf
-                                <div class="form-group row">
-                                    <label class="col-sm-2 control-label">{{ __('BG Image') }}<span class="text-danger">*</span></label>
-                                    <div class="col-sm-10">
-                                        <img
-                                            src="{{ asset('assets/front/img/'.$static->faq_bg_image) }}"
-                                            class="mw-400 mb-3 img-demo show-img"
-                                            alt=""
-                                        />
-                                        <div class="custom-file">
-                                            <label class="custom-file-label" for="faq_bg_image">{{ __('Choose New Image') }}</label>
-                                            <input type="file" class="custom-file-input up-img" name="faq_bg_image" id="faq_bg_image" />
+                                <div class="tab-content" id="nav-tabContent">
+                                    <div class="form-group row my-3">
+                                        <label class="col-sm-2 control-label">{{ __('BG Image') }}<span class="text-danger">*</span></label>
+                                        <div class="col-sm-10">
+                                            <img
+                                                src="{{ asset('assets/front/img/'.$static->faq_bg_image) }}"
+                                                class="mw-400 mb-3 img-demo show-img"
+                                                alt="" width="150px" height="150px"
+                                            />
+                                            <div class="custom-file">
+                                                <label class="custom-file-label" for="faq_bg_image">{{ __('Choose New Image') }}</label>
+                                                <input type="file" class="custom-file-input up-img" name="faq_bg_image" id="faq_bg_image" />
+                                            </div>
+                                            <p class="help-block text-info">
+                                                {{ __('Upload 1920X900 (Pixel) Size image for best quality. Only jpg, jpeg, png image is allowed.') }}
+                                            </p>
+                                            @if ($errors->has('faq_bg_image'))
+                                                <p class="text-danger"> {{ $errors->first('faq_bg_image') }} </p>
+                                            @endif
                                         </div>
-                                        <p class="help-block text-info">
-                                            {{ __('Upload 1920X900 (Pixel) Size image for best quality. Only jpg, jpeg, png image is allowed.') }}
-                                        </p>
-                                        @if ($errors->has('faq_bg_image'))
-                                            <p class="text-danger"> {{ $errors->first('faq_bg_image') }} </p>
-                                        @endif
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 control-label">
-                                        {{ __('Image1') }}
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-sm-10">
-                                        <img
-                                            src="{{ asset('assets/front/img/'.$static->faq_image1) }}"
-                                            class="mw-400 mb-3 img-demo show-img"
-                                            alt=""
-                                        />
-                                        <div class="custom-file">
-                                            <label class="custom-file-label" for="faq_image1">{{ __('Choose New Image') }}</label>
-                                            <input type="file" class="custom-file-input up-img" name="faq_image1" id="faq_image1" />
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 control-label">
+                                            {{ __('Image1') }}
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-sm-10">
+                                            <img
+                                                src="{{ asset('assets/front/img/'.$static->faq_image1) }}"
+                                                class="mw-400 mb-3 img-demo show-img"
+                                                alt=""
+                                                width="150px" height="150px"
+                                            />
+                                            <div class="custom-file">
+                                                <label class="custom-file-label" for="faq_image1">{{ __('Choose New Image') }}</label>
+                                                <input type="file" class="custom-file-input up-img" name="faq_image1" id="faq_image1" />
+                                            </div>
+                                            <p class="help-block text-info">
+                                                {{ __('Upload 440X320 (Pixel) Size image for best quality. Only jpg, jpeg, png image is allowed.') }}
+                                            </p>
+                                            @if ($errors->has('faq_image1'))
+                                                <p class="text-danger"> {{ $errors->first('faq_image1') }} </p>
+                                            @endif
                                         </div>
-                                        <p class="help-block text-info">
-                                            {{ __('Upload 440X320 (Pixel) Size image for best quality. Only jpg, jpeg, png image is allowed.') }}
-                                        </p>
-                                        @if ($errors->has('faq_image1'))
-                                            <p class="text-danger"> {{ $errors->first('faq_image1') }} </p>
-                                        @endif
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 control-label">
-                                        {{ __('Image2') }}
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-sm-10">
-                                        <img
-                                            src="{{ asset('assets/front/img/'.$static->faq_image2) }}"
-                                            class="mw-400 mb-3 img-demo show-img"
-                                            alt=""
-                                        />
-                                        <div class="custom-file">
-                                            <label class="custom-file-label" for="faq_image2">{{ __('Choose New Image') }}</label>
-                                            <input type="file" class="custom-file-input up-img" name="faq_image2" id="faq_image2" />
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 control-label">
+                                            {{ __('Image2') }}
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-sm-10">
+                                            <img
+                                                src="{{ asset('assets/front/img/'.$static->faq_image2) }}"
+                                                class="mw-400 mb-3 img-demo show-img"
+                                                alt=""
+                                                width="150px" height="150px"
+                                            />
+                                            <div class="custom-file">
+                                                <label class="custom-file-label" for="faq_image2">{{ __('Choose New Image') }}</label>
+                                                <input type="file" class="custom-file-input up-img" name="faq_image2" id="faq_image2" />
+                                            </div>
+                                            <p class="help-block text-info">
+                                                {{ __('Upload 431X524 (Pixel) Size image for best quality. Only jpg, jpeg, png image is allowed.') }}
+                                            </p>
+                                            @if ($errors->has('faq_image2'))
+                                                <p class="text-danger"> {{ $errors->first('faq_image2') }} </p>
+                                            @endif
                                         </div>
-                                        <p class="help-block text-info">
-                                            {{ __('Upload 431X524 (Pixel) Size image for best quality. Only jpg, jpeg, png image is allowed.') }}
-                                        </p>
-                                        @if ($errors->has('faq_image2'))
-                                            <p class="text-danger"> {{ $errors->first('faq_image2') }} </p>
-                                        @endif
+                                    </div>
+                                    <div class="col-md-12 tab-pane fade show active" id="nav-en-faq" role="tabpanel" aria-labelledby="nav-en-faq-tab" >
+                                        {{--english--}}
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 control-label">
+                                                {{ __('Title') }}
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <input
+                                                    value="{{ $static->faq_title }}"
+                                                    placeholder="{{ __('Title') }}"
+                                                    class="form-control"
+                                                    name="faq_title"
+                                                    type="text"
+                                                />
+                                                @if ($errors->has('faq_title'))
+                                                    <p class="text-danger"> {{ $errors->first('faq_title') }} </p>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 control-label">
+                                                {{ __('Subtitle') }}
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <input
+                                                    value="{{ $static->faq_sub_title }}"
+                                                    placeholder="{{ __('Subtitle') }}"
+                                                    class="form-control"
+                                                    name="faq_sub_title"
+                                                    type="text"
+                                                />
+                                                @if ($errors->has('faq_sub_title'))
+                                                    <p class="text-danger"> {{ $errors->first('faq_sub_title') }} </p>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 tab-pane fade" id="nav-ar-faq" role="tabpanel" aria-labelledby="nav-ar-faq-tab">
+                                        {{--arabic--}}
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 control-label">
+                                                {{ __('العنوان') }}
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <input
+                                                    value="{{ $static_ar->faq_title }}"
+                                                    placeholder="{{ __('Title') }}"
+                                                    class="form-control"
+                                                    name="ar_faq_title"
+                                                    type="text"
+                                                />
+                                                @if ($errors->has('ar_faq_title'))
+                                                    <p class="text-danger"> {{ $errors->first('ar_faq_title') }} </p>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 control-label">
+                                                {{ __('العنوان الفرعي') }}
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <input
+                                                    value="{{ $static_ar->faq_sub_title }}"
+                                                    placeholder="{{ __('Subtitle') }}"
+                                                    class="form-control"
+                                                    name="ar_faq_sub_title"
+                                                    type="text"
+                                                />
+                                                @if ($errors->has('ar_faq_sub_title'))
+                                                    <p class="text-danger"> {{ $errors->first('ar_faq_sub_title') }} </p>
+                                                @endif
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 control-label">
-                                        {{ __('Title') }}
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-sm-10">
-                                        <input
-                                            value="{{ $static->faq_title }}"
-                                            placeholder="{{ __('Title') }}"
-                                            class="form-control"
-                                            name="faq_title"
-                                            type="text"
-                                        />
-                                        @if ($errors->has('faq_title'))
-                                            <p class="text-danger"> {{ $errors->first('faq_title') }} </p>
-                                        @endif
+                                    <div class="form-group row">
+                                        <div class="offset-sm-2 col-sm-10">
+                                            <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 control-label">
-                                        {{ __('Subtitle') }}
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-sm-10">
-                                        <input
-                                            value="{{ $static->faq_sub_title }}"
-                                            placeholder="{{ __('Subtitle') }}"
-                                            class="form-control"
-                                            name="faq_sub_title"
-                                            type="text"
-                                        />
-                                        @if ($errors->has('faq_sub_title'))
-                                            <p class="text-danger"> {{ $errors->first('faq_sub_title') }} </p>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="offset-sm-2 col-sm-10">
-                                        <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
-                                    </div>
-                                </div>
                             </form>
                         </div>
                     </div>

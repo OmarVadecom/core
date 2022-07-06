@@ -32,85 +32,101 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                    <form class="form-horizontal" action="{{ route('admin.client.update', $client->id) }}" method="POST" enctype="multipart/form-data">
+                                <nav>
+                                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                        <a class="col-md-6 nav-item nav-link active" id="nav-en-client-tab" data-toggle="tab" href="#nav-en-client" role="tab" aria-controls="nav-en-client" aria-selected="true">English</a>
+                                        <a class="col-md-6 nav-item nav-link" id="nav-ar-client-tab" data-toggle="tab" href="#nav-ar-client" role="tab" aria-controls="nav-ar-client" aria-selected="false">عربي</a>
+                                    </div>
+                                </nav>
+                                <form class="form-horizontal" action="{{ route('admin.client.update', $client->id) }}" method="POST" enctype="multipart/form-data">
                                         @csrf
-                                        <div class="form-group row">
-                                            <label class="col-sm-2 control-label">{{ __('Language') }}<span class="text-danger">*</span></label>
-            
-                                            <div class="col-sm-10">
-                                                <select class="form-control lang" name="language_id">
-                                                    @foreach($langs as $lang)
-                                                        <option value="{{$lang->id}}" {{ $client->language_id == $lang->id ? 'selected' : '' }} >{{$lang->name}}</option>
-                                                    @endforeach
-                                                </select>
-                                                @if ($errors->has('language_id'))
-                                                    <p class="text-danger"> {{ $errors->first('language_id') }} </p>
-                                                @endif
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-2 control-label">{{ __('Image') }}<span class="text-danger">*</span></label>
-            
-                                            <div class="col-sm-10">
-                                                <img class="w-100 mb-3 img-demo show-img" src="{{ asset('assets/front/img/client/'.$client->image) }}" alt="">
-                                                <div class="custom-file">
-                                                    <label class="custom-file-label" for="image">{{ __('Choose New Image') }}</label>
-                                                    <input type="file" class="custom-file-input up-img" name="image" id="image">
+
+                                        <div class="tab-content" id="nav-tabContent">
+                                            <div class="form-group row my-3">
+                                                <label class="col-sm-2 control-label">{{ __('Image') }}<span class="text-danger">*</span></label>
+                
+                                                <div class="col-sm-10">
+                                                    <img class="w-100 mb-3 img-demo show-img" src="{{ asset('assets/front/img/client/'.$client->image) }}" alt="" width="150px" height="150px">
+                                                    <div class="custom-file">
+                                                        <label class="custom-file-label" for="image">{{ __('Choose New Image') }}</label>
+                                                        <input type="file" class="custom-file-input up-img" name="image" id="image">
+                                                    </div>
+                                                    <p class="help-block text-info">{{ __('Upload 70X70 (Pixel) Size image for best quality.
+                                                        Only jpg, jpeg, png image is allowed.') }}
+                                                    </p>
+                                                    @if ($errors->has('image'))
+                                                        <p class="text-danger"> {{ $errors->first('image') }} </p>
+                                                    @endif
                                                 </div>
-                                                <p class="help-block text-info">{{ __('Upload 70X70 (Pixel) Size image for best quality.
-                                                    Only jpg, jpeg, png image is allowed.') }}
-                                                </p>
-                                                @if ($errors->has('image'))
-                                                    <p class="text-danger"> {{ $errors->first('image') }} </p>
+                                            </div>
+                                            <div class="col-md-12 tab-pane fade show active" id="nav-en-client" role="tabpanel" aria-labelledby="nav-en-client-tab" >
+                                                {{--english--}}
+                                                <div class="form-group row">
+                                                    <label for="name" class="col-sm-2 control-label">{{ __('Name') }}<span class="text-danger">*</span></label>
+                    
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" name="name" placeholder="{{ __('Name') }}" value="{{ $client_en->name }}">
+                                                        @if ($errors->has('name'))
+                                                        <p class="text-danger"> {{ $errors->first('name') }} </p>
+                                                    @endif
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="value" class="col-sm-2 control-label">{{ __('Link') }}<span class="text-danger">*</span></label>
+                    
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" name="link" placeholder="{{ __('Link') }}" value="{{ $client_en->link }}">
+                                                        @if ($errors->has('link'))
+                                                        <p class="text-danger"> {{ $errors->first('link') }} </p>
+                                                    @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 tab-pane fade" id="nav-ar-client" role="tabpanel" aria-labelledby="nav-ar-client-tab">
+                                                {{--arabic--}}
+                                                <div class="form-group row">
+                                                    <label for="name" class="col-sm-2 control-label">{{ __('الاسم') }}<span class="text-danger">*</span></label>
+                    
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" name="ar_name" placeholder="{{ __('Name') }}" value="{{ $client_ar->name }}">
+                                                        @if ($errors->has('ar_name'))
+                                                        <p class="text-danger"> {{ $errors->first('ar_name') }} </p>
+                                                    @endif
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="value" class="col-sm-2 control-label">{{ __('الرابط') }}<span class="text-danger">*</span></label>
+                    
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" name="ar_link" placeholder="{{ __('Link') }}" value="{{ $client_ar->link }}">
+                                                        @if ($errors->has('ar_link'))
+                                                        <p class="text-danger"> {{ $errors->first('ar_link') }} </p>
+                                                    @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="value" class="col-sm-2 control-label">{{ __('Order') }}<span class="text-danger">*</span></label>
+                
+                                                <div class="col-sm-10">
+                                                    <input type="number" class="form-control" name="serial_number" placeholder="{{ __('Order') }}" value="{{ $client->serial_number }}">
+                                                    @if ($errors->has('serial_number'))
+                                                    <p class="text-danger"> {{ $errors->first('serial_number') }} </p>
                                                 @endif
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="name" class="col-sm-2 control-label">{{ __('Name') }}<span class="text-danger">*</span></label>
-            
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" name="name" placeholder="{{ __('Name') }}" value="{{ $client->name }}">
-                                                @if ($errors->has('name'))
-                                                <p class="text-danger"> {{ $errors->first('name') }} </p>
-                                            @endif
-                                            </div>
-                                        </div>
-            
-                                        <div class="form-group row">
-                                            <label for="value" class="col-sm-2 control-label">{{ __('Link') }}<span class="text-danger">*</span></label>
-            
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" name="link" placeholder="{{ __('Link') }}" value="{{ $client->link }}">
-                                                @if ($errors->has('link'))
-                                                <p class="text-danger"> {{ $errors->first('link') }} </p>
-                                            @endif
-                                            </div>
-                                        </div>
-
-                                      
-
-
-                                        <div class="form-group row">
-                                            <label for="value" class="col-sm-2 control-label">{{ __('Order') }}<span class="text-danger">*</span></label>
-            
-                                            <div class="col-sm-10">
-                                                <input type="number" class="form-control" name="serial_number" placeholder="{{ __('Order') }}" value="{{ $client->serial_number }}">
-                                                @if ($errors->has('serial_number'))
-                                                <p class="text-danger"> {{ $errors->first('serial_number') }} </p>
-                                            @endif
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="status" class="col-sm-2 control-label">{{ __('Status') }}<span class="text-danger">*</span></label>
-    
-                                            <div class="col-sm-10">
-                                                <select class="form-control" name="status">
-                                                   <option value="0" {{ $client->status == '0' ? 'selected' : '' }}>{{ __('Unpublish') }}</option>
-                                                   <option value="1" {{ $client->status == '1' ? 'selected' : '' }}>{{ __('Publish') }}</option>
-                                                  </select>
-                                                @if ($errors->has('status'))
-                                                    <p class="text-danger"> {{ $errors->first('status') }} </p>
-                                                @endif
+                                            <div class="form-group row">
+                                                <label for="status" class="col-sm-2 control-label">{{ __('Status') }}<span class="text-danger">*</span></label>
+        
+                                                <div class="col-sm-10">
+                                                    <select class="form-control" name="status">
+                                                    <option value="0" {{ $client->status == '0' ? 'selected' : '' }}>{{ __('Unpublish') }}</option>
+                                                    <option value="1" {{ $client->status == '1' ? 'selected' : '' }}>{{ __('Publish') }}</option>
+                                                    </select>
+                                                    @if ($errors->has('status'))
+                                                        <p class="text-danger"> {{ $errors->first('status') }} </p>
+                                                    @endif
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -119,7 +135,7 @@
                                             </div>
                                         </div>
                 
-                                    </form>
+                                </form>
                                 
                             </div>
                             <!-- /.card-body -->

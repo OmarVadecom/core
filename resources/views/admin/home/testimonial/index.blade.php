@@ -26,7 +26,7 @@
                     <div class="card card-primary card-outline">
                         <div class="card-header">
                             <h3 class="card-title mt-1">{{ __('Testimonial Content') }}</h3>
-                            <div class="card-tools">
+                            {{-- <div class="card-tools">
                                 <div class="d-inline-block mr-4">
                                     <select class="form-control lang languageSelect" data="{{url()->current() . '?language='}}">
                                         @foreach($langs as $lang)
@@ -37,51 +37,96 @@
                                         @endforeach
                                     </select>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="card-body">
+                            <nav>
+                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                    <a class="col-md-6 nav-item nav-link active" id="nav-en-testimonial-tab" data-toggle="tab" href="#nav-en-testimonial" role="tab" aria-controls="nav-en-testimonial" aria-selected="true">English</a>
+                                    <a class="col-md-6 nav-item nav-link" id="nav-ar-testimonial-tab" data-toggle="tab" href="#nav-ar-testimonial" role="tab" aria-controls="nav-ar-testimonial" aria-selected="false">عربي</a>
+                                </div>
+                            </nav>
                             <form
-                                action="{{ route('admin.testimonialcontent.update',  $saectiontitle->language_id) }}"
-                                enctype="multipart/form-data"
-                                class="form-horizontal"
-                                method="POST"
-                            >
+                                action="{{ route('admin.testimonialcontent.update',  $english_saectiontitle->language_id) }}" enctype="multipart/form-data" class="form-horizontal" method="POST">
                                 @csrf
 
-                                <div class="form-group row">
-                                    <label class="col-sm-2 control-label">
-                                        {{ __('Testimonial Title') }}
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-sm-10">
-                                        <input
-                                            value="{{ $saectiontitle->testimonial_title }}"
-                                            placeholder="{{ __('Testimonial Title') }}"
-                                            name="testimonial_title"
-                                            class="form-control"
-                                            type="text"
-                                        >
-                                        @if ($errors->has('testimonial_title'))
-                                            <p class="text-danger"> {{ $errors->first('testimonial_title') }} </p>
-                                        @endif
+                                <div class="tab-content" id="nav-tabContent">
+                                    <div class="col-md-12 tab-pane fade show active" id="nav-en-testimonial" role="tabpanel" aria-labelledby="nav-en-testimonial-tab" >
+                                        <div class="form-group row my-3">
+                                            <label class="col-sm-2 control-label">
+                                                {{ __('Testimonial Title') }}
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <input
+                                                    value="{{ $english_saectiontitle->testimonial_title }}"
+                                                    placeholder="{{ __('Testimonial Title') }}"
+                                                    name="testimonial_title"
+                                                    class="form-control"
+                                                    type="text"
+                                                >
+                                                @if ($errors->has('testimonial_title'))
+                                                    <p class="text-danger"> {{ $errors->first('testimonial_title') }} </p>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 control-label">
+                                                {{ __('Testimonial Sub-title') }}
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <input
+                                                    value="{{ $english_saectiontitle->testimonial_subtitle }}"
+                                                    placeholder="{{ __('Testimonial Sub-Title') }}"
+                                                    name="testimonial_subtitle"
+                                                    class="form-control"
+                                                    type="text"
+                                                >
+                                                @if ($errors->has('testimonial_subtitle'))
+                                                    <p class="text-danger"> {{ $errors->first('testimonial_subtitle') }} </p>
+                                                @endif
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 control-label">
-                                        {{ __('Testimonial Sub-title') }}
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-sm-10">
-                                        <input
-                                            value="{{ $saectiontitle->testimonial_subtitle }}"
-                                            placeholder="{{ __('Testimonial Sub-Title') }}"
-                                            name="testimonial_subtitle"
-                                            class="form-control"
-                                            type="text"
-                                        >
-                                        @if ($errors->has('testimonial_subtitle'))
-                                            <p class="text-danger"> {{ $errors->first('testimonial_subtitle') }} </p>
-                                        @endif
+
+                                    <div class="col-md-12 tab-pane fade" id="nav-ar-testimonial" role="tabpanel" aria-labelledby="nav-ar-testimonial-tab">
+                                        <div class="form-group row my-3">
+                                            <label class="col-sm-2 control-label">
+                                                {{ __('عنوان الشهادة') }}
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <input
+                                                    value="{{  $arabic_saectiontitle->testimonial_title }}"
+                                                    placeholder="{{ __('Testimonial Title') }}"
+                                                    name="ar_testimonial_title"
+                                                    class="form-control"
+                                                    type="text"
+                                                >
+                                                @if ($errors->has('ar_testimonial_title'))
+                                                    <p class="text-danger"> {{ $errors->first('ar_testimonial_title') }} </p>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 control-label">
+                                                {{ __('عنوان الشهادة الفرعي') }}
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <input
+                                                    value="{{  $arabic_saectiontitle->testimonial_subtitle }}"
+                                                    placeholder="{{ __('Testimonial Sub-Title') }}"
+                                                    name="ar_testimonial_subtitle"
+                                                    class="form-control"
+                                                    type="text"
+                                                >
+                                                @if ($errors->has('ar_testimonial_subtitle'))
+                                                    <p class="text-danger"> {{ $errors->first('ar_testimonial_subtitle') }} </p>
+                                                @endif
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -188,7 +233,7 @@
                                         <tr>
                                             <td>{{ ++$id }}</td>
                                             <td>
-                                                <img class="w-80" src="{{ asset('assets/front/img/'.$testimonial->image) }}" alt="" />
+                                                <img class="w-80" src="{{ asset('assets/front/img/'.$testimonial->image) }}" alt="" width="150px" height="150px" />
                                             </td>
                                             <td>{{ $testimonial->name }}</td>
                                             <td>{{ $testimonial->position}}</td>

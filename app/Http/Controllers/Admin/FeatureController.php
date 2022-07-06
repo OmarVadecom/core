@@ -6,6 +6,8 @@ use App\Models\Feature;
 use App\Models\Language;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
+
 
 class FeatureController extends Controller
 {
@@ -38,22 +40,34 @@ class FeatureController extends Controller
       
         $request->validate([
             'title' => 'required|max:250',
+            'ar_title' => 'required|max:250',
             'icon' => 'required|max:250',
             'text' => 'required|max:250',
+            'ar_text' => 'required|max:250',
             'serial_number' => 'required|numeric',
             'status' => 'required',
-            'language_id' => 'required',
         ]);
 
-        $feature = new Feature();
+        $feature = Feature::where('language_id', 1)->first();
+        $feature_ar = Feature::where('language_id', 2)->first();
+        $str= Str::random(4);
 
-        $feature->language_id = $request->language_id;
+        $feature = new Feature();
+        $feature->language_id = 1;
         $feature->title = $request->title;
         $feature->icon = $request->icon;
+        $feature->feature_id = $str;
         $feature->text = $request->text;
         $feature->serial_number = $request->serial_number;
         $feature->status = $request->status;
         $feature->save();
+
+        $feature_ar = new Feature();
+        $feature_ar->language_id = 2;
+        $feature_ar->feature_id = $str;
+        $feature_ar->title = $request->ar_title;
+        $feature_ar->text = $request->ar_text;
+        $feature_ar->save();
 
         $notification = array(
             'messege' => 'Feature Added successfully!',
@@ -79,7 +93,9 @@ class FeatureController extends Controller
     public function edit($id){
 
         $feature = Feature::find($id);
-        return view('admin.home.feature.edit', compact('feature'));
+        $feature_en = Feature::where('feature_id',$feature->feature_id)->where('language_id', 1)->first();
+        $feature_ar = Feature::where('feature_id',$feature->feature_id)->where('language_id', 2)->first();
+        return view('admin.home.feature.edit', compact('feature','feature_en','feature_ar'));
 
     }
 
@@ -88,23 +104,30 @@ class FeatureController extends Controller
 
         $request->validate([
             'title' => 'required|max:250',
+            'ar_title' => 'required|max:250',
             'icon' => 'required|max:250',
             'text' => 'required|max:250',
+            'ar_text' => 'required|max:250',
             'serial_number' => 'required|numeric',
             'status' => 'required',
-            'language_id' => 'required',
         ]);
 
 
-        $feature = Feature::findOrFail($id);
+        $feature = Feature::find($id);
+        $feature_en = Feature::where('feature_id',$feature->feature_id)->where('language_id', 1)->first();
+        $feature_ar = Feature::where('feature_id',$feature->feature_id)->where('language_id', 2)->first();
 
-        $feature->language_id = $request->language_id;
-        $feature->title = $request->title;
-        $feature->icon = $request->icon;
-        $feature->text = $request->text;
-        $feature->serial_number = $request->serial_number;
-        $feature->status = $request->status;
-        $feature->save();
+       
+        $feature_en->title = $request->title;
+        $feature_en->icon = $request->icon;
+        $feature_en->text = $request->text;
+        $feature_en->serial_number = $request->serial_number;
+        $feature_en->status = $request->status;
+        $feature_en->save();
+
+        $feature_ar->title = $request->ar_title;
+        $feature_ar->text = $request->ar_text;
+        $feature_ar->save();
 
         $notification = array(
             'messege' => 'Feature Updated successfully!',

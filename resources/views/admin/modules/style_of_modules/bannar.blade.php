@@ -19,40 +19,24 @@
 
 
         <div class="tab-content" id="nav-tabContent">
+            <div class="form-group row my-3">        
+                <label class="col-sm-2 control-label">{{ __('Image') }}</label>
+                <div class="col-sm-10">
+                        <input
+                            name="mod[{{ $randomKey }}][bannar][image]"
+                            class="form-control"
+                            type="text"
+                            id="image"
+                            value="{{ isset($moduleAttributes['image']) ? $moduleAttributes['image'] : '' }}"
+                        />
+                    @if ($errors->has('image'))
+                        <p class="text-danger"> {{ $errors->first('image') }} </p>
+                    @endif
+                </div>
+            </div>
              <div class="tab-pane fade show active" id="nav-en-bannar"  role="tabpanel" aria-labelledby="nav-en-bannar-tab">
                 {{-- English --}}
-                <div class="form-group row my-3">        
-                    <label class="col-sm-2 control-label">{{ __('Image') }}</label>
-                    <div class="col-sm-10">
-                        <img
-                            src="{{isset($moduleAttributes['image']) ? asset('assets/front/img/bannar/' . $moduleAttributes['image']) : asset('assets/admin/img/img-demo.jpg') }}"
-                            class="mw-400 mb-3 show-img img-demo"
-                            alt=""
-                        >
-                        <div class="custom-file">
-                            <label
-                                class="custom-file-label"
-                                for="image"
-                            >{{ __('Choose Image') }}</label>
-                            <input
-                                name="images[{{ $randomKey }}][bannar][imageFile]"
-                                class="custom-file-input up-img"
-                                type="file"
-                                id="image"
-                            />
-                            <input
-                                name="mod[{{ $randomKey }}][bannar][image]"
-                                value="{{ isset($moduleAttributes['image']) }}"
-                                class="file-image-value"
-                                type="hidden"
-                            />
-                        </div>
-                        @if ($errors->has('image'))
-                            <p class="text-danger"> {{ $errors->first('image') }} </p>
-                        @endif
-                    </div>
-                </div>
-                <div class="form-group row">   
+                <div class="form-group row my-3">   
                     <label class="col-sm-2 control-label">{{ __('Title') }}</label>
                     <div class="col-sm-10">
                         <input
@@ -167,42 +151,25 @@
                         </div>
                     </div>
                 </div>
-            </div>
-           
-            <div class="tab-pane fade" id="nav-ar-bannar" role="tabpanel" aria-labelledby="nav-ar-bannar-tab">
-                {{-- Arabic --}}
-                <div class="form-group row my-3">        
-                    <label class="col-sm-2 control-label">{{ __('الصورة') }}</label>
-                    <div class="col-sm-10">
-                        <img
-                            src="{{isset($moduleAttributes['ar_image']) ? asset('assets/front/img/bannar/' . $moduleAttributes['ar_image']) : asset('assets/admin/img/img-demo.jpg') }}"
-                            class="mw-400 mb-3 show-img img-demo"
-                            alt=""
-                        >
-                        <div class="custom-file">
-                            <label
-                                class="custom-file-label"
-                                for="image"
-                            >{{ __('Choose Image') }}</label>
-                            <input
-                                name="images[{{ $randomKey }}][bannar][ar_imageFile]"
-                                class="custom-file-input up-img"
-                                type="file"
-                                id="image"
-                            />
-                            <input
-                                name="mod[{{ $randomKey }}][bannar][ar_image]"
-                                value="{{ isset($moduleAttributes['ar_image']) }}"
-                                class="file-image-value"
-                                type="hidden"
-                            />
-                        </div>
-                        @if ($errors->has('ar_image'))
-                            <p class="text-danger"> {{ $errors->first('ar_image') }} </p>
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        @if(isset($moduleAttributes['bannar_type_en']))
+                        <label for="title">Choose Style</label>
+                        <select name="mod[{{ $randomKey }}][bannar][bannar_type_en]" class="form-control">
+                            <option value="">Choose Style</option>
+                            <option value="b_1" {{($moduleAttributes['bannar_type_en'] == 'b_1') ? 'selected' : '' }} >Style 1 </option>
+                            <option value="b_2" {{($moduleAttributes['bannar_type_en'] == 'b_2') ? 'selected' : '' }}>Style 2</option>
+                            <option value="b_3" {{($moduleAttributes['bannar_type_en'] == 'b_3') ? 'selected' : '' }}>Style 3</option>
+                            <option value="b_4" {{($moduleAttributes['bannar_type_en'] == 'b_4') ? 'selected' : '' }}>Style 4</option>
+                        </select>
                         @endif
                     </div>
                 </div>
-                <div class="form-group row">
+             </div>
+            <div class="tab-pane fade" id="nav-ar-bannar" role="tabpanel" aria-labelledby="nav-ar-bannar-tab">
+                {{-- Arabic --}}
+                
+                <div class="form-group row my-3">
                     <label class="col-sm-2 control-label">{{ __('العنوان') }}</label>
                     <div class="col-sm-10">
                         <input
@@ -317,6 +284,20 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        @if(isset($moduleAttributes['bannar_type_ar']))
+                        <label for="title">Choose Style</label>
+                        <select name="mod[{{ $randomKey }}][bannar][bannar_type_ar]" class="form-control">
+                            <option value="">Choose Style</option>
+                            <option value="b_1" {{($moduleAttributes['bannar_type_ar'] == 'b_1') ? 'selected' : '' }} >Style 1 </option>
+                            <option value="b_2" {{($moduleAttributes['bannar_type_ar'] == 'b_2') ? 'selected' : '' }}>Style 2</option>
+                            <option value="b_3" {{($moduleAttributes['bannar_type_ar'] == 'b_3') ? 'selected' : '' }}>Style 3</option>
+                            <option value="b_4" {{($moduleAttributes['bannar_type_ar'] == 'b_4') ? 'selected' : '' }}>Style 4</option>
+                        </select>
+                        @endif
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -324,24 +305,24 @@
 
         
             <div class="tab-content" id="nav-tabContent">
-
+                <div class="form-group row my-3">
+                    <label class="col-sm-2 control-label">{{ __('Image') }}</label>
+                    <div class="col-sm-10">
+                        {{-- <img class="mw-400 mb-3 show-img img-demo d-block" src="{{ asset('assets/admin/img/img-demo.jpg') }}" alt=""> --}}
+                        
+                            {{-- <label class="custom-file-label" for="image">{{ __('Choose Image') }}</label> --}}
+                            <input type="text" class="form-control" name="mod[{{ $randNumModule }}][bannar][image]" id="image">
+                            {{-- <input type="hidden" class="file-image-value" name="mod[{{ $randNumModule }}][bannar][image]" value=""> --}}
+                      
+                        @if ($errors->has('image'))
+                            <p class="text-danger"> {{ $errors->first('image') }} </p>
+                        @endif
+                    </div>
+                </div>
                 <div class="tab-pane fade show active" id="nav-en-bannar"  role="tabpanel" aria-labelledby="nav-en-bannar-tab">
                     {{--English--}}
+                   
                     <div class="form-group row my-3">
-                        <label class="col-sm-2 control-label">{{ __('Image') }}</label>
-                        <div class="col-sm-10">
-                            <img class="mw-400 mb-3 show-img img-demo d-block" src="{{ asset('assets/admin/img/img-demo.jpg') }}" alt="">
-                            <div class="custom-file">
-                                <label class="custom-file-label" for="image">{{ __('Choose Image') }}</label>
-                                <input type="file" class="custom-file-input up-img" name="images[{{ $randNumModule }}][bannar][imageFile]" id="image">
-                                <input type="hidden" class="file-image-value" name="mod[{{ $randNumModule }}][bannar][image]" value="">
-                            </div>
-                            @if ($errors->has('image'))
-                                <p class="text-danger"> {{ $errors->first('image') }} </p>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="form-group row">
                         <label class="col-sm-2 control-label">{{ __('Title') }}</label>
                         
                         <div class="col-sm-10">
@@ -433,25 +414,26 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <div class="col-md-8">
+                            @if(isset($moduleAttributes['bannar_type_en']))
+                            <label for="title">Choose Style</label>
+                            <select name="mod[{{ $randNumModule }}][bannar][bannar_type_en]" class="form-control">
+                                <option value="" >Choose Style</option>
+                                <option value="b_1" >Style 1 </option>
+                                <option value="b_2" >Style 2</option>
+                                <option value="b_3" >Style 3</option>
+                                <option value="b_4">Style 4</option>
+                            </select>
+                            @endif
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="tab-pane fade" id="nav-ar-bannar" role="tabpanel" aria-labelledby="nav-ar-bannar-tab">
                     {{--arabic--}}
+                   
                     <div class="form-group row my-3">
-                        <label class="col-sm-2 control-label">{{ __('الصورة') }}</label>
-                        <div class="col-sm-10">
-                            <img class="mw-400 mb-3 show-img img-demo d-block" src="{{ asset('assets/admin/img/img-demo.jpg') }}" alt="">
-                            <div class="custom-file">
-                                <label class="custom-file-label" for="image">{{ __('Choose Image') }}</label>
-                                <input type="file" class="custom-file-input up-img" name="images[{{ $randNumModule }}][bannar][ar_imageFile]" id="image">
-                                <input type="hidden" class="file-image-value" name="mod[{{ $randNumModule }}][bannar][ar_image]" value="">
-                            </div>
-                            @if ($errors->has('ar_image'))
-                                <p class="text-danger"> {{ $errors->first('ar_image') }} </p>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="form-group row">
                         <label class="col-sm-2 control-label">{{ __('العنوان') }}</label>
                         
                         <div class="col-sm-10">
@@ -541,6 +523,20 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-8">
+                            @if(isset($moduleAttributes['bannar_type_ar']))
+                            <label for="title">Choose Style</label>
+                            <select name="mod[{{ $randNumModule }}][bannar][bannar_type_ar]" class="form-control">
+                                <option value="" >Choose Style</option>
+                                <option value="b_1" >Style 1 </option>
+                                <option value="b_2" >Style 2</option>
+                                <option value="b_3" >Style 3</option>
+                                <option value="b_4">Style 4</option>
+                            </select>
+                            @endif
                         </div>
                     </div>
                 </div>
