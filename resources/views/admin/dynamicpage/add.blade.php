@@ -84,7 +84,7 @@
                                        <br>
                                         <div class="tab-content" id="nav-tabContent" >
                                             <div class=" col-sm-10 tab-pane fade show active " id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                                                <label for="title">Title</label>
+                                                <label for="title">Title <span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control titleinp" name="en_title" data-slug="1"  placeholder="{{ __('Title') }}" required>
                                                 @if ($errors->has('en_title'))
                                                     <p class="text-danger"> {{ $errors->first('en_title') }} </p>
@@ -102,7 +102,7 @@
                                             </div>
 
                                         <div class="col-sm-10 tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-home-tab">
-                                            <label for="title">العنوان</label>
+                                            <label for="title"> العنوان<span class="text-danger">*</span></label>
                                             <input type="text" class="form-control slugable" name="ar_title" data-slug="0"  placeholder="العنوان" required >
                                             @if ($errors->has('ar_title'))
                                                 <p class="text-danger"> {{ $errors->first('ar_title') }} </p>
@@ -153,7 +153,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 control-label">Include {{ __('Category') }} within slug<span class="text-danger">*</span></label>
+                                    <label class="col-sm-2 control-label">Include {{ __('Category') }} within slug</label>
                                     <div class="col-sm-4">
                                         <select class="form-control lang" name="slug_with_category">
                                             <option value="1"> Yes </option>
@@ -162,8 +162,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="value" class="col-sm-2 control-label">{{ __('Order') }}<span
-                                                class="text-danger">*</span></label>
+                                    <label for="value" class="col-sm-2 control-label">{{ __('Order') }}</label>
 
                                     <div class="col-sm-10">
                                         <input type="number" class="form-control" name="serial_number"
@@ -176,7 +175,6 @@
                                 <div class="form-group row">
                                     <label for="footer" class="col-sm-2 control-label">
                                         Footer
-                                        <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-sm-10">
                                         <select class="form-control" name="footer" id="footer">
@@ -190,8 +188,8 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="status" class="col-sm-2 control-label">{{ __('Status') }}<span
-                                                class="text-danger">*</span></label>
+                                    <label for="status" class="col-sm-2 control-label">{{ __('Status') }}
+                                                </label>
 
                                     <div class="col-sm-10">
                                         <select class="form-control" name="status">
@@ -204,8 +202,8 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 control-label">{{ __('Modules') }}<span
-                                                class="text-danger">*</span></label>
+                                    <label class="col-sm-2 control-label">{{ __('Modules') }}
+                                              </label>
                                     <div class="col-sm-10">
                                         <select class="form-control lang modules" name="module">
                                             <option selected disabled>Select Module</option>

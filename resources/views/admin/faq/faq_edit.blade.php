@@ -33,8 +33,9 @@
                         </div>
 
                         <div class="card-body">
-                            <form class="form-horizontal" action="{{ route('faq.store') }}" method="POST">
+                            <form class="form-horizontal" action="{{ route('faq.update', $faq->id) }}" method="POST">
                                 @csrf
+                                @method('PUT')
                                 <div class="form-group row">
                                     <div class="col-sm-10">
                                         <label class="col-sm-2 control-label">{{ __('Language') }}<span class="text-danger">*</span></label>

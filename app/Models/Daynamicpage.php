@@ -35,7 +35,8 @@ class Daynamicpage extends Model
             if(request()->get('language') == "ar"){
                 $url=request()->get('language').'/';
             }
-            return $url.$dynamicPageCategory->slug . '/' . $this['slug'];
+           return $url.$dynamicPageCategory->slug . '/' . $this['slug'];
+
         } else {
             return $url.$this['slug'];
         }

@@ -13,7 +13,7 @@
             <div class="col-sm-9">
                 <select class="form-control" name="mod[{{ $randNumModule }}][faq_category][category_id]" >
                     <option value="">Choose Category</option>
-                    @foreach($faq_categories as $category)
+                    @foreach(\App\Helpers\Helper::getModule() as  $category)
                         <option value="{{$category->id}}" {{(isset( $moduleAttributes['category_id'])&&$moduleAttributes['category_id']==$category->id) ? 'selected' : '' }} >{{$category->name_en}}</option>
                     @endforeach
                 </select>
