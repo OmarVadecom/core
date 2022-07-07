@@ -5,6 +5,7 @@ namespace App\Helpers;
 
 use App\Models\Currency;
 use App\Models\dynamicPageCategories;
+use App\Models\FaqCategory;
 use App\Models\Language;
 use App\Models\Shipping;
 use App\Models\Permalink;
@@ -270,7 +271,16 @@ class Helper
             'bannar'                => 'Bannar',
             'faq_category' => 'Faq Category',
         ];
+
     }
+
+    public function getModule()
+    {
+        $faq_categories = FaqCategory::get();
+
+        return $faq_categories;
+    }
+
 
     public static function modulesHasImage(): array
     {

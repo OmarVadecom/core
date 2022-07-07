@@ -97,6 +97,7 @@ class FaqSectionController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $request->validate([
             'question_en' => 'required' ,
             'question_ar' => 'required',
@@ -105,7 +106,7 @@ class FaqSectionController extends Controller
             'category_id' => 'required'
         ]);
 
-        $faq = FaqCategory::find($id);
+        $faq = FaqSection::find($id);
         $faq->update([
             'question_en' => $request->question_en ,
             'question_ar' => $request->question_ar ,

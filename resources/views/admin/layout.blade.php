@@ -71,24 +71,25 @@
             @include('admin.partials.side-navbar')
 
             <div class="content-wrapper">
-        
-        @if(Request::is('*/edit/*') || Request::is('*/add') )
-        	<div class="container">
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                       <div class="input-group">
-                           <button class="btn btn-outline-secondary" type="button" id="button-image"><i class="fa-solid fa-images"></i></i></button>
+                copy
 
-                           <input type="text" id="image_label" class="form-control" name="image"
-                                aria-label="Image" aria-describedby="button-image">
-                            <div class="input-group-append">
-                                <button id="copyButton" class="btn btn-success" title="copy" onclick="copyToClipboard()"><i class="fa fa-copy"></i></button>
+                @if(Request::is('*/edit/*') || Request::is('*/add') ||  Request::is('*/copy'))
+                    <div class="container">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <div class="input-group">
+                                    <button class="btn btn-outline-secondary" type="button" id="button-image"><i class="fa-solid fa-images"></i></i></button>
+
+                                    <input type="text" id="image_label" class="form-control" name="image"
+                                           aria-label="Image" aria-describedby="button-image">
+                                    <div class="input-group-append">
+                                        <button id="copyButton" class="btn btn-success" title="copy" onclick="copyToClipboard()"><i class="fa fa-copy"></i></button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        @endif
+                 @endif
            
             @yield('content')
             

@@ -11,7 +11,7 @@ class FaqCategory extends Model
      protected $guarded = [];
     use HasFactory;
 
-    public function feqs()
+    public function faqs()
     {
         return $this->hasMany(FaqSection::class,'category_id');
     }
