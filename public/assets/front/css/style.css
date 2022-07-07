@@ -205,7 +205,7 @@ input[type=checkbox], input[type=radio] {
 
 .section-title .title-tag {
   color: #0c59db;
-  font-size: 16px;
+  font-size: 35px;
   font-weight: 700;
   padding-bottom: 5px;
   z-index: 1;
@@ -213,14 +213,27 @@ input[type=checkbox], input[type=radio] {
   letter-spacing: 2px;
 }
 .section-title .title {
-  font-size: 55px;
+  font-size: 35px;
   font-weight: 700;
   position: relative;
 }
-@media (min-width: 992px) and (max-width: 1199px) {
-  .section-title .title {
-    font-size: 40px;
-  }
+.module-text
+{
+  font-size: 18px;
+}
+.call-border
+{
+  /* Border radius 25px */
+  background-color: #0171bc;
+  border: 1px solid #0171bc;
+  border-radius: 25px;
+  Color: #0171bc !important;
+  padding: 29px 35px;
+
+}
+.section-content .title
+{
+    font-size: 35px !important;
 }
 @media (max-width: 991px) {
   .section-title .title {
@@ -290,13 +303,13 @@ input[type=checkbox], input[type=radio] {
 }
 @media (min-width: 992px) and (max-width: 1199px) {
   .section-title-two .title {
-    font-size: 40px;
+    font-size: 35px;
     text-align: center !important;
   }
 }
 @media (max-width: 991px) {
   .section-title-two .title {
-    font-size: 40px;
+    font-size: 35px;
     text-align: center !important;
   }
 }
@@ -363,14 +376,15 @@ input[type=checkbox], input[type=radio] {
 
 .main-btn {
   padding: 22px 45px;
-  background-color: #0c59db;
+  background-color: #db5b76 !important;
   font-size: 16px;
   font-weight: 600;
   color: #fff;
   line-height: 1;
   position: relative;
   z-index: 1;
-  border: none;
+  border: 1px solid #db5b76;
+  border-radius: 15px;
 }
 .main-btn::before {
   content: "";
@@ -5719,16 +5733,16 @@ div#preloader .image img {
 /*=======  About  =======*/
 .about-text-block .section-title .title {
   color: #232323;
-  font-size: 2.5rem;
+  font-size: 35px;
 }
 @media (min-width: 992px) and (max-width: 1199px) {
   .about-text-block .section-title .title {
-    font-size: 42px;
+    font-size: 35px;
   }
 }
 @media (max-width: 991px) {
   .about-text-block .section-title .title {
-    font-size: 46px;
+    font-size: 35px;
   }
 }
 @media (max-width: 767px) {
@@ -6943,13 +6957,19 @@ div#preloader .image img {
   position: relative;
   z-index: 1;
   text-align: center;
-  padding-top: 250px;
+  padding-top: 190px;
   padding-bottom: 100px;
 }
 @media (max-width: 575px) {
   .page-title-area {
     padding-top: 230px;
   }
+}
+.page-title-item
+{
+  position: absolute;
+  top: -27px;
+  left: 450px;
 }
 .page-title-area::before {
   position: absolute;
@@ -11109,13 +11129,15 @@ div#preloader .image img {
 }
 
 .btn-module.red-btn-module {
-  background-color: #c7202d;
+  background-color: #c7202d !important;
   color: #fff;
+  font-size: 18px;
 }
 
 .btn-module.yellow-btn-module {
-  background-color: #ffcb08;
+  background-color: #0c59db !important;
   color: #000;
+  font-size: 18px;
 }
 
 .contact-info-section {
