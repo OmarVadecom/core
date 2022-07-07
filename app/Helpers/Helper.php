@@ -10,10 +10,7 @@ use App\Models\Shipping;
 use App\Models\Permalink;
 use App\Models\Daynamicpage;
 use App\Models\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\URL;
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class Helper
 {
@@ -283,21 +280,13 @@ class Helper
       return $requests;
     }
 
-        public static function changeSiteLocale($locale = null,$url)
+        public static function changeSiteLocale($locale = null)
         {
-            
             if (is_null($locale)) {
-                $locale = Helper::getCurrentLocale();
+                $locale = getCurrentLocale();
             }
-          
 
-            //$segments = request()->segments();
-            $previous_url_seg = explode('/',url()->previous());
-            $base_url_seg = explode('/',URL::to('/'));
-            $segments = array_diff($previous_url_seg,$base_url_seg);
-            Log::debug("helper ");
-            Log::debug($segments);
-            Log::debug($locale);
+            $segments = request()->segments();
             if (config('laravellocalization.hideDefaultLocaleInURL') == true) {
                 if ($locale == 'en') {
                     array_shift($segments);
@@ -308,14 +297,12 @@ class Helper
             } else {
                 $segments[0] = $locale;
             }
-            LaravelLocalization::setLocale($locale);
-            session()->put('lang', $locale);
-            app()->setLocale($locale);
+
             // dd($segments);
-            Log::debug($segments);
+
             $url = url(implode('/', $segments));
             if (request()->getQueryString()) $url .= '?' . request()->getQueryString();
-            Log::debug($url);
+
             return $url;
         }
 

@@ -47,21 +47,17 @@
             </ul>
         </div>
         <div class="language-change">
-            @if(app()->getLocale() == "ar")
-                <a class="name text-white" href="{{route('changeLanguage','en')}}"  >
+            @if($currentLang->code == "ar")
+                <a class="name text-white" href="{{ Helper::changeSiteLocale('en') }}" >
                     <i class="fas fa-globe-americas"></i>
                     E
                 </a>
-               
-            @endif
-            
-            @if(app()->getLocale() == 'en')
-                <a class="name text-white" href="{{route('changeLanguage','ar')}}" >
+            @else
+                <a class="name text-white" href="{{ Helper::changeSiteLocale('ar') }}" >
                     <i class="fas fa-globe-americas"></i>
-                        ع
+                    ع
                 </a>
             @endif
-            
         </div>
     </div>
 </div>
